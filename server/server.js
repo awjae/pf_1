@@ -27,7 +27,7 @@ app.use(bodyParser.urlencoded({limit:'50mb', extended:false}));
 app.use(bodyParser.json({limit:'50mb'}));
 
 // 사전에 처리하고 싶은경우 app.use사용
-app.use('/', static(path.join(__dirname, 'public')));
+app.use('/', static(path.join(__dirname, '../client/dist')));
 app.use(cors());
 
 const router = express.Router();
