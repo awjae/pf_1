@@ -1,6 +1,6 @@
 const path = require("path");
 // const autoprefixer = require("autoprefixer");
-// const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   entry: {
@@ -65,49 +65,82 @@ module.exports = {
     //       }
     //     ]
     //   },
-    //   {
-    //     test: /\.(css|scss)$/,
-    //     use: [
-    //       MiniCssExtractPlugin.loader,
-    //       // require.resolve('style-loader'),
-    //       {
-    //         loader: require.resolve("css-loader"),
-    //         options: {
-    //           importLoaders: 1,
-    //           modules: {
-    //             localIdentName: "[name]_[local]_[hash:base64:5]"
-    //           },
-    //           url: true
-    //         }
-    //       },
-    //       {
-    //         loader: require.resolve("postcss-loader"),
-    //         options: {
-    //           ident: "postcss",
-    //           plugins: () => [
-    //             require("postcss-flexbugs-fixes"),
-    //             autoprefixer({
-    //               flexbox: "no-2009"
-    //             })
-    //           ]
-    //         }
-    //       },
-    //       require.resolve("resolve-url-loader"),
-    //       {
-    //         loader: "sass-loader",
-    //         options: {
-    //         }
-    //       }
-    //     ]
-    //   }
+      {
+        test: /\.(css|scss)$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          // require.resolve('style-loader'),
+          {
+            loader: require.resolve("css-loader"),
+            options: {
+              importLoaders: 1,
+              modules: {
+                localIdentName: "[local]"
+              },
+              url: true
+            }
+          },
+          // {
+          //   loader: require.resolve("css-loader"),
+          //   options: {
+          //     importLoaders: 1,
+          //     modules: {
+          //       localIdentName: "[name]_[local]_[hash:base64:5]"
+          //     },
+          //     url: true
+          //   }
+          // },
+          // {
+          //   loader: require.resolve("css-loader"),
+          //   options: {
+          //     importLoaders: 1,
+          //     modules: {
+          //       localIdentName: "[name]_[local]_[hash:base64:5]"
+          //     },
+          //     url: true
+          //   }
+          // },
+          // {
+          //   loader: require.resolve("postcss-loader"),
+          //   options: {
+          //     ident: "postcss",
+          //     plugins: () => [
+          //       require("postcss-flexbugs-fixes"),
+          //       autoprefixer({
+          //         flexbox: "no-2009"
+          //       })
+          //     ]
+          //   }
+          // },
+          // require.resolve("resolve-url-loader"),
+          // {
+          //   loader: "sass-loader",
+          //   options: {
+          //   }
+          // }
+        ]
+      },
+      {
+        test: /\.(ttf|eot|woff|woff2)$/,
+        use : [
+          {
+            loader: "file-loader",
+            options: {
+              limit: 10000,
+              name: '[name].[ext]',
+              outputPath: '/css/font/'
+            },
+          }
+        ]
+      },
     ]
   },
   plugins: [
-    // new MiniCssExtractPlugin({
-    //   filename: "../css/bundle.css",
-    //   chunkFilename: "[name].css",
-    //   ignoreOrder: true
-    // })
+    new MiniCssExtractPlugin({
+      filename: "../dist/css/bundle.css",
+      chunkFilename: "[name].css",
+      ignoreOrder: true
+    })
   ],
   resolve: {
     modules: ["node_modules", path.resolve(__dirname, "../src")],
@@ -120,6 +153,7 @@ module.exports = {
     //   ".css",
     //   ".scss",
     //   ".svg"
+      ".ttf",
     ]
   }
 };

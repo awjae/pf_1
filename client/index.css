@@ -1,0 +1,12 @@
+@font-face {
+    font-family: 'NotoSansKR-Regular';
+    src : url('./src/css/font/NotoSansKR-Regular.ttf') format('truetype');
+}
+html, body {
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    box-sizing: border-box;
+    font-family: 'NotoSansKR-Regular';
+}

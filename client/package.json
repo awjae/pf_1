@@ -18,7 +18,11 @@
     "@babel/preset-env": "^7.12.1",
     "@babel/preset-react": "^7.12.1",
     "babel-loader": "^8.1.0",
+    "css-loader": "^5.0.0",
     "dotenv-webpack": "2.0.0",
+    "file-loader": "^6.1.1",
+    "mini-css-extract-plugin": "^1.2.0",
+    "style-loader": "^2.0.0",
     "webpack": "^4.44.1",
     "webpack-cli": "3.3.12",
     "webpack-merge": "^5.2.0"
