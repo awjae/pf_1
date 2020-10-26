@@ -127,8 +127,7 @@ module.exports = {
             loader: "file-loader",
             options: {
               limit: 10000,
-              name: '[name].[ext]',
-              outputPath: '/css/font/'
+              name: '/[name].[ext]',
             },
           }
         ]
@@ -137,7 +136,7 @@ module.exports = {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: "../dist/css/bundle.css",
+      filename: "../dist/bundle.css",
       chunkFilename: "[name].css",
       ignoreOrder: true
     })
