@@ -1,7 +1,6 @@
 const path = require("path");
 // const autoprefixer = require("autoprefixer");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-
 module.exports = {
   entry: {
     app: path.resolve(__dirname, "../index.jsx") // 직접 코드 수정하는 부분
@@ -24,7 +23,6 @@ module.exports = {
               presets: ['@babel/preset-env', '@babel/react']
             }
           },
-          
         ]
       },
     //   {
@@ -132,6 +130,10 @@ module.exports = {
           }
         ]
       },
+      {
+        test: /mapbox.*\.js$/,
+        use: 'script-loader'
+      }
     ]
   },
   plugins: [

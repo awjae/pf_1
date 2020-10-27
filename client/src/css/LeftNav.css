@@ -1,98 +1,13 @@
 .leftNav {
-    display: flex;
-    flex-direction: row;
-    position: relative;
-}
-
-.leftNav .menu {
-    width: 200px;
-    padding : 15px 10px ;
-    border: 1px solid #1166DD;
-    z-index: 2;
-    background-color: #003964;
-    color: white;
-    overflow-y: hidden;
-    font-size: 15px;
-    
-} 
-.leftNav .info {
     height: 100%;
     position: absolute;
-    z-index: 1;
-    left: -140px;
-    transition: all 0.2s;
-} 
-
-.leftNav .info.active {
-    height: 100%;
-    position: absolute;
-    z-index: 1;
-    left: 200px;
-    transition: all 0.5s;
-} 
-.info--contents {
-    /* border: 2px solid rgba(34, 34, 34, 0.2); */
-    position: relative;
-    box-shadow: 5px 0px 5px rgba(34, 34, 34, 0.2);
-    padding : 20px 25px;
-    width: 280px;
-    height: 100%;
-    background-color: #ffffff;
-    color: #7A7A7A;
-}
-.info--contents > ul:last-child{
-    margin-bottom: 0px;
-}
-.info--contents li{
-    margin-bottom: 10px;
-    height: 40px;
-    display: flex;
-    align-items: center;
+    border-right: 1px solid #d9d9d9;
 }
 
-.info--contents li > label{
-    width: 110px;
-    font-size: 14px;
-}
-.info--contents li > input{
-    border: 0px solid;
-    border-bottom: 1px solid #3396ff;
+.leftNav--menu__icon {
     width: 100px;
-    height: 30px;
-}
-.info--contents li > input[type=radio]{
-    width: 15px;
-    height: 30px;
-}
-.info--contents li > input[type=radio]:focus{
-    outline: none;
-}
-.info--contents p {
-    margin-bottom: 10px;
-    font-size: 17px;
-    font-weight: bold;
-}
-.info--contents select {
-    width: 100%;
-    height: 30px;
-    border-color: rgb(51, 150, 255, 0.6);
-}
-
-.info--contents .menu--li {
-    display: inline-flex;
+    height: 100px;
+    display: flex;
     justify-content: center;
-    width: 100%;
-}
-.info--contents .menu--li:hover {
-    border: 1px solid #1166DD;  
-    height: 40px;
-    margin-bottom: 10px;
-}
-
-.info--contents.active{
-    border: 1px solid gray;
-    padding : 5px;
-    width: 200px;
-    height: 100%;
-    background-color: #ffffff;
+    align-items: center;
 }

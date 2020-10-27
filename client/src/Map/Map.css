@@ -1,0 +1,10 @@
+#map {
+    width: calc(100% - 100px);
+    height: 100%;
+    left: 101px;
+    position: relative;
+}
+
+#map * {
+    outline: none;
+}

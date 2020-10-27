@@ -1,8 +1,8 @@
-html, body {
+html, body, #root {
     height: 100%;
     width: 100%;
     overflow-x: hidden;
     overflow-y: hidden;
-    box-sizing: border-box;
     font-family: 'NotoSansKR-Regular';
+    box-sizing: border-box;
 }
