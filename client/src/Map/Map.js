@@ -11,7 +11,7 @@ function Map() {
         mapboxgl.accessToken = key;
         const map = new mapboxgl.Map({
             container: 'map',
-            style: 'mapbox://styles/mapbox/streets-v11', // stylesheet location
+            style: 'mapbox://styles/mapbox/satellite-streets-v11', // stylesheet location
             center: [127, 37.5], // starting position [lng, lat]
             zoom: 12 // starting zoom
         });
