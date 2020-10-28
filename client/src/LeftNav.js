@@ -1,4 +1,6 @@
 import  React, { useState, useEffect } from 'react';
+import { Search, Flag, CallSplit, Grade, PersonPin, Build } from '@material-ui/icons';
+
 import './css/LeftNav.css';
 
 function LeftNav() {
@@ -7,7 +9,14 @@ function LeftNav() {
 
     useEffect(() => {
 
-        const list = ["홈", "컨텐츠1", "컨텐츠2", "컨텐츠3"];
+        const list = [
+            { name : "내정보", icon : <PersonPin/> },
+            { name : "검색", icon : <Search/> },
+            { name : "길찾기", icon : <CallSplit/> },
+            { name : "여행지", icon : <Flag/> },
+            { name : "도구", icon : <Build/> },
+            { name : "즐겨찾기", icon : <Grade/> },
+        ];
         setmenuArr(list);
 
     }, [])
@@ -21,7 +30,7 @@ function LeftNav() {
                     menuArr.map((el, idx) => (
                         <React.Fragment key={ idx }>
                             <div className="leftNav--menu__icon">
-                                {el}
+                                <span title={ el.name }>{ el.icon }</span>
                             </div>
                         </React.Fragment>
                     ))

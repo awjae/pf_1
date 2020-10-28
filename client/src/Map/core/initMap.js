@@ -5,10 +5,10 @@ const initMap = {};
 initMap.init = (map) => {
     map.on('load', function () {
         // Insert the layer beneath any symbol layer.
-        var layers = map.getStyle().layers;
+        const layers = map.getStyle().layers;
 
-        var labelLayerId;
-        for (var i = 0; i < layers.length; i++) {
+        let labelLayerId;
+        for (let i = 0; i < layers.length; i++) {
             if (layers[i].type === 'symbol' && layers[i].layout['text-field']) {
                 labelLayerId = layers[i].id;
                 break;

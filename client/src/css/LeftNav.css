@@ -10,4 +10,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 16px;
+}
+
+.leftNav--menu__icon svg {
+    color: #00bb38;
+    width: 1.2em;
+    height: 1.2em;
+    cursor: pointer;
 }
