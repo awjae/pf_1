@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import 'mapbox-gl';
+import initMap from './core/initMap';
 import './Map.css';
 
 function Map() {
@@ -11,10 +12,13 @@ function Map() {
         mapboxgl.accessToken = key;
         const map = new mapboxgl.Map({
             container: 'map',
-            style: 'mapbox://styles/mapbox/satellite-streets-v11', // stylesheet location
-            center: [127, 37.5], // starting position [lng, lat]
-            zoom: 12 // starting zoom
+            style: 'mapbox://styles/mapbox/satellite-streets-v11', 
+            center: [127.1214607, 37.3829765], 
+            zoom: 18, 
+            pitch: 60, //상하
+            bearing: 0, //좌우
         });
+        initMap.init(map);
 
     }, [])
 

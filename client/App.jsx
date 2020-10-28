@@ -7,7 +7,7 @@ import HeaderBar from 'HeaderBar';
 const App = ({ }) => {
     return (
         <>
-            <HeaderBar></HeaderBar>
+            {/* <HeaderBar></HeaderBar> */}
             <BodyContents></BodyContents>
         </>
     )
