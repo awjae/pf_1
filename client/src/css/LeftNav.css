@@ -14,8 +14,12 @@
 }
 
 .leftNav--menu__icon svg {
-    color: #00bb38;
+    color: #333333;
     width: 1.2em;
     height: 1.2em;
     cursor: pointer;
+}
+
+.leftNav--menu__icon>div:first-child>svg {
+    color: #00bb38;
 }
