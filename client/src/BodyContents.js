@@ -6,12 +6,15 @@ import './css/BodyContents.css';
 function BodyContents() {
 
     const [currMenu, setCurrMenu] = useState("");
-    
-    const handleSetCurrMenu = (name) => {
-        setCurrMenu(name);
-        console.log(currMenu);
-    }
 
+    const handleSetCurrMenu = (name) => {
+        if (currMenu === name) {
+            setCurrMenu("");
+        } else { 
+            setCurrMenu(name) 
+        };
+    }
+    
     return (
         <main className="main">
             <LeftNav
