@@ -1,13 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import LeftNav from 'LeftNav';
 import Map from './Map/Map';
 import './css/BodyContents.css';
 
 function BodyContents() {
+
+    const [currMenu, setCurrMenu] = useState("");
+    
+    const handleSetCurrMenu = (name) => {
+        setCurrMenu(name);
+        console.log(currMenu);
+    }
+
     return (
         <main className="main">
-            <LeftNav></LeftNav>
-            <Map></Map>
+            <LeftNav
+                setCurrMenu = { handleSetCurrMenu }
+                >
+            </LeftNav>
+            <Map
+                currMenu = { currMenu }>
+            </Map>
         </main>
     )
 }

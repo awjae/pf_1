@@ -3,9 +3,9 @@ import { Search, Flag, CallSplit, Grade, PersonPin, Build } from '@material-ui/i
 
 import './css/LeftNav.css';
 
-function LeftNav() {
+function LeftNav(props) {
 
-    const [menuArr, setmenuArr] = useState([]);
+    const [menuArr, setMenuArr] = useState([]);
 
     useEffect(() => {
 
@@ -17,11 +17,9 @@ function LeftNav() {
             { name : "도구", icon : <Build/> },
             { name : "즐겨찾기", icon : <Grade/> },
         ];
-        setmenuArr(list);
+        setMenuArr(list);
 
     }, [])
-
-
 
     return (
         <aside className="leftNav">
@@ -30,7 +28,7 @@ function LeftNav() {
                     menuArr.map((el, idx) => (
                         <React.Fragment key={ idx }>
                             <div className="leftNav--menu__icon">
-                                <span title={ el.name }>{ el.icon }</span>
+                                <span title={ el.name } onClick={() => props.setCurrMenu(el.name) }>{ el.icon }</span>
                             </div>
                         </React.Fragment>
                     ))

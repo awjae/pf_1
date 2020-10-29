@@ -1,0 +1,17 @@
+.map--sidebar.active {
+    width: 400px;
+    height: 100%;
+    position: absolute;
+    z-index: 1;
+    background: #ffffff;
+    box-shadow: 5px 0px 5px rgb(128, 128, 128, 0.6);
+    border-radius: 0px 10px 10px 0px;
+}
+.map--sidebar {
+    width: 400px;
+    height: 100%;
+    left: -400px;
+    position: absolute;
+    z-index: 1;
+    background: #ffffff;
+}

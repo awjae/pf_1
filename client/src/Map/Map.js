@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
 import 'mapbox-gl';
 import initMap from './core/initMap';
+import MapLeftSidebar from './component/MapLeftSidebar';
 import './Map.css';
 
-function Map() {
+function Map(props) {
 
     useEffect(() => {
 
@@ -24,7 +25,8 @@ function Map() {
 
     return (
         <div id="map">
-
+            <MapLeftSidebar 
+                currMenu = { props.currMenu } />
         </div>
     )
 }

@@ -13,13 +13,30 @@
     font-size: 16px;
 }
 
-.leftNav--menu__icon svg {
-    color: #333333;
+.leftNav--menu__icon svg{
     width: 1.2em;
     height: 1.2em;
     cursor: pointer;
 }
 
-.leftNav--menu__icon>div:first-child>svg {
+.leftNav--menu__icon {
+    color: #333333;
+}
+
+.leftNav--menu__icon>span:hover {
+    color : #fff;
+    background: rgba(4, 117, 244, 0.8);
+    border-radius: 100%;
+    padding: 5%;
+}
+.leftNav--menu__icon:first-child>span:hover {
+    color : #00bb38;
+    background: none;
+    border-radius: none;
+    padding: none;
+}
+
+
+.leftNav--menu__icon:first-child {
     color: #00bb38;
 }
