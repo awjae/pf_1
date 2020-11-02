@@ -3,9 +3,11 @@ import './MapLeftSidebar.css';
 
 function MapLeftSidebar(props) {
 
+    props.mapLaftEaseTo(props.currMenu); 
+
     return (
         <aside className={ `map--sidebar ${props.currMenu ? "active" : ""}` }>
-            { props.currMenu }            
+            { props.currMenu.contents }              
         </aside>
     )
 }

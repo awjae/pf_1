@@ -7,11 +7,11 @@ function BodyContents() {
 
     const [currMenu, setCurrMenu] = useState("");
 
-    const handleSetCurrMenu = (name) => {
-        if (currMenu === name) {
+    const handleSetCurrMenu = (el) => {
+        if (currMenu === el) {
             setCurrMenu("");
         } else { 
-            setCurrMenu(name) 
+            setCurrMenu(el) 
         };
     }
     

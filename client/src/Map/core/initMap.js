@@ -1,8 +1,10 @@
+import { ContactPhoneSharp } from "@material-ui/icons";
 
 
 const initMap = {};
 
 initMap.init = (map) => {
+    initMap.map = map || "";
     map.on('load', function () {
         // Insert the layer beneath any symbol layer.
         const layers = map.getStyle().layers;
@@ -39,6 +41,24 @@ initMap.init = (map) => {
             labelLayerId
         );
     });
+}
+initMap.leftNavEvent = (active) => {
+    if (!initMap.map) return;
+    const padding = {};
+    if (active) {
+        padding['left'] = 300;
+        initMap.map.easeTo({
+            padding: padding,
+            duration: 500 // In ms, CSS transition duration property for the sidebar matches this value
+        });
+    } else {
+        padding['left'] = 0;
+        // Add the 'collapsed' class to the class list of the element
+        initMap.map.easeTo({
+            padding: padding,
+            duration: 300
+        });
+    }
 }
 
 export default initMap;

@@ -131,6 +131,18 @@ module.exports = {
         ]
       },
       {
+        test: /\.(png|jpg)$/,
+        use : [
+          {
+            loader: "file-loader",
+            options: {
+              limit: 10000,
+              name: 'image/[name].[ext]',
+            },
+          }
+        ]
+      },
+      {
         test: /mapbox.*\.js$/,
         use: 'script-loader'
       }
