@@ -23,7 +23,13 @@
     color: #333333;
 }
 
-.leftNav--menu__icon>span:hover {
+.leftNav--menu__iconSpan.active {
+    color : #fff;
+    background: rgba(4, 117, 244, 0.8);
+    border-radius: 100%;
+    padding: 5%;
+}
+.leftNav--menu__iconSpan:hover {
     color : #fff;
     background: rgba(4, 117, 244, 0.8);
     border-radius: 100%;

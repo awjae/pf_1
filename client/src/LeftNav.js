@@ -23,6 +23,21 @@ function LeftNav(props) {
 
     }, [])
 
+    const clickHandle = (e) => {
+        if (e.title === "내정보") return;
+        if (e.classList.contains("active")) {
+            e.classList.remove("active");
+            return;
+        } else {
+            const spanList = document.querySelectorAll('.leftNav--menu__iconSpan');
+            spanList.forEach(span => span.classList.remove("active"));
+
+            e.classList.add("active")
+        }
+        
+        
+    }
+    
     return (
         <aside className="leftNav">
             <nav className="leftNav--menu">
@@ -30,7 +45,12 @@ function LeftNav(props) {
                     menuArr.map((el, idx) => (
                         <React.Fragment key={ idx }>
                             <div className="leftNav--menu__icon">
-                                <span title={ el.name } onClick={() => props.setCurrMenu(el) }>{ el.icon }</span>
+                                <span 
+                                    className="leftNav--menu__iconSpan" 
+                                    title={ el.name } 
+                                    onClick={(e) =>  { props.setCurrMenu(el); clickHandle(e.currentTarget) } }>
+                                        { el.icon }
+                                </span>
                             </div>
                         </React.Fragment>
                     ))
