@@ -13,5 +13,12 @@ module.exports = env =>
       new DotEnv({
         path: path.resolve(__dirname, "./local.env")
       })
-    ]
+    ],
+    proxy: {
+      "/api/naver/geocode": {
+        target: "https://naveropenapi.apigw.ntruss.com/map-geocode/v2/geocode",
+        secure: false,
+        changeOrigin: true
+      } // 프록시
+    },
   });

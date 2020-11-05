@@ -27,7 +27,14 @@ module.exports = merge(baseConfig, {
     disableHostCheck: true,
     headers: {
       "Access-Control-Allow-Origin": "*"
-    }
+    },
+    proxy: {
+      "/api/naver/geocode": {
+        target: "https://naveropenapi.apigw.ntruss.com/map-geocode/v2/geocode",
+        secure: false,
+        changeOrigin: true
+      } // 프록시
+    },
   },
   optimization: {
     namedModules: true,

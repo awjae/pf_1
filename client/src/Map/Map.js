@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import 'mapbox-gl';
 import initMap from './core/initMap';
 import MapLeftSidebar from './component/MapLeftSidebar';

@@ -1,0 +1,33 @@
+.SearchPage {
+    width: 100%;
+    height: 100%;
+}
+
+.SearchPage--header {
+    border-radius: 10px;
+    border : 4px solid #00bb38;
+    margin: 40px 20px;
+    height: 50px;
+}
+.SearchPage--header>section {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+.SearchPage--header input {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    margin: 10px;
+    font-size: 15px;
+}
+.SearchPage--header svg {
+    color: gray;
+    font-size: 30px;
+    padding: 0px 5px;
+    border-left: 1px solid #d8d8d8;
+}
+.SearchPage--header svg:hover{
+    color : #00bb38;
+    cursor: pointer;
+}
