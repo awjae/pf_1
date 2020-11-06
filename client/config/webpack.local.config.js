@@ -29,7 +29,7 @@ module.exports = merge(baseConfig, {
       "Access-Control-Allow-Origin": "*"
     },
     proxy: {
-      "/api/naver/geocode": {
+      "/api/*": {
         target: "https://naveropenapi.apigw.ntruss.com/map-geocode/v2/geocode",
         secure: false,
         changeOrigin: true

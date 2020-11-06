@@ -14,18 +14,20 @@ function SearchPage() {
         timer = setTimeout(() => {
             setSearchInput(value)
 
-            searchNAVERGeocoding(searchInput)
+            searchNAVERGeocoding(value)
         }, 400);
     }
 
-    const searchNAVERGeocoding = (searchInput) => {
-        fetch('/api/naver/geocode', {
+    //백엔드에서 프록시 넣기
+    //https://developers.naver.com/products/datalab/ 장소검색도 검색 결과에 넣기
+    const searchNAVERGeocoding = (value) => {
+        console.log(value)
+        fetch('https://naveropenapi.apigw.ntruss.com/map-geocode/v2/geocode?query=' + value, {
             method: "GET",
-            header : {
+            headers : {
                 'X-NCP-APIGW-API-KEY-ID' : process.env.NAVER_KEY_ID,
                 'X-NCP-APIGW-API-KEY' : process.env.NAVER_KEY_PW,
-                'query' : searchInput
-            }
+            },
         })
         .then((res) => {
             console.log(res)
