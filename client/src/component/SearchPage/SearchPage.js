@@ -35,21 +35,21 @@ function SearchPage() {
         // .then((res) => {
         //     console.log(res)
         // })
-        const url = makeURLForSearchAddress(value, 'place', 1);
-        fetch('http://api.vworld.kr/req/search&' + url)
-        .then((res) => {
-            console.log(res)
-        })
+        const url = makeURLForSearchAddress(value, 'address', 1);
+        fetch('./api/vworld' + url)
+        .then((res) => res.json())
+        .then(json => {
+
+            const data = json.response.result.items;
+
+        });
     }
 
     const makeURLForSearchAddress = (query, type, page) => {
         var text = ``
         switch (type) {
-            case 'address_road' :
-                text = `service=search&request=search&version=2.0&crs=EPSG:4326&size=8&page=${page}&query=${query}&type=address&category=road&format=json&errorformat=json&key=E33AEC41-F230-3C7E-A007-6307BA86AA9F`
-                break;
-            case 'address_parcel' :
-                text = `service=search&request=search&version=2.0&crs=EPSG:4326&size=8&page=${page}&query=${query}&type=address&category=parcel&format=json&errorformat=json&key=E33AEC41-F230-3C7E-A007-6307BA86AA9F`
+            case 'address' :
+                text = `?request=search&version=2.0&crs=EPSG:4326&size=8&page=${page}&query=${query}&type=address&category=road&format=json&errorformat=json&key=E33AEC41-F230-3C7E-A007-6307BA86AA9F`
                 break;
             case 'place' :
                 text = `service=search&request=search&version=2.0&crs=EPSG:4326&size=8&page=${page}&query=${query}&type=place&format=json&errorformat=json&key=E33AEC41-F230-3C7E-A007-6307BA86AA9F`

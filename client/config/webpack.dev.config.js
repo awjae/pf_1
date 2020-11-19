@@ -15,8 +15,8 @@ module.exports = env =>
       })
     ],
     proxy: {
-      "/api/naver/geocode": {
-        target: "https://naveropenapi.apigw.ntruss.com/map-geocode/v2/geocode",
+      "/api/vworld": {
+        target: "http://api.vworld.kr/req/search",
         secure: false,
         changeOrigin: true
       } // 프록시
