@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './SearchPage.css';
 import { Search } from '@material-ui/icons';
+import axios from "axios";
 
 function SearchPage() {
 
@@ -21,7 +22,18 @@ function SearchPage() {
     //백엔드에서 프록시 넣기
     //https://developers.naver.com/products/datalab/ 장소검색도 검색 결과에 넣기
     const searchNAVERGeocoding = (value) => {
-        console.log(value)
+        console.log(value);
+
+        axios.post("/proxy.do", {
+            baseUrl : 'http://api.vworld.kr/req/search',
+            extraUrl : makeURLForSearchAddress(value, 'address', 1)
+        })
+        .then(function (res) {
+            console.log(res)
+        })
+        .catch(function (err) {
+            console.log(err)
+        })
 
         // let naverHeader = new Headers();
         // naverHeader.append('X-NCP-APIGW-API-KEY-ID', process.env.NAVER_KEY_ID);
@@ -35,18 +47,18 @@ function SearchPage() {
         // .then((res) => {
         //     console.log(res)
         // })
-        const url = makeURLForSearchAddress(value, 'address', 1);
-        fetch('./api/vworld' + url)
-        .then((res) => res.json())
-        .then(json => {
+        // const url = makeURLForSearchAddress(value, 'address', 1);
+        // fetch('/proxy.do' + url)
+        // .then((res) => res.json())
+        // .then(json => {
 
-            const data = json.response.result.items;
+        //     const data = json.response.result.items;
 
-        });
+        // });
     }
 
     const makeURLForSearchAddress = (query, type, page) => {
-        var text = ``
+        var text = ``;
         switch (type) {
             case 'address' :
                 text = `?request=search&version=2.0&crs=EPSG:4326&size=8&page=${page}&query=${query}&type=address&category=road&format=json&errorformat=json&key=E33AEC41-F230-3C7E-A007-6307BA86AA9F`

@@ -1,4 +1,5 @@
 const server = require('./server');
+const proxyReq = require('request');
 
 //기본 메인 페이지
 server.get('/', function(req, res) {
@@ -42,6 +43,14 @@ server.post('/postList.do', function (req, res) {
         
     });
 
+});
+
+//프록시 요청
+server.post('/proxy.do', function (req, res) {
+    console.log('프록시 요청 실행')
+
+    const { baseUrl, extraUrl } = req.body;
+    proxyReq(encodeURI(baseUrl+extraUrl)).pipe(res);
 });
 
 server.start();
