@@ -60,5 +60,11 @@ initMap.leftNavEvent = (active) => {
         });
     }
 }
+initMap.setCenter = (x, y) => {
+    if (!initMap.map) return;
+    initMap.map.setCenter(
+        [ parseFloat(x), parseFloat(y)]
+    );
+}
 
 export default initMap;

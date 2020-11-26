@@ -1,0 +1,18 @@
+.SearchCard {
+    border-top: 1px solid #dcdcdc;
+    padding: 15px;
+}
+.SearchCard:hover {
+    background: #f7f7f7;
+}
+.SearchCard__title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #3691f6;
+    padding: 10px;
+    cursor: pointer;
+}
+.SearchCard__subTitle{
+    padding: 5px 10px;
+    font-size: 13px;
+}
