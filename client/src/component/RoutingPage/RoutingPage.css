@@ -1,0 +1,109 @@
+.RoutingPage {
+    width: 100%;
+    height: 100%;
+    font-family: 'NotoSansKR-Regular';
+}
+
+.RoutingPage__header {
+    border-radius: 10px;
+    border : 2px solid rgba(4, 117, 244, 0.8);
+    margin: 40px 20px 0px 20px;
+    padding: 5px;
+}
+.RoutingPage__header > p{
+    padding: 5px 10px;
+}
+.RoutingPage__header > p:first-child{
+    border-bottom: 1px solid #bebebe;
+}
+.RoutingPage__header--input {
+    width: 80%;
+    height: 100%;
+    border: 0;
+    margin: 0px;
+    padding: 5px;
+    font-size: 15px;
+}
+.RoutingPage__header--input:focus {
+    border-bottom: 1px solid rgba(4, 117, 244, 0.5);
+}
+.RoutingPage__header--changer {
+    border : 1px solid #bebebe;
+    color : #bebebe;
+    background: #fff;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    padding: 0px !important;
+    margin: 0px;
+    position: absolute;
+    right: 40px;
+    top : 69px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.RoutingPage__header--changer:hover {
+    border : 1px solid #0475f4;
+    color:  #0475f4;
+    background: #fff;
+    cursor: pointer;
+}
+.RoutingPage__subHeader {
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+}
+.RoutingPage__subHeader > button{
+    color : #0475f4;
+    background: #fff;
+    border : 1px solid #bebebe;
+    border-radius: 5px;
+    padding: 8px 15px;
+    box-shadow: none;
+    display: flex;
+    align-items: center;
+}
+.RoutingPage__subHeader > button:hover{
+    background:#fcfcfc;
+    box-shadow: 2px 2px 2px #bebebe;
+    cursor: pointer;
+}
+.RoutingPage__subHeader > button:first-child {
+    color: #868686;
+}
+.RoutingPage__subHeader > button > svg {
+    font-size: 1rem;
+}
+.RountingPage__contents--header {
+    border-bottom: 1px solid #bebebe;
+}
+.RountingPage__contents--header ul {
+    display: flex;
+    justify-content: space-evenly;
+}
+.RountingPage__contents--header li {
+    cursor: pointer;
+    color: #bebebe;
+    padding: 5px 36px;
+}
+.RountingPage__contents--header li:hover {
+    color: #0475f4;
+}
+.RoutingPoint {
+    margin-right: 30px;
+    margin-top: 35px;
+    border: 1px solid;
+    border-radius: 50%;
+    padding: 5px 4px;
+    float: right;
+    color: #bebebe;
+}
+.RoutingPoint:hover {
+    cursor: pointer;
+    color: #0475f4;
+}
+.RountingPage__contents--body {
+    height: calc(100vh - 275px);
+    overflow-y: auto;
+}

@@ -69,9 +69,9 @@ function SearchPage() {
             </section>
             <article className="SearchPage__contents">
                 { items && 
-                    items.map(item => {
+                    items.map((item, idx) => {
                         if (item.address.bldnm) {
-                            return <SearchCard key={item.id} address={item.address} point={item.point}/>;
+                            return <SearchCard key={idx} address={item.address} point={item.point}/>;
                         }
                     })
                 }

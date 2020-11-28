@@ -8,6 +8,7 @@
     border : 4px solid #00bb38;
     margin: 40px 20px;
     height: 50px;
+    padding: 5px;
 }
 .SearchPage__header>section {
     display: flex;
