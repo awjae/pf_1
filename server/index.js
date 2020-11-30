@@ -52,5 +52,12 @@ server.post('/proxy.do', function (req, res) {
     const { baseUrl, extraUrl } = req.body;
     proxyReq(encodeURI(baseUrl+extraUrl)).pipe(res);
 });
+//프록시 요청 except encode
+server.post('/proxyNaE.do', function (req, res) {
+    console.log('프록시 요청 실행')
+
+    const { baseUrl, extraUrl, key } = req.body;
+    proxyReq(encodeURI(baseUrl+extraUrl)+key).pipe(res);
+});
 
 server.start();

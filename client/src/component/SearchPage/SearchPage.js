@@ -71,7 +71,7 @@ function SearchPage() {
                 { items && 
                     items.map((item, idx) => {
                         if (item.address.bldnm) {
-                            return <SearchCard key={idx} address={item.address} point={item.point}/>;
+                            return <SearchCard key={idx} address={item.address} point={item.point} />;
                         }
                     })
                 }

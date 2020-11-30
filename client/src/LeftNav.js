@@ -3,6 +3,7 @@ import { Search, Flag, CallSplit, Grade, PersonPin, Build } from '@material-ui/i
 import Mypage from './component/Mypage/MyPage';
 import SearchPage from './component/SearchPage/SearchPage';
 import RoutingPage from './component/RoutingPage/RoutingPage';
+import TourPage from './component/TourPage/TourPage';
 
 import './css/LeftNav.css';
 
@@ -16,7 +17,7 @@ function LeftNav(props) {
             { name : "내정보", icon : <PersonPin/>, menu : "mypage", contents : <Mypage /> },
             { name : "검색", icon : <Search/>, menu : "SearchPage", contents : <SearchPage /> },
             { name : "길찾기", icon : <CallSplit/>, menu : "routing", contents : <RoutingPage /> },
-            { name : "여행지", icon : <Flag/>, menu : "trip", contents : "" },
+            { name : "여행지", icon : <Flag/>, menu : "trip", contents : <TourPage /> },
             { name : "도구", icon : <Build/>, menu : "tools", contents : "" },
             { name : "즐겨찾기", icon : <Grade/>, menu : "favorite", contents : "" },
         ];

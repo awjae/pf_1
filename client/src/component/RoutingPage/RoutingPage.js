@@ -39,7 +39,7 @@ function RoutingPage() {
                 const items = res.data.response.result.items;
                 setCurrentFocus(el.target.id);
                 setContents(items);
-
+                
             })
             .catch(function (err) {
                 console.log(err)
@@ -58,7 +58,7 @@ function RoutingPage() {
         console.log(startPoint);
         console.log(endPoint);
         setCurrentFocus("routing");
-
+        setContents([]);
         
     }
 
@@ -118,7 +118,7 @@ function RoutingPage() {
                     { currentFocus && currentFocus === "routing" &&
                         contents.map(item => {
                             if (item.address.bldnm) {
-                                return <SearchCard key={item.id} address={item.address} point={item.point}/>;
+                                return <p>길찾기...</p>
                             }
                         })
                     }

@@ -1,0 +1,67 @@
+.TourPage {
+    font-family: 'NotoSansKR-Regular';
+}
+
+.TourPage__header {
+    background: 
+     linear-gradient(#fff,#fff) padding-box, 
+     linear-gradient(to right, #00bb38, #ffe45d) border-box;
+    color: #313149;
+    padding:10px;
+    border: 5px solid transparent;
+    border-radius:15px;
+    display:inline-block;
+    display: flex;
+    margin: 40px 15px 20px;
+    padding : 15px 30px;
+    justify-content: space-evenly;
+}
+
+.TourPage__header >input {
+    font-size: 2em;
+    width: 80%;
+    border: none;
+    font-family: 'NotoSansKR-Regular';
+}
+.TourPage__header >input:focus {
+    border-bottom: 1px solid #00bb38;
+}
+.TourPage__header > svg {
+    color: #f6b236;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+}
+.TourPage__contents {
+    padding: 10px;
+    height: calc(100vh - 185px);
+    overflow-y: auto;
+
+    display: flex;
+    flex-wrap: wrap;
+}
+.TourCardImg__wrapper {
+    width: 180px;
+    height: 100px;
+    margin-left: 5px;
+    margin-bottom: 15px;
+    box-shadow: 3px 3px 3px grey;
+    border-radius: 20px;
+}
+.TourCardImg__wrapper:hover {
+    cursor: pointer;
+}
+.TourCardImg {
+    border-radius: 20px;
+    width: 180px;
+    height: 100px;
+}
+.TourCardImg__title {
+    position: relative;
+    color: #fff;
+    background: rgb(0 0 0 / 60%);
+    border-radius: 5px;
+    padding: 3px 5px;
+    bottom: 30px;
+    left: 20px;
+}
