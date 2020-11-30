@@ -49,16 +49,17 @@ function RoutingPage() {
     } 
 
     const setRoutingPoint = (id, item) => {
-
         id === "startPointButton" ? setStartPoint(item) : id === "endPointButton" ? setEndPoint(item) : null;
-
         initMap.setCenter(item.point.x, item.point.y);
-
     }
 
+    /* 길찾기 버튼 클릭 */
     const findRouting = () => {
         console.log(startPoint);
         console.log(endPoint);
+        setCurrentFocus("routing");
+
+        
     }
 
     return (
