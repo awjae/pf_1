@@ -33,7 +33,7 @@ app.use(cors());
 const router = express.Router();
 app.use('/', router);
 
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 80;
 
 server.start = function() {
     http.createServer(app).listen(port, function() {

@@ -4,7 +4,7 @@ const baseConfig = require("./webpack.base.config");
 const DotEnv = require("dotenv-webpack");
 // const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
-const PORT = 7777;
+const PORT = 89;
 
 module.exports = merge(baseConfig, {
   plugins: [
