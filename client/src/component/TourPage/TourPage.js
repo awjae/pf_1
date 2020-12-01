@@ -13,8 +13,13 @@ function TourPage() {
     const [tourModal, setTourModal] = useState();
 
     const searchTour = (el) => {
-        if (el.key === "Enter") {
-            const value = el.target.value;
+        if (el.key === "Enter" || el === "click") {
+            let value = "";
+            if (el === "click") {
+                value = document.querySelector('#tourInput').value;
+            } else {
+                value = el.target.value;
+            }
             document.querySelector('.TourPage__contents--wrapper').scrollTop = 0;
             axios.post("/proxyNaE.do", {
                 baseUrl : 'http://api.visitkorea.or.kr/openapi/service/rest/PhotoGalleryService/gallerySearchList?pageNo=1&numOfRows=20&MobileOS=ETC&MobileApp=AppTest&arrange=A&_type=json&keyword=',
@@ -89,7 +94,7 @@ function TourPage() {
         <>
             <section className="TourPage">
                 <header className="TourPage__header">
-                    <input type="text" placeholder="여행지 검색" onKeyPress={ searchTour } id="tourInput"/><Flag />
+                    <input type="text" placeholder="여행지 검색" onKeyPress={ searchTour } id="tourInput"/><span onClick={() => searchTour("click")}><Flag /></span>
                 </header>
                 <article className="TourPage__contents">
                     <div className="TourPage__contents--wrapper" onScroll={ TourCardScrollHandler }>

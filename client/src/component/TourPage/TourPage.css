@@ -26,7 +26,7 @@
 .TourPage__header >input:focus {
     border-bottom: 1px solid #00bb38;
 }
-.TourPage__header > svg {
+.TourPage__header svg {
     color: #f6b236;
     width: 40px;
     height: 40px;
