@@ -27,9 +27,13 @@ function TourPage() {
                 key : '&serviceKey=D27U4D%2FI6rYhcsbQPWP0P4UesCnjrDNSrsiFbOJdmPPKiaGE1frZWi4LJOFPUGDSf%2FFp4ZMsPNzLwCYp82YzIQ%3D%3D',
             })
             .then(function (res) {
-                const items = res.data.response.body.items.item;            
-                console.log(items)    
-                setItemList(items);
+                const items = res.data.response.body.items.item;        
+                if (Array.isArray(items)) {
+                    setItemList(items);
+                } else {
+                    setItemList([items]);
+                }
+                
             })
             .catch(function (err) {
                 console.log(err);
