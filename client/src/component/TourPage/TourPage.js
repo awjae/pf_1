@@ -2,11 +2,15 @@ import React, { useState } from 'react';
 import './TourPage.css';
 import { Flag } from '@material-ui/icons';
 import axios from 'axios';
-import TourCard from './TourCard'
+import TourCard from './TourCard';
+import TourModal from './TourModal';
+import initMap from '../../Map/core/initMap';
 
 function TourPage() {
 
     const [itemList, setItemList] = useState([]);
+    const [paging, setPaging] = useState(1);
+    const [tourModal, setTourModal] = useState();
 
     const searchTour = (el) => {
         if (el.key === "Enter") {
@@ -29,20 +33,47 @@ function TourPage() {
         }
     }
 
-    return (
-        <section className="TourPage">
-            <header className="TourPage__header">
-                <input type="text" placeholder="여행지 검색" onKeyPress={ searchTour } id="tourInput"/><Flag />
-            </header>
-            <article className="TourPage__contents">
-                { itemList &&
-                    itemList.map(item => {
-                        return <TourCard key={item.galContentId} url={item.galWebImageUrl} item={item} imgTitle={item.galTitle} />
-                    })
-
+    const tourModalHandler = (imgInfo) => {
+        setTourModal(imgInfo);
+        if (imgInfo) {
+            console.log(imgInfo)
+            axios.post("/proxy.do", {
+                baseUrl : 'http://api.vworld.kr/req/search',
+                extraUrl : `?request=search&version=2.0&crs=EPSG:4326&size=1&page=1&query=${imgInfo.galTitle}&type=place&format=json&errorformat=json&key=E33AEC41-F230-3C7E-A007-6307BA86AA9F`
+            })
+            .then(function (res) {
+                const item = res.data.response.result.items[0];
+                if(item) {
+                    initMap.setCenter(item.point.x, item.point.y);
                 }
-            </article>
-        </section>
+            })
+            .catch(function(err) {
+                console.log(err)
+            })
+
+        }
+    }
+
+    return (
+        <>
+            <section className="TourPage">
+                <header className="TourPage__header">
+                    <input type="text" placeholder="여행지 검색" onKeyPress={ searchTour } id="tourInput"/><Flag />
+                </header>
+                <article className="TourPage__contents">
+                    <div className="TourPage__contents--wrapper">
+                        { itemList &&
+                            itemList.map(item => {
+                                return <TourCard key={item.galContentId} url={item.galWebImageUrl} item={item} imgTitle={item.galTitle} tourModalHandler={tourModalHandler} />
+                            })
+                        }
+                    </div>
+                </article>
+            </section>
+            { tourModal &&
+                <TourModal imgInfo={tourModal} tourModalHandler={tourModalHandler}></TourModal>
+            }
+        </>
     )
 }
 

@@ -31,9 +31,27 @@ function SearchPage() {
             extraUrl : makeURLForSearchAddress(value, 'address', 1)
         })
         .then(function (res) {
-            const items = res.data.response.result.items;
-            console.log(items);
-            setItems(items);
+            const items1 = res.data.response.result.items;
+            console.log(items1);
+
+            if (items1.length < 10) {
+                axios.post("/proxy.do", {
+                    baseUrl : 'http://api.vworld.kr/req/search',
+                    extraUrl : makeURLForSearchAddress(value, 'place', 1)
+                })
+                .then(function (res2) {
+                    const items2 = res2.data.response.result.items;
+                    console.log(items1.concat(items2))
+                    setItems(items1.concat(items2))
+                })
+                .catch(function(err) {
+                    console.log(err)
+                })
+            } else {
+                setItems(items1);
+
+            }
+
         })
         .catch(function (err) {
             console.log(err)
@@ -47,7 +65,7 @@ function SearchPage() {
                 text = `?request=search&version=2.0&crs=EPSG:4326&size=20&page=${page}&query=${query}&type=address&category=road&format=json&errorformat=json&key=E33AEC41-F230-3C7E-A007-6307BA86AA9F`
                 break;
             case 'place' :
-                text = `service=search&request=search&version=2.0&crs=EPSG:4326&size=20&page=${page}&query=${query}&type=place&format=json&errorformat=json&key=E33AEC41-F230-3C7E-A007-6307BA86AA9F`
+                text = `?request=search&version=2.0&crs=EPSG:4326&size=20&page=${page}&query=${query}&type=place&format=json&errorformat=json&key=E33AEC41-F230-3C7E-A007-6307BA86AA9F`
                 break;
             default :
                 break;
@@ -70,8 +88,8 @@ function SearchPage() {
             <article className="SearchPage__contents">
                 { items && 
                     items.map((item, idx) => {
-                        if (item.address.bldnm) {
-                            return <SearchCard key={idx} address={item.address} point={item.point} />;
+                        if (item.address.bldnm || item.title) {
+                            return <SearchCard key={idx} address={item.address} point={item.point} placeTitle={item.title}/>;
                         }
                     })
                 }

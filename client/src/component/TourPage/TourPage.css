@@ -33,12 +33,14 @@
     cursor: pointer;
 }
 .TourPage__contents {
-    padding: 10px;
     height: calc(100vh - 185px);
+}
+.TourPage__contents--wrapper {
     overflow-y: auto;
-
     display: flex;
     flex-wrap: wrap;
+    padding: 10px;
+    height: 100%;
 }
 .TourCardImg__wrapper {
     width: 180px;
@@ -64,4 +66,39 @@
     padding: 3px 5px;
     bottom: 30px;
     left: 20px;
+    max-width: 150px;
+    width: fit-content;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: block;
+}
+.TourCardImg:hover {
+    border: 2px solid #f3e25b;
+    box-shadow: 5px 5px 15px #f6b236;
+}
+
+.TourModal {
+    position: fixed;
+    width: 60%;
+    height: 70%;
+    left: 60%;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    z-index: 1;
+    border-radius: 30px;
+    background: #ffffff;
+    box-shadow: 10px 10px 100px 20px #040303;
+    display: block;
+}
+.TourModal__closer {
+    right: 20px;
+    position: absolute;
+    color: #fff;
+    top: 20px;
+    cursor: pointer;
+}
+.TourModal__closer > svg {
+    width: 40px;
+    height: 40px;
 }

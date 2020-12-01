@@ -21,7 +21,7 @@ function SearchCard(props) {
     return (
         <div className="SearchCard">
             <p className="SearchCard__title" onClick={() => setMapCenter(point) }>
-                { address.bldnm }
+                { address.bldnm || props.placeTitle }
             </p>
             <p className="SearchCard__subTitle">
                 { address.road }
