@@ -15,7 +15,7 @@ function TourPage() {
     const searchTour = (el) => {
         if (el.key === "Enter") {
             const value = el.target.value;
-
+            document.querySelector('.TourPage__contents--wrapper').scrollTop = 0;
             axios.post("/proxyNaE.do", {
                 baseUrl : 'http://api.visitkorea.or.kr/openapi/service/rest/PhotoGalleryService/gallerySearchList?pageNo=1&numOfRows=20&MobileOS=ETC&MobileApp=AppTest&arrange=A&_type=json&keyword=',
                 extraUrl : value,
@@ -27,7 +27,7 @@ function TourPage() {
                 setItemList(items);
             })
             .catch(function (err) {
-                console.log(err)
+                console.log(err);
             })
 
         }
@@ -53,6 +53,37 @@ function TourPage() {
 
         }
     }
+    let timer;
+    const TourCardScrollHandler = (e) => {
+        if (e.target.scrollTop + e.target.clientHeight > e.target.scrollHeight - 250) {
+            if (timer) {
+                clearTimeout(timer);
+            }
+            timer = setTimeout(() => {
+                const reqPage = paging + 1;
+                const value = document.querySelector('#tourInput').value;
+                axios.post("/proxyNaE.do", {
+                    baseUrl : `http://api.visitkorea.or.kr/openapi/service/rest/PhotoGalleryService/gallerySearchList?pageNo=${reqPage}&numOfRows=20&MobileOS=ETC&MobileApp=AppTest&arrange=A&_type=json&keyword=`,
+                    extraUrl : value,
+                    key : '&serviceKey=D27U4D%2FI6rYhcsbQPWP0P4UesCnjrDNSrsiFbOJdmPPKiaGE1frZWi4LJOFPUGDSf%2FFp4ZMsPNzLwCYp82YzIQ%3D%3D',
+                })
+                .then(function (res) {
+                    const items = res.data.response.body.items.item;            
+                    console.log(items)    
+                    //setItemList(items);
+                    if (items) {
+                        setPaging(reqPage);
+                        const newTourList = itemList.concat(items);
+                        setItemList(newTourList);
+                    }
+                })
+                .catch(function (err) {
+                    console.log(err)
+                })
+
+            }, 300);
+        }
+    }
 
     return (
         <>
@@ -61,7 +92,7 @@ function TourPage() {
                     <input type="text" placeholder="여행지 검색" onKeyPress={ searchTour } id="tourInput"/><Flag />
                 </header>
                 <article className="TourPage__contents">
-                    <div className="TourPage__contents--wrapper">
+                    <div className="TourPage__contents--wrapper" onScroll={ TourCardScrollHandler }>
                         { itemList &&
                             itemList.map(item => {
                                 return <TourCard key={item.galContentId} url={item.galWebImageUrl} item={item} imgTitle={item.galTitle} tourModalHandler={tourModalHandler} />
