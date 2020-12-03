@@ -58,4 +58,9 @@ turf.js
 
 - 미디어 쿼리를 이용한 웹앱 지원
 
-- 
+- api 문서 만들어보기
+
+- ...
+
+7. 아키텍처
+![](https://i.imgur.com/dsesobM.png)
