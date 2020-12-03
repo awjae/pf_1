@@ -1,13 +1,39 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './SearchPage.css';
-import { Search } from '@material-ui/icons';
+import { Search, SettingsEthernetSharp } from '@material-ui/icons';
 import axios from "axios";
 import SearchCard from './SearchCard';
+import initMap from '../../Map/core/initMap';
 
 function SearchPage() {
 
     const [searchInput, setSearchInput] = useState("");
     const [items, setItems] = useState([]);
+
+    useEffect(() => {
+        //날씨 API, 영화 순위 API
+        // Geolocation API는 보안 컨텍스트(HTTPS)에서만 작동합니다.
+        //현재 위치에 기반한 날씨 보류..
+        const { lat, lng } = initMap.map.getCenter();
+        const key = process.env.OPENWEATHER;
+        axios(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${key}`)
+        .then(function(res) {
+            const { name, main, weather } = res.data;
+
+            console.log(name, main, weather);
+
+            //세션 스토리지에 search 유무 확인
+            if (true) {
+                
+            }
+
+        })
+        .catch(function(err) {
+            console.log(err)
+        })
+
+    }, [])
+
 
     let timer;
     const searchHandleChange = (value) => {
