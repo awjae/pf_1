@@ -11,14 +11,15 @@ function SearchPage() {
 
     let timer;
     const searchHandleChange = (value) => {
-        if (timer) {
-            clearTimeout(timer);
+        if (!timer) {
+            timer = setTimeout(() => {
+                timer = null;
+                setItems([]);
+                setSearchInput(value)
+                searchVworldGeocoding(value)
+            }, 400);
         }
-        timer = setTimeout(() => {
-            setSearchInput(value)
-
-            searchVworldGeocoding(value)
-        }, 400);
+        
     }
 
     //백엔드에서 프록시 넣기
@@ -77,7 +78,7 @@ function SearchPage() {
         <section className="SearchPage">
             <header className="SearchPage__header">
                 <section>
-                    <input type="text" placeholder="장소, 버스, 지하철, 도로 검색" onChange={ (e) => searchHandleChange(e.target.value) }/>
+                    <input type="text" placeholder="장소, 버스, 지하철, 도로 검색" onChange={ (e) => searchHandleChange(e.target.value) } onKeyPress={(e) => searchHandleChange(e.target.value)} />
                     <Search></Search>
                 </section>
             </header>
