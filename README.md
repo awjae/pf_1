@@ -9,12 +9,19 @@ VWorld Map API
 
 2. 관련 라이브러리 및 개발환경
 
-```NodeJS
+```
+NodeJS
 express
+
 React
 Javascript
+babel
+webpack
+
+axios
 Mapbox-gl.js
-turf.js```
+turf.js
+```
 
 3. 역할 : 웹서비스 1인 개발
 
