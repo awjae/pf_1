@@ -3,31 +3,14 @@
 
 Demo : http://awjae.space
 
-1. 관련 API
-VWorld Map API
-한국관광공사 API
+아키텍처
+![](https://i.imgur.com/dsesobM.png)
 
-2. 관련 라이브러리 및 개발환경
+1. 역할 : 웹서비스 1인 개발
 
-```
-NodeJS
-express
+2. 개인 스터디용, 사용해보지 못한 라이브러리 활용, 프론트엔트 프레임워크 활용
 
-React
-Javascript
-babel
-webpack
-
-axios
-Mapbox-gl.js
-turf.js
-```
-
-3. 역할 : 웹서비스 1인 개발
-
-4. 개인 스터디용, 사용해보지 못한 라이브러리 활용, 프론트엔트 프레임워크 활용
-
-5. 성과
+3. 성과
 
 - 백엔드와 프론트엔드의 프로젝트 분리 개발
 백엔드(스태틱 서버), 프론트(배포용 bundle)
@@ -44,7 +27,7 @@ turf.js
 
 - ...
 
-6. Task
+4. Task
 
 - 로그인
 
@@ -62,5 +45,22 @@ turf.js
 
 - ...
 
-7. 아키텍처
-![](https://i.imgur.com/dsesobM.png)
+5. API, 라이브러리 및 개발환경
+```
+VWorld Map API
+한국관광공사 API
+```
+
+```
+NodeJS
+express
+
+React
+Javascript
+babel
+webpack
+
+axios
+Mapbox-gl.js
+turf.js
+``` 
