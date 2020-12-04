@@ -29,6 +29,10 @@ Demo : http://awjae.space
 
 4. Task
 
+- redux or recoil 적용하기 (상태관리가 필요한 과정을 몸소 체험하기)
+
+- react-route-dom 적용하기 (라우팅이 필요한 과정을 몸소 체험하기(url을 북마크..))
+
 - 로그인
 
 - 즐겨찾기
