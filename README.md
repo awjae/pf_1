@@ -47,6 +47,8 @@ Demo : http://awjae.space
 
 - api 문서 만들어보기
 
+- jenkins, jest.. 등 활용해보기
+
 - ...
 
 5. API, 라이브러리 및 개발환경

@@ -49,6 +49,7 @@ function RoutingPage() {
     } 
 
     const setRoutingPoint = (id, item) => {
+        console.log(item);
         id === "startPointButton" ? setStartPoint(item) : id === "endPointButton" ? setEndPoint(item) : null;
         initMap.setCenter(item.point.x, item.point.y);
     }
