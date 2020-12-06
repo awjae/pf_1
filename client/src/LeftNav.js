@@ -4,6 +4,7 @@ import Mypage from './component/Mypage/MyPage';
 import SearchPage from './component/SearchPage/SearchPage';
 import RoutingPage from './component/RoutingPage/RoutingPage';
 import TourPage from './component/TourPage/TourPage';
+import initMap from './Map/core/initMap';
 
 import './css/LeftNav.css';
 
@@ -36,7 +37,9 @@ function LeftNav(props) {
 
             e.classList.add("active")
         }
-        
+        if (e.title !== "길찾기") {
+            initMap.currDirect.removeRoutes();
+        }
         
     }
     

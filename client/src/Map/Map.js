@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import 'mapbox-gl';
-import '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions';
 import initMap from './core/initMap';
 import MapLeftSidebar from './component/MapLeftSidebar';
 import './Map.css';
@@ -18,16 +17,8 @@ function Map(props) {
             pitch: 60, //상하
             bearing: 0, //좌우
         });
-        const directPlugin = new MapboxDirections({
-            accessToken: mapboxgl.accessToken,
-            unit: "metric"
-        });
-        map.addControl(
-            directPlugin
-        );
-
+        
         initMap.init(map);
-        initMap.directPlugin = directPlugin;
         
     }, [])
 

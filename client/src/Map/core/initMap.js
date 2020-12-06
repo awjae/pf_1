@@ -1,8 +1,8 @@
 import { ContactPhoneSharp } from "@material-ui/icons";
-
+import '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions';
 
 const initMap = {};
-
+initMap.accessToken = process.env.MAPBOXGL_ACCESS_TOKEN;
 initMap.init = (map) => {
     initMap.map = map || "";
     map.on('load', function () {
@@ -41,6 +41,10 @@ initMap.init = (map) => {
             labelLayerId
         );
     });
+
+    //initMap.setDirectControls("traffic");
+    initMap.map.addControl(initMap.directArr.traffic);
+    initMap.currDirect = initMap.directArr.traffic;
 }
 initMap.leftNavEvent = (active) => {
     if (!initMap.map) return;
@@ -66,5 +70,40 @@ initMap.setCenter = (x, y) => {
         [ parseFloat(x), parseFloat(y)]
     );
 }
+initMap.directArr = {
+    traffic : new MapboxDirections({
+        accessToken: initMap.accessToken,
+        unit: "metric",
+        profile: 'mapbox/driving-traffic'
+    }),
+    driving : new MapboxDirections({
+        accessToken: initMap.accessToken,
+        unit: "metric",
+        profile: 'mapbox/driving'
+    }),
+    walking : new MapboxDirections({
+        accessToken: initMap.accessToken,
+        unit: "metric",
+        profile: 'mapbox/walking'
+    }),
+    cycling : new MapboxDirections({
+        accessToken: initMap.accessToken,
+        unit: "metric",
+        profile: 'mapbox/cycling'
+    })
+};
+initMap.setDirectControls = (method) => {
+    //if (initMap.currDirect) initMap.map.removeControl(initMap.currDirect);
+
+    //initMap.map.addControl(initMap.directArr[method]);
+    //initMap.currDirect = initMap.directArr[method];
+
+    //해당 오픈소스가 setProfile을 지원하지않는다 오롯이 제공하는 radio로만 조작 가능하게 해둠..
+    //issue 가 이미 있지만 수용할 생각이 없다.
+    //https://github.com/mapbox/mapbox-gl-directions/blob/master/src/controls/inputs.js
+    const change = new Event('change');
+    method==="traffic" ? document.querySelector(`#mapbox-directions-profile-driving-${method}`).dispatchEvent(change) : document.querySelector(`#mapbox-directions-profile-${method}`).dispatchEvent(change)
+
+};
 
 export default initMap;

@@ -8,3 +8,7 @@
 #map * {
     outline: none;
 }
+
+.mapboxgl-control-container {
+    display: none;
+}
