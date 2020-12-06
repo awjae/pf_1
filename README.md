@@ -39,8 +39,6 @@ Demo : http://awjae.space
 
 - 세션 및 로컬 스토리지 활용
 
-- 길찾기
-
 - 공간정보 Processing Tool
 
 - 미디어 쿼리를 이용한 웹앱 지원

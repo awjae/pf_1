@@ -37,8 +37,11 @@ function LeftNav(props) {
 
             e.classList.add("active")
         }
-        if (e.title !== "길찾기") {
-            initMap.currDirect.removeRoutes();
+        if (e.title === "길찾기") {
+            initMap.map.addControl(initMap.directArr.traffic);
+            initMap.currDirect = initMap.directArr.traffic;
+        } else {
+            initMap.map.removeControl(initMap.directArr.traffic)
         }
         
     }

@@ -43,8 +43,6 @@ initMap.init = (map) => {
     });
 
     //initMap.setDirectControls("traffic");
-    initMap.map.addControl(initMap.directArr.traffic);
-    initMap.currDirect = initMap.directArr.traffic;
 }
 initMap.leftNavEvent = (active) => {
     if (!initMap.map) return;
