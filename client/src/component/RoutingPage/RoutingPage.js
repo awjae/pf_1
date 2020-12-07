@@ -95,6 +95,15 @@ function RoutingPage() {
         setContents([]);
     }
 
+    const resetRouting = () => {
+        setContents([]);
+        document.querySelector('#startPoint').value = "";
+        document.querySelector('#endPoint').value = "";
+        setStartPoint({});
+        setEndPoint({});
+        initMap.currDirect.removeRoutes();
+    }
+
     useEffect(() => {
 
         //direct 이벤트
@@ -133,7 +142,7 @@ function RoutingPage() {
                 <p className="RoutingPage__header--changer" onClick={ routingReverse }><ImportExport /></p>
             </header>
             <section className="RoutingPage__subHeader">
-                <button>
+                <button onClick={ resetRouting }>
                     초기화
                 </button>
                 <button onClick={ findRouting }>

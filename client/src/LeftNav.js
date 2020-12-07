@@ -5,6 +5,7 @@ import SearchPage from './component/SearchPage/SearchPage';
 import RoutingPage from './component/RoutingPage/RoutingPage';
 import TourPage from './component/TourPage/TourPage';
 import initMap from './Map/core/initMap';
+import { Link } from "react-router-dom";
 
 import './css/LeftNav.css';
 
@@ -35,7 +36,7 @@ function LeftNav(props) {
         } else {
             if (initMap.currDirect) {
                 initMap.map.removeControl(initMap.directArr.traffic)
-                initMap.currDirect = {};
+                initMap.currDirect = null;
             }
             
         }
@@ -58,14 +59,14 @@ function LeftNav(props) {
                 { menuArr && 
                     menuArr.map((el, idx) => (
                         <React.Fragment key={ idx }>
-                            <div className="leftNav--menu__icon">
+                            <Link className="leftNav--menu__icon" to={`${el.menu}`}>
                                 <span 
                                     className="leftNav--menu__iconSpan" 
                                     title={ el.name } 
                                     onClick={(e) =>  { props.setCurrMenu(el); clickHandle(e.currentTarget) } }>
                                         { el.icon }
                                 </span>
-                            </div>
+                            </Link>
                         </React.Fragment>
                     ))
                 }
