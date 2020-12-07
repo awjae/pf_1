@@ -92,7 +92,7 @@ function RoutingPage() {
         document.querySelector('#endPoint').value = temp.address.bldnm;
         setStartPoint(endPoint);
         setEndPoint(temp);
-
+        setContents([]);
     }
 
     useEffect(() => {
