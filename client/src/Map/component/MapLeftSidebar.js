@@ -9,7 +9,9 @@ function MapLeftSidebar(props) {
 
     return (
         <aside className={ `map--sidebar ${props.currMenu ? "active" : ""}` }>
+
             { props.currMenu.contents }
+
         </aside>
     )
 }

@@ -19,7 +19,7 @@
     cursor: pointer;
 }
 
-.leftNav--menu__icon {
+.leftNav--menu__icon>a {
     color: #333333;
 }
 
@@ -43,6 +43,6 @@
 }
 
 
-.leftNav--menu__icon:first-child {
+.leftNav--menu__icon:first-child>a {
     color: #00bb38;
 }

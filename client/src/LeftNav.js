@@ -59,14 +59,14 @@ function LeftNav(props) {
                 { menuArr && 
                     menuArr.map((el, idx) => (
                         <React.Fragment key={ idx }>
-                            <Link className="leftNav--menu__icon" to={`${el.menu}`}>
-                                <span 
+                            <div className="leftNav--menu__icon">
+                                <Link to={`${el.menu}`}
                                     className="leftNav--menu__iconSpan" 
                                     title={ el.name } 
                                     onClick={(e) =>  { props.setCurrMenu(el); clickHandle(e.currentTarget) } }>
                                         { el.icon }
-                                </span>
-                            </Link>
+                                </Link>
+                            </div>
                         </React.Fragment>
                     ))
                 }
