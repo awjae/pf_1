@@ -28,6 +28,18 @@ function LeftNav(props) {
 
     const clickHandle = (e) => {
         if (e.title === "내정보") return;
+
+        if (e.title === "길찾기") {
+            initMap.map.addControl(initMap.directArr.traffic);
+            initMap.currDirect = initMap.directArr.traffic;
+        } else {
+            if (initMap.currDirect) {
+                initMap.map.removeControl(initMap.directArr.traffic)
+                initMap.currDirect = {};
+            }
+            
+        }
+
         if (e.classList.contains("active")) {
             e.classList.remove("active");
             return;
@@ -36,12 +48,6 @@ function LeftNav(props) {
             spanList.forEach(span => span.classList.remove("active"));
 
             e.classList.add("active")
-        }
-        if (e.title === "길찾기") {
-            initMap.map.addControl(initMap.directArr.traffic);
-            initMap.currDirect = initMap.directArr.traffic;
-        } else {
-            initMap.map.removeControl(initMap.directArr.traffic)
         }
         
     }

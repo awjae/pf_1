@@ -85,12 +85,21 @@ function RoutingPage() {
         setProfile(e.currentTarget.dataset.value);
     } 
 
+    const routingReverse = () => {
+        initMap.currDirect.reverse();
+        const temp = startPoint;
+        document.querySelector('#startPoint').value = endPoint.address.bldnm;
+        document.querySelector('#endPoint').value = temp.address.bldnm;
+        setStartPoint(endPoint);
+        setEndPoint(temp);
+
+    }
+
     useEffect(() => {
 
         //direct 이벤트
         initMap.currDirect.on("route", function(e) {
             const routes = e.route[0];
-            console.log(routes)
             let duration = "";
             if ((routes.duration / 60).toFixed(0) < 60) {
                 duration = (routes.duration / 60).toFixed(0)+ "분";
@@ -121,7 +130,7 @@ function RoutingPage() {
                 <p>
                     <input className="RoutingPage__header--input" placeholder="도착지 입력하세요"onKeyPress={ searchPoint } id="endPoint" />
                 </p>
-                <p className="RoutingPage__header--changer"><ImportExport /></p>
+                <p className="RoutingPage__header--changer" onClick={ routingReverse }><ImportExport /></p>
             </header>
             <section className="RoutingPage__subHeader">
                 <button>
