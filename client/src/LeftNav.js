@@ -28,7 +28,13 @@ function LeftNav(props) {
     }, [])
 
     const clickHandle = (e) => {
-        if (e.title === "내정보") return;
+        console.log(initMap.currDirect)
+
+        if (e.title === "내정보") {
+            const spanList = document.querySelectorAll('.leftNav--menu__iconSpan');
+            spanList.forEach(span => span.classList.remove("active"));
+            return;
+        }
 
         if (e.title === "길찾기") {
             initMap.map.addControl(initMap.directArr.traffic);

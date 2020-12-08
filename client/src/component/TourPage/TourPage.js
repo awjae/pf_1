@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import './TourPage.css';
 import { Flag } from '@material-ui/icons';
 import axios from 'axios';
@@ -11,12 +11,13 @@ function TourPage() {
     const [itemList, setItemList] = useState([]);
     const [paging, setPaging] = useState(1);
     const [tourModal, setTourModal] = useState();
+    const tourInput = useRef();
 
     const searchTour = (el) => {
         if (el.key === "Enter" || el === "click") {
             let value = "";
             if (el === "click") {
-                value = document.querySelector('#tourInput').value;
+                value = tourInput.current.value;
             } else {
                 value = el.target.value;
             }
@@ -27,7 +28,9 @@ function TourPage() {
                 key : '&serviceKey=D27U4D%2FI6rYhcsbQPWP0P4UesCnjrDNSrsiFbOJdmPPKiaGE1frZWi4LJOFPUGDSf%2FFp4ZMsPNzLwCYp82YzIQ%3D%3D',
             })
             .then(function (res) {
-                const items = res.data.response.body.items.item;        
+                const items = res.data.response.body.items.item;     
+                if (!items) return;  
+                 
                 if (Array.isArray(items)) {
                     setItemList(items);
                 } else {
@@ -70,7 +73,7 @@ function TourPage() {
             }
             timer = setTimeout(() => {
                 const reqPage = paging + 1;
-                const value = document.querySelector('#tourInput').value;
+                const value = tourInput.current.value;
                 axios.post("/proxyNaE.do", {
                     baseUrl : `http://api.visitkorea.or.kr/openapi/service/rest/PhotoGalleryService/gallerySearchList?pageNo=${reqPage}&numOfRows=20&MobileOS=ETC&MobileApp=AppTest&arrange=A&_type=json&keyword=`,
                     extraUrl : value,
@@ -98,7 +101,7 @@ function TourPage() {
         <>
             <section className="TourPage">
                 <header className="TourPage__header">
-                    <input type="text" placeholder="여행지 검색" onKeyPress={ searchTour } id="tourInput"/><span onClick={() => searchTour("click")}><Flag /></span>
+                    <input type="text" placeholder="여행지 검색" onKeyPress={ searchTour } id="tourInput" ref={ tourInput }/><span onClick={() => searchTour("click")}><Flag /></span>
                 </header>
                 <article className="TourPage__contents">
                     <div className="TourPage__contents--wrapper" onScroll={ TourCardScrollHandler }>

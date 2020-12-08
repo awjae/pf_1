@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ImportExport, ChevronRight, DirectionsCar, DirectionsBus, DirectionsWalk, DirectionsBike } from '@material-ui/icons';
 import './RoutingPage.css';
 import axios from 'axios'; 
@@ -12,6 +12,9 @@ function RoutingPage() {
     const [startPoint, setStartPoint] = useState({});
     const [endPoint, setEndPoint] = useState({});
     const [profile, setProfile] = useState("");
+    const profileUl = useRef();
+    const startPointRef = useRef();
+    const endPointRef = useRef();
 
     const makeURLForSearchAddress = (query, type, page) => {
         var text = ``;
@@ -32,7 +35,6 @@ function RoutingPage() {
         setContents([]);
         if (el.key === "Enter") {
             const value = el.target.value;
-
             axios.post("/proxy.do", {
                 baseUrl : 'http://api.vworld.kr/req/search',
                 extraUrl : makeURLForSearchAddress(value, 'address', 1)
@@ -41,7 +43,6 @@ function RoutingPage() {
                 const items = res.data.response.result.items;
                 setCurrentFocus(el.target.id);
                 setContents(items);
-                
             })
             .catch(function (err) {
                 console.log(err)
@@ -62,7 +63,7 @@ function RoutingPage() {
         initMap.currDirect.setDestination([parseFloat(endPoint.point.x), parseFloat(endPoint.point.y)]);
 
         if (!profile) {
-            document.querySelector('.RountingPage__contents--header').children[0].children[0].style.color = "#0475f4";
+            profileUl.current.children[0].children[0].style.color = "#0475f4";
             setProfile("traffic");
         }
 
@@ -70,11 +71,11 @@ function RoutingPage() {
     }
 
     const setStartPointHandler = (item) => {
-        document.querySelector('#startPoint').value = item.address.bldnm;
+        startPointRef.current.value = item.address.bldnm;
         setStartPoint(item);
     }
     const setEndPointHandler = (item) => {
-        document.querySelector('#endPoint').value = item.address.bldnm;
+        endPointRef.current.value = item.address.bldnm;
         setEndPoint(item);
     }
 
@@ -88,8 +89,8 @@ function RoutingPage() {
     const routingReverse = () => {
         initMap.currDirect.reverse();
         const temp = startPoint;
-        document.querySelector('#startPoint').value = endPoint.address.bldnm;
-        document.querySelector('#endPoint').value = temp.address.bldnm;
+        startPointRef.current.value = endPoint.address.bldnm;
+        endPointRef.current.value = temp.address.bldnm;
         setStartPoint(endPoint);
         setEndPoint(temp);
         setContents([]);
@@ -97,8 +98,8 @@ function RoutingPage() {
 
     const resetRouting = () => {
         setContents([]);
-        document.querySelector('#startPoint').value = "";
-        document.querySelector('#endPoint').value = "";
+        startPointRef.current.value = "";
+        endPointRef.current.value = "";
         setStartPoint({});
         setEndPoint({});
         initMap.currDirect.removeRoutes();
@@ -134,10 +135,10 @@ function RoutingPage() {
         <section className="RoutingPage">
             <header className="RoutingPage__header">
                 <p>
-                    <input className="RoutingPage__header--input" placeholder="출발지 입력하세요" onKeyPress={ searchPoint } id="startPoint" />
+                    <input className="RoutingPage__header--input" placeholder="출발지 입력하세요" onKeyPress={ searchPoint } ref={ startPointRef } id="startPoint" />
                 </p>
                 <p>
-                    <input className="RoutingPage__header--input" placeholder="도착지 입력하세요"onKeyPress={ searchPoint } id="endPoint" />
+                    <input className="RoutingPage__header--input" placeholder="도착지 입력하세요"onKeyPress={ searchPoint } ref={ endPointRef } id="endPoint"/>
                 </p>
                 <p className="RoutingPage__header--changer" onClick={ routingReverse }><ImportExport /></p>
             </header>
@@ -151,7 +152,7 @@ function RoutingPage() {
             </section>
             <article className="RountingPage__contents">
                 <header className="RountingPage__contents--header">
-                    <ul>
+                    <ul ref={ profileUl }>
                         <li onClick={ setProfileHandler } data-value="traffic"><DirectionsCar /></li>
                         <li onClick={ setProfileHandler } data-value="driving"><DirectionsBus /></li>
                         <li onClick={ setProfileHandler } data-value="walking"><DirectionsWalk /></li>
