@@ -1,9 +1,5 @@
 import  React, { useState, useEffect } from 'react';
 import { Search, Flag, CallSplit, Grade, PersonPin, Build } from '@material-ui/icons';
-import Mypage from './component/Mypage/MyPage';
-import SearchPage from './component/SearchPage/SearchPage';
-import RoutingPage from './component/RoutingPage/RoutingPage';
-import TourPage from './component/TourPage/TourPage';
 import initMap from './Map/core/initMap';
 import { Link } from "react-router-dom";
 
@@ -28,8 +24,7 @@ function LeftNav(props) {
     }, [])
 
     const clickHandle = (e) => {
-        console.log(initMap.currDirect)
-
+        
         if (e.title === "내정보") {
             const spanList = document.querySelectorAll('.leftNav--menu__iconSpan');
             spanList.forEach(span => span.classList.remove("active"));

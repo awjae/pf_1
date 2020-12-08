@@ -51,7 +51,6 @@ function SearchPage() {
     //백엔드에서 프록시 넣기
     //https://developers.naver.com/products/datalab/ 장소검색도 검색 결과에 넣기
     const searchVworldGeocoding = (value) => {
-        console.log(value);
 
         axios.post("/proxy.do", {
             baseUrl : 'http://api.vworld.kr/req/search',
@@ -59,7 +58,6 @@ function SearchPage() {
         })
         .then(function (res) {
             const items1 = res.data.response.result.items;
-            console.log(items1);
 
             if (items1.length < 10) {
                 axios.post("/proxy.do", {

@@ -9,7 +9,7 @@ import SearchPage from '../component/SearchPage/SearchPage';
 import RoutingPage from '../component/RoutingPage/RoutingPage';
 import TourPage from '../component/TourPage/TourPage';
 
-function Map(props) {
+function Map() {
     
     useEffect(() => {
 

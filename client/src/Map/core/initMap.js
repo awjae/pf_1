@@ -1,4 +1,3 @@
-import { ContactPhoneSharp } from "@material-ui/icons";
 import '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions';
 
 const initMap = {};
