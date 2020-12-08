@@ -16,12 +16,12 @@ function LeftNav(props) {
     useEffect(() => {
 
         const list = [
-            { name : "내정보", icon : <PersonPin/>, menu : "mypage", contents : <Mypage /> },
-            { name : "검색", icon : <Search/>, menu : "SearchPage", contents : <SearchPage /> },
-            { name : "길찾기", icon : <CallSplit/>, menu : "routing", contents : <RoutingPage /> },
-            { name : "여행지", icon : <Flag/>, menu : "trip", contents : <TourPage /> },
-            { name : "도구", icon : <Build/>, menu : "tools", contents : "" },
-            { name : "즐겨찾기", icon : <Grade/>, menu : "favorite", contents : "" },
+            { name : "내정보", icon : <PersonPin/>, menu : "mypage" },
+            { name : "검색", icon : <Search/>, menu : "SearchPage" },
+            { name : "길찾기", icon : <CallSplit/>, menu : "routing" },
+            { name : "여행지", icon : <Flag/>, menu : "trip" },
+            { name : "도구", icon : <Build/>, menu : "tools" },
+            { name : "즐겨찾기", icon : <Grade/>, menu : "favorite" },
         ];
         setMenuArr(list);
 

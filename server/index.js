@@ -14,6 +14,19 @@ server.get('/', function(req, res) {
         res.end(html);
     });
 });
+//에러페이지등 일단 index처리
+server.get('*', function(req, res) {
+    console.log('/ 요청.');
+    
+    req.app.render('index', '', function(err, html) {
+        if (err) {
+            console.log('view 처리 시 에러 발생 ->' + err);
+            return;
+        }
+        
+        res.end(html);
+    });
+});
 
 //post 요청
 server.post('/postList.do', function (req, res) {

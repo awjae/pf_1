@@ -3,6 +3,11 @@ import 'mapbox-gl';
 import initMap from './core/initMap';
 import MapLeftSidebar from './component/MapLeftSidebar';
 import './Map.css';
+import { Route } from 'react-router-dom';
+import Mypage from '../component/Mypage/MyPage';
+import SearchPage from '../component/SearchPage/SearchPage';
+import RoutingPage from '../component/RoutingPage/RoutingPage';
+import TourPage from '../component/TourPage/TourPage';
 
 function Map(props) {
     
@@ -27,11 +32,15 @@ function Map(props) {
         initMap.leftNavEvent(menuEl)
     }
 
+    //leftMenu-Route
     return (
         <div id="map">
-            <MapLeftSidebar 
-                currMenu = { props.currMenu } 
-                mapLaftEaseTo = { mapLaftEaseTo } />
+            <Route path="/mypage" render={() => <MapLeftSidebar mapLaftEaseTo={mapLaftEaseTo} currMenu = { <Mypage /> } /> } />
+            <Route path="/SearchPage" render={() => <MapLeftSidebar mapLaftEaseTo={mapLaftEaseTo} currMenu = { <SearchPage /> } /> } /> 
+            <Route path="/routing" render={() => <MapLeftSidebar mapLaftEaseTo={mapLaftEaseTo} currMenu = { <RoutingPage /> } /> } /> 
+            <Route path="/trip" render={() => <MapLeftSidebar mapLaftEaseTo={mapLaftEaseTo} currMenu = { <TourPage /> } /> } /> 
+            <Route path="/tools" render={() => <MapLeftSidebar mapLaftEaseTo={mapLaftEaseTo} currMenu = { "" } /> } />
+            <Route path="/favorite" render={() => <MapLeftSidebar mapLaftEaseTo={mapLaftEaseTo} currMenu = { "" } /> } />  
         </div>
     )
 }

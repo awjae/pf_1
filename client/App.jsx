@@ -9,7 +9,7 @@ const App = ({ }) => {
     return (
         <BrowserRouter>
             {/* <HeaderBar></HeaderBar> */}
-            <BodyContents></BodyContents>
+            <Route path="/" component={ BodyContents } />
         </BrowserRouter>
     )
 }

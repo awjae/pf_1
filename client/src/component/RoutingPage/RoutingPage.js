@@ -107,7 +107,7 @@ function RoutingPage() {
     useEffect(() => {
 
         //direct 이벤트
-        initMap.currDirect.on("route", function(e) {
+        initMap.currDirect?.on("route", function(e) {
             const routes = e.route[0];
             let duration = "";
             if ((routes.duration / 60).toFixed(0) < 60) {
