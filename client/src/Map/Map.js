@@ -8,6 +8,8 @@ import Mypage from '../component/Mypage/MyPage';
 import SearchPage from '../component/SearchPage/SearchPage';
 import RoutingPage from '../component/RoutingPage/RoutingPage';
 import TourPage from '../component/TourPage/TourPage';
+import BookMarkPage from '../component/BookMarkPage/BookMarkPage';
+import LayerPage from '../component/LayerPage/LayerPage';
 
 function Map() {
     
@@ -39,8 +41,8 @@ function Map() {
             <Route path="/SearchPage" render={() => <MapLeftSidebar mapLaftEaseTo={mapLaftEaseTo} currMenu = { <SearchPage /> } /> } /> 
             <Route path="/routing" render={() => <MapLeftSidebar mapLaftEaseTo={mapLaftEaseTo} currMenu = { <RoutingPage /> } /> } /> 
             <Route path="/trip" render={() => <MapLeftSidebar mapLaftEaseTo={mapLaftEaseTo} currMenu = { <TourPage /> } /> } /> 
-            <Route path="/tools" render={() => <MapLeftSidebar mapLaftEaseTo={mapLaftEaseTo} currMenu = { "" } /> } />
-            <Route path="/favorite" render={() => <MapLeftSidebar mapLaftEaseTo={mapLaftEaseTo} currMenu = { "" } /> } />  
+            <Route path="/tools" render={() => <MapLeftSidebar mapLaftEaseTo={mapLaftEaseTo} currMenu = { <LayerPage /> } /> } />
+            <Route path="/favorite" render={() => <MapLeftSidebar mapLaftEaseTo={mapLaftEaseTo} currMenu = { <BookMarkPage /> } /> } />  
         </div>
     )
 }

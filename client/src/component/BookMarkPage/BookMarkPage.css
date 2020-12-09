@@ -1,0 +1,60 @@
+.BookMarkPage {
+    font-family: 'NotoSansKR-Regular';
+}
+
+.BookMarkPage__header {
+    border-radius: 10px;
+    margin: 40px 20px;
+    padding: 5px;
+}
+
+.BookMarkPage__contents {
+    height: calc(100vh - 150px);
+}
+
+.BookMarkPage__header--ul {
+    display: flex;
+    border-top: 1px solid #dcdcdc;
+    font-size: 16px;
+    height: 30px;
+    padding-top: 10px;
+}
+.BookMarkPage__header--ul>li {
+    width: 33%;
+    height: 100%;
+    text-align: center;
+    vertical-align: middle;
+    border-bottom: 1px solid #dcdcdc;
+    cursor: pointer;
+}
+.BookMarkPage__header--ul>li:hover, .BookMarkPage__header--ul>li.active {
+    border-bottom: 1px solid rgba(4, 117, 244, 0.8);
+}
+
+.BookMarkPage__contents--noUser {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    padding-top: 150px;
+}
+.BookMarkPage__contents--noUser header {
+    font-size: 17px;
+    height: 80px;
+}
+.BookMarkPage__contents--noUser article button{
+    color : #0475f4;
+    background: #fff;
+    border : 1px solid #bebebe;
+    border-radius: 5px;
+    padding: 8px 15px;
+    box-shadow: none;
+    display: flex;
+    align-items: center;
+}
+.BookMarkPage__contents--noUser article button:hover{
+    background:#fcfcfc;
+    box-shadow: 2px 2px 2px #bebebe;
+    cursor: pointer;
+}
+

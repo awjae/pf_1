@@ -110,6 +110,14 @@ function TourPage() {
                                 return <TourCard key={item.galContentId} url={item.galWebImageUrl} item={item} imgTitle={item.galTitle} tourModalHandler={tourModalHandler} />
                             })
                         }
+                        { itemList.length === 0 &&
+                            <section className="">
+                                <header>여행지를 검색하세요</header>
+                                <article>
+                                    <span>이쁜 사진을 감상 할 수 있습니다.</span>
+                                </article>
+                            </section>
+                        }
                     </div>
                 </article>
             </section>

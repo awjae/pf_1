@@ -123,11 +123,7 @@ function RoutingPage() {
                 duration,
                 distance
             }
-            setContents([item]);
-
-            // routes.forEach(e => {
-
-            // });        
+            setContents([item]); 
         })
 
     }, [])
