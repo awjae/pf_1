@@ -29,7 +29,10 @@ function TourPage() {
             })
             .then(function (res) {
                 const items = res.data.response.body.items.item;     
-                if (!items) return;  
+                if (!items) {
+                    setItemList([]);
+                    return;
+                }  
                  
                 if (Array.isArray(items)) {
                     setItemList(items);
@@ -96,7 +99,6 @@ function TourPage() {
             }, 300);
         }
     }
-
     return (
         <>
             <section className="TourPage">
@@ -110,11 +112,19 @@ function TourPage() {
                                 return <TourCard key={item.galContentId} url={item.galWebImageUrl} item={item} imgTitle={item.galTitle} tourModalHandler={tourModalHandler} />
                             })
                         }
-                        { itemList.length === 0 &&
-                            <section className="">
+                        { itemList.length === 0 && !(tourInput.current) &&
+                            <section className="TourPage__contents--initData">
                                 <header>여행지를 검색하세요</header>
                                 <article>
                                     <span>이쁜 사진을 감상 할 수 있습니다.</span>
+                                </article>
+                            </section>
+                        }
+                        { itemList.length === 0 && tourInput.current &&
+                            <section className="TourPage__contents--noData">
+                                <header>검색 결과가 없습니다</header>
+                                <article>
+                                    <span>다른 여행지를 검색해주세요.</span>
                                 </article>
                             </section>
                         }

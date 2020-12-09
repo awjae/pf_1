@@ -102,3 +102,16 @@
     width: 40px;
     height: 40px;
 }
+
+.TourPage__contents--initData, .TourPage__contents--noData {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    margin-top: 60px;
+}
+
+.TourPage__contents--initData header, .TourPage__contents--noData header {
+    font-size: 17px;
+    height: 80px;
+}

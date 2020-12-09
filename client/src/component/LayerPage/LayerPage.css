@@ -1,0 +1,40 @@
+.LayerPage {
+    font-family: 'NotoSansKR-Regular';
+}
+
+.LayerPage__header {
+    border-radius: 10px;
+    margin: 40px 20px;
+    padding: 5px;
+}
+
+.LayerPage__contents {
+    height: calc(100vh - 150px);
+}
+
+.LayerPage__contents--noUser {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    padding-top: 150px;
+}
+.LayerPage__contents--noUser header {
+    font-size: 17px;
+    height: 80px;
+}
+.LayerPage__contents--noUser article button{
+    color : #0475f4;
+    background: #fff;
+    border : 1px solid #bebebe;
+    border-radius: 5px;
+    padding: 8px 15px;
+    box-shadow: none;
+    display: flex;
+    align-items: center;
+}
+.LayerPage__contents--noUser article button:hover{
+    background:#fcfcfc;
+    box-shadow: 2px 2px 2px #bebebe;
+    cursor: pointer;
+}
