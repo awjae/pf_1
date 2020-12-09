@@ -1,13 +1,14 @@
 import  React, { useState, useEffect } from 'react';
 import { Search, Flag, CallSplit, Grade, PersonPin, Build } from '@material-ui/icons';
 import initMap from './Map/core/initMap';
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import './css/LeftNav.css';
 
 function LeftNav(props) {
 
     const [menuArr, setMenuArr] = useState([]);
+    const history = useHistory();
 
     useEffect(() => {
 
@@ -22,37 +23,31 @@ function LeftNav(props) {
         setMenuArr(list);
 
     }, [])
-
-    const clickHandle = (e) => {
-        
-        if (e.title === "내정보") {
-            const spanList = document.querySelectorAll('.leftNav--menu__iconSpan');
-            spanList.forEach(span => span.classList.remove("active"));
-            return;
-        }
+    const clickHandle = ((e, menu) => {
 
         if (e.title === "길찾기") {
             initMap.map.addControl(initMap.directArr.traffic);
             initMap.currDirect = initMap.directArr.traffic;
         } else {
-            if (initMap.currDirect) {
+            try {
                 initMap.map.removeControl(initMap.directArr.traffic)
-                initMap.currDirect = null;
+            } catch {
+                //라이브러리가 객체 메모리 해제가 비정상적으로 이루어져 어쩔수 없이 코드 제거 후 try catch
             }
-            
         }
 
         if (e.classList.contains("active")) {
             e.classList.remove("active");
+            history.push('/');
             return;
         } else {
             const spanList = document.querySelectorAll('.leftNav--menu__iconSpan');
             spanList.forEach(span => span.classList.remove("active"));
-
+            history.push(`/${menu}`);
             e.classList.add("active")
         }
         
-    }
+    }).bind(this);
     
     return (
         <aside className="leftNav">
@@ -61,10 +56,10 @@ function LeftNav(props) {
                     menuArr.map((el, idx) => (
                         <React.Fragment key={ idx }>
                             <div className="leftNav--menu__icon">
-                                <Link to={`${el.menu}`}
+                                <Link to={ "#" }
                                     className="leftNav--menu__iconSpan" 
                                     title={ el.name } 
-                                    onClick={(e) =>  { props.setCurrMenu(el); clickHandle(e.currentTarget) } }>
+                                    onClick={(e) =>  { props.setCurrMenu(el); clickHandle(e.currentTarget, el.menu) } }>
                                         { el.icon }
                                 </Link>
                             </div>

@@ -64,6 +64,7 @@ function RoutingPage() {
 
         if (!profile) {
             profileUl.current.children[0].children[0].style.color = "#0475f4";
+            initMap.setDirectControls("traffic");
             setProfile("traffic");
         }
 
