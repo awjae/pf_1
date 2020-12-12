@@ -19,7 +19,7 @@ module.exports = merge(baseConfig, {
   devtool: "cheap-module-source-map",
   output: {
     filename: "bundle.js",
-    publicPath: "http://localhost:" + PORT + "/"
+    publicPath: "http://awjae.space:" + PORT + "/"
   },
   devServer: {
     port: PORT,
