@@ -14,6 +14,19 @@ server.get('/', function(req, res) {
         res.end(html);
     });
 });
+//로그인 팝
+server.get('/loginPop', function(req, res) {
+    console.log('/loginPop.');
+    
+    req.app.render('loginPop', '', function(err, html) {
+        if (err) {
+            console.log('view 처리 시 에러 발생 ->' + err);
+            return;
+        }
+        
+        res.end(html);
+    });
+});
 //에러페이지등 일단 index처리
 server.get('*', function(req, res) {
     console.log('/ 요청.');

@@ -3,7 +3,7 @@ import LeftNav from 'LeftNav';
 import Map from './Map/Map';
 import './css/BodyContents.css';
 
-function BodyContents() {
+function BodyContents({ match }) {
 
     const [currMenu, setCurrMenu] = useState("");
 
@@ -19,10 +19,12 @@ function BodyContents() {
         <main className="main">
             <LeftNav
                 setCurrMenu = { handleSetCurrMenu }
+                match={ match }
                 >
             </LeftNav>
             <Map
-                currMenu = { currMenu }>
+                currMenu = { currMenu }
+                match={ match }>
             </Map>
         </main>
     )

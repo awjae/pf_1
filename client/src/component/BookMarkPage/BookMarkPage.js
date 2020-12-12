@@ -5,6 +5,10 @@ function BookMarkPage() {
 
     const [user, setUser] = useState();
 
+    const loginPop = () => {
+        window.open(window.location.origin + '/loginPop','Data','height=500,width=350');
+    }
+
     return (
         <section className="BookMarkPage">
             <header className="BookMarkPage__header">
@@ -22,7 +26,7 @@ function BookMarkPage() {
                     <section className="BookMarkPage__contents--noUser">
                         <header>자주 가는 장소를 간직해요</header>
                         <article>
-                            <button>로그인</button>
+                            <button onClick={ loginPop }>로그인</button>
                         </article>
                     </section>
                 }
