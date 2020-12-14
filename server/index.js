@@ -2,8 +2,8 @@ const server = require('./server');
 const proxyReq = require('request');
 
 //기본 메인 페이지
-server.get('/', function(req, res) {
-    console.log('/ 요청.');
+server.get('*', function(req, res) {
+    console.log(req.originalUrl + '/ 요청.');
     
     req.app.render('index', '', function(err, html) {
         if (err) {
@@ -18,7 +18,7 @@ server.get('/', function(req, res) {
 server.get('/loginPop', function(req, res) {
     console.log('/loginPop.');
     
-    req.app.render('loginPop', '', function(err, html) {
+    req.app.render('index', '', function(err, html) {
         if (err) {
             console.log('view 처리 시 에러 발생 ->' + err);
             return;
