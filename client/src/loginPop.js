@@ -1,21 +1,25 @@
-import React from 'react'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import './css/LoginPop.css';
 
 function loginPop() {
     return (
-        <section>
+        <section className="loginPop">
             <header>
                 awjae.space
             </header>
-            <article>
-                <input placeholder="아이디" />
-                <input placeholder="비밀번호" />
+            <article className="loginPop__input--wrapper">
+                <span>
+                    <input placeholder="아이디" />
+                    <input placeholder="비밀번호" />
+                </span>
                 <button>로그인</button>
             </article>
-            <footer>
+            <footer className="loginPop__footer">
                 <ul>
-                    <li>회원가입</li>
-                    <li>아이디 찾기</li>
-                    <li>비밀번호 찾기</li>
+                    <li><Link to="/loginPop/signUp">회원가입</Link></li>
+                    <li><Link to="/loginPop/findId">아이디 찾기</Link></li>
+                    <li><Link to="/loginPop/findPw">비밀번호 찾기</Link></li>
                 </ul>
             </footer>
         </section>

@@ -38,7 +38,7 @@ function Map() {
     return (
         <div id="map">
             <Route path="/mypage" render={() => <MapLeftSidebar mapLaftEaseTo={mapLaftEaseTo} currMenu = { <Mypage /> } /> } />
-            <Route path="/SearchPage" render={() => <MapLeftSidebar mapLaftEaseTo={mapLaftEaseTo} currMenu = { <SearchPage /> } /> } /> 
+            <Route path="/searchPage" render={() => <MapLeftSidebar mapLaftEaseTo={mapLaftEaseTo} currMenu = { <SearchPage /> } /> } /> 
             <Route path="/routing" render={() => <MapLeftSidebar mapLaftEaseTo={mapLaftEaseTo} currMenu = { <RoutingPage /> } /> } /> 
             <Route path="/trip" render={() => <MapLeftSidebar mapLaftEaseTo={mapLaftEaseTo} currMenu = { <TourPage /> } /> } /> 
             <Route path="/tools" render={() => <MapLeftSidebar mapLaftEaseTo={mapLaftEaseTo} currMenu = { <LayerPage /> } /> } />

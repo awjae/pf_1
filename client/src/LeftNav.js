@@ -14,7 +14,7 @@ function LeftNav(props) {
 
         const list = [
             { name : "내정보", icon : <PersonPin/>, menu : "mypage" },
-            { name : "검색", icon : <Search/>, menu : "SearchPage" },
+            { name : "검색", icon : <Search/>, menu : "searchPage" },
             { name : "길찾기", icon : <CallSplit/>, menu : "routing" },
             { name : "여행지", icon : <Flag/>, menu : "trip" },
             { name : "도구", icon : <Build/>, menu : "tools" },
