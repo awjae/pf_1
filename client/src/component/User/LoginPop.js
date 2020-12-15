@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './css/LoginPop.css';
+import './LoginPop.css';
 
 function loginPop() {
     return (
