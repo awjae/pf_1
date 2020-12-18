@@ -1,5 +1,6 @@
 const server = require('./server');
 const proxyReq = require('request');
+const database = require('./database');
 
 //기본 메인 페이지
 server.get('/', function(req, res) {
