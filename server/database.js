@@ -1,4 +1,5 @@
 const database = {};
+const { Client } = require('pg');
 const util = require('./util'); // util.js안의 정보를 요청함
 //pg
 const pg = new Client({
