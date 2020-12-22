@@ -1,6 +1,7 @@
 const server = require('./server');
 const proxyReq = require('request');
 const database = require('./database');
+const util = require('./util');
 
 //기본 메인 페이지
 server.get('/', function(req, res) {
@@ -40,6 +41,34 @@ server.get('*', function(req, res) {
         res.end(html);
     });
 });
+// id 중복찾기
+server.post('/checkId.do', function (req, res) {
+    console.log('/checkId.do 요청됨');
+    console.log('PARAMS');
+    console.dir(req.body);
+
+    var paramId = req.body.id;
+
+    var sql = 'select * FROM public."user" where id = $1';
+
+    var dbParams = [paramId];
+    
+    database.PgQuery(res, sql, dbParams, function(err, rows) {
+        
+        if (rows.length > 0) {
+            req.session.user= {
+                id: rows[0].id,
+                name: rows[0].name
+            };
+            util.sendResponse(res, rows);
+        } else {
+            util.sendResponse(res, []);
+        } 
+        
+    });
+
+});
+
 
 //post 요청
 server.post('/postList.do', function (req, res) {

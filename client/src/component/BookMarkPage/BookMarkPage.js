@@ -6,7 +6,7 @@ function BookMarkPage() {
     const [user, setUser] = useState();
 
     const loginPop = () => {
-        window.open(window.location.origin + '/loginPop','Data','height=350, width=350, top=200, left=100');
+        window.open(window.location.origin + '/loginPop','Data','height=450, width=350, top=200, left=100');
     }
 
     return (
