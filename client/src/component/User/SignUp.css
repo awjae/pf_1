@@ -81,3 +81,13 @@
 .signUpPop__footer ul> li:hover, .findIdPop__footer ul> li:hover, .findPwPop__footer ul> li:hover {
     background: rgba(0, 0, 0, 0.3);
 }
+
+.signUpPop__input--pw {
+    display: flex;
+    flex-direction: column;
+}
+.signUpPop__input--pw> span {
+    color: #fff;
+    font-size: 13px;
+    margin-top: 5px;
+}
