@@ -4,7 +4,7 @@
 Demo : http://awjae.space
 
 아키텍처
-![](https://i.imgur.com/dsesobM.png)
+![](https://i.imgur.com/hIYwrVj.png)
 
 1. 역할 : 웹서비스 1인 개발
 

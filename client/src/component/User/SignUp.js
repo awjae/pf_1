@@ -47,6 +47,11 @@ function SignUp() {
             pw1 === pw2 ? pw2CheckSpan.current.innerText = "사용가능합니다." : pw2CheckSpan.current.innerText = "비밀번호가 일지하지 않습니다.";
         }
     }, [pw2])
+
+    const handleSignUp = () => {
+        //validator
+        
+    }
     
     return (
         <section className="signUpPop">
@@ -62,7 +67,7 @@ function SignUp() {
             </article>
             <footer className="signUpPop__footer">
                 <ul>
-                    <li>회원가입</li>
+                    <li onClick={ handleSignUp }>회원가입</li>
                 </ul>
             </footer>
         </section>
