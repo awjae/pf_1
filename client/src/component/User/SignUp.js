@@ -10,7 +10,9 @@ function SignUp() {
     const [pw1, setPw1] = useState("");
     const [pw2, setPw2] = useState("");
 
+    const idInput = useRef();
     const idCheckButton = useRef();
+    const pw1Input = useRef();
     const pw1CheckSpan = useRef();
     const pw2CheckSpan = useRef();
 
@@ -50,19 +52,48 @@ function SignUp() {
 
     const handleSignUp = () => {
         //validator
-        
+        if (!userValidator()) {
+            axios.put('/insertUser.do', {
+                id : id,
+                name : name,
+                email : email,
+                pw : pw2
+            }) 
+            .then((res) => {
+                console.log('insert success');
+                alert('회원가입완료');
+                location.href = 'http://awjae.space/loginPop';
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+        }
     }
     
+    const userValidator = () => {
+        if (!id || idCheckButton.current.innerText !== "사용가능") {
+            idInput.current.focus();
+            alert("아이디를 확인해주세요.");
+            return true;
+        }
+        if (!pw1 || !pw2 || pw1 !== pw2) {
+            pw1Input.current.focus();
+            alert("비밀번호를 확인해주세요.");
+            return true;
+        }
+        return false;
+    }
+
     return (
         <section className="signUpPop">
             <header>
                 awjae.space
             </header>
             <article className="signUpPop__input--wrapper">
-                <p><input placeholder="아이디" value={ id } onChange= {(e) => setId(e.target.value) }/><button ref={idCheckButton} className="signUpPop__checkId" onClick={ handleCheckId }>중복확인</button></p>
+                <p><input ref={ idInput } placeholder="아이디" value={ id } onChange= {(e) => setId(e.target.value) }/><button ref={idCheckButton} className="signUpPop__checkId" onClick={ handleCheckId }>중복확인</button></p>
                 <p><input placeholder="닉네임" value={ name } onChange= {(e) => setName(e.target.value) }/></p>
                 <p><input placeholder="이메일" type="email" value={ email } onChange= {(e) => setEmail(e.target.value) }/></p>
-                <p className="signUpPop__input--pw"><input placeholder="비밀번호" type="password" value={ pw1 } onChange= {(e) => setPw1(e.target.value) }/><span ref={ pw1CheckSpan }></span></p>
+                <p className="signUpPop__input--pw"><input ref={pw1Input} placeholder="비밀번호" type="password" value={ pw1 } onChange= {(e) => setPw1(e.target.value) }/><span ref={ pw1CheckSpan }></span></p>
                 <p className="signUpPop__input--pw"><input placeholder="비밀번호 확인" type="password" value={ pw2 } onChange= {(e) => setPw2(e.target.value) }/><span ref={ pw2CheckSpan }></span></p>
             </article>
             <footer className="signUpPop__footer">

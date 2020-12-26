@@ -49,6 +49,10 @@ server.get = function(reqPath, callback) {
     router.route(reqPath).get(callback);
 }
 
+server.put = function(reqPath, callback) {
+    router.route(reqPath).put(callback);
+}
+
 server.router = router;
 
 module.exports = server;

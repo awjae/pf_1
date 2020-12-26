@@ -47,11 +47,34 @@ server.post('/checkId.do', function (req, res) {
     console.log('PARAMS');
     console.dir(req.body);
 
-    var paramId = req.body.id;
+    const paramId = req.body.id;
 
-    var sql = 'select * FROM public."user" where id = $1';
+    const sql = 'select * FROM public."user" where id = $1';
 
-    var dbParams = [paramId];
+    const dbParams = [paramId];
+    
+    database.PgQuery(res, sql, dbParams, function(err, rows) {
+        
+        if (rows.length > 0) {
+            req.session.user= {
+                id: rows[0].id,
+                name: rows[0].name
+            };
+            util.sendResponse(res, rows);
+        } else {
+            util.sendResponse(res, []);
+        } 
+        
+    });
+
+});
+
+//회원가입
+server.put('/insertUser.do', function (req, res) {
+    console.dir(req.body);
+    const sql = 'insert into public."user"(id, name, email, pw) values($1, $2, $3, $4)';
+
+    const dbParams = [req.body.id, req.body.name, req.body.email, req.body.pw];
     
     database.PgQuery(res, sql, dbParams, function(err, rows) {
         
