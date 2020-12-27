@@ -5,9 +5,38 @@ function BookMarkPage() {
 
     const [user, setUser] = useState();
 
+    
+
     const loginPop = () => {
-        window.open(window.location.origin + '/loginPop','Data','height=450, width=450, top=200, left=100');
+        //const win = window.open(window.location.origin + '/loginPop','Data','height=450, width=450, top=200, left=100');
+        openPop(window.location.origin + '/loginPop', 'loginPop', 'height=450, width=450, top=200, left=100', function (win) {
+            console.log(window.userInfo)
+            //로그인 성공
+            window.sessionStorage.setItem('id', window.userInfo.id);
+            window.sessionStorage.setItem('name', window.userInfo.name);
+            window.sessionStorage.setItem('email', window.userInfo.email);
+            location.reload();
+        })
+      
     }
+
+    const openPop = function(uri, name, options, closeCallback) {
+        var win = window.open(uri, name, options);
+        var interval = window.setInterval(function() {
+            try {
+                if (win == null || win.closed) {
+                    window.clearInterval(interval);
+                    closeCallback(win);
+                }
+            }
+            catch (e) {
+            }
+        }, 1000);
+        return win;
+    };
+    
+    
+    출처: https://yangyag.tistory.com/157 [Hello Brother!]
 
     return (
         <section className="BookMarkPage">

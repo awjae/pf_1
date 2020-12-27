@@ -92,6 +92,30 @@ server.put('/insertUser.do', function (req, res) {
 
 });
 
+//로그인
+server.post('/loginUser.do', function (req, res) {
+    console.dir('loginUser 요청');
+    const sql = 'select * FROM public."user" where id = $1 AND pw = $2';
+
+    const dbParams = [req.body.id, req.body.pw];
+    
+    database.PgQuery(res, sql, dbParams, function(err, rows) {
+        console.log(rows)
+        if (rows.length > 0) {
+            req.session.user= {
+                id: rows[0].id,
+                pw: rows[0].pw,
+                name : rows[0].name,
+                email : rows[0].email
+            };
+            util.sendResponse(res, rows);
+        } else {
+            util.sendResponse(res, []);
+        } 
+        
+    });
+
+});
 
 //post 요청
 server.post('/postList.do', function (req, res) {
