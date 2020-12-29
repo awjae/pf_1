@@ -1,11 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './BookMarkPage.css';
 
 function BookMarkPage() {
 
     const [user, setUser] = useState();
 
-    
+    useEffect(() => {
+
+        if (window.sessionStorage.id) {
+            setUser({id : window.sessionStorage.getItem("id"), name : window.sessionStorage.getItem("name"), email : window.sessionStorage.getItem("email") });
+        }
+
+    }, [])
 
     const loginPop = () => {
         //const win = window.open(window.location.origin + '/loginPop','Data','height=450, width=450, top=200, left=100');
@@ -15,6 +21,7 @@ function BookMarkPage() {
             window.sessionStorage.setItem('id', window.userInfo.id);
             window.sessionStorage.setItem('name', window.userInfo.name);
             window.sessionStorage.setItem('email', window.userInfo.email);
+
             location.reload();
         })
       
@@ -35,9 +42,6 @@ function BookMarkPage() {
         return win;
     };
     
-    
-    출처: https://yangyag.tistory.com/157 [Hello Brother!]
-
     return (
         <section className="BookMarkPage">
             <header className="BookMarkPage__header">
@@ -48,9 +52,6 @@ function BookMarkPage() {
                 </ul>
             </header>
             <article className="BookMarkPage__contents">
-                { user &&
-                    console.log(user)
-                }
                 { !user &&
                     <section className="BookMarkPage__contents--noUser">
                         <header>자주 가는 장소를 간직해요</header>
