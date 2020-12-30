@@ -91,6 +91,13 @@
     box-shadow: 10px 10px 100px 20px #040303;
     display: block;
 }
+.TourModal__marker {
+    right: 60px;
+    position: absolute;
+    color: #fff;
+    top: 20px;
+    cursor: pointer;
+}
 .TourModal__closer {
     right: 20px;
     position: absolute;
@@ -98,7 +105,7 @@
     top: 20px;
     cursor: pointer;
 }
-.TourModal__closer > svg {
+.TourModal__closer > svg, .TourModal__marker > svg {
     width: 40px;
     height: 40px;
 }

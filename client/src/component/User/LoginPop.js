@@ -54,7 +54,7 @@ function loginPop() {
             <article className="loginPop__input--wrapper">
                 <span>
                     <input placeholder="아이디" onChange={e => setId(e.target.value) } ref={ idInput }/>
-                    <input placeholder="비밀번호" onChange={e => setPw(e.target.value) } ref={ pwInput }/>
+                    <input type="password" placeholder="비밀번호" onChange={e => setPw(e.target.value) } ref={ pwInput }/>
                 </span>
                 <button onClick={ handleLogin }>로그인</button>
             </article>

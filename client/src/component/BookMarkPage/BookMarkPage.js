@@ -4,11 +4,13 @@ import './BookMarkPage.css';
 function BookMarkPage() {
 
     const [user, setUser] = useState();
+    const [bookMarkList, setBookmarkList] = useState([]);
 
     useEffect(() => {
 
         if (window.sessionStorage.id) {
             setUser({id : window.sessionStorage.getItem("id"), name : window.sessionStorage.getItem("name"), email : window.sessionStorage.getItem("email") });
+            //selectBookMarkList(window.sessionStorage.getItem("id"));
         }
 
     }, [])
