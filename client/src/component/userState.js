@@ -1,6 +1,4 @@
-import { atom, useRecoilState, selector } from 'recoil';
-
-
+import { atom, selector } from 'recoil';
 
 export const userState = atom({
     key: 'userState',
