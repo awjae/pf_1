@@ -117,6 +117,26 @@ server.post('/loginUser.do', function (req, res) {
 
 });
 
+//
+server.put('/insertBookmark.do', function (req, res) {
+    console.dir('insertBookmark 요청');
+
+    const sql = 'INSERT INTO public.bookmark(name, x, y, id) VALUES ($1, $2, $3, $4);';
+
+    const dbParams = [req.body.name, req.body.x, req.body.y, req.body.id];
+    
+    database.PgQuery(res, sql, dbParams, function(err, rows) {
+        console.log(rows)
+        if (rows.length > 0) {
+            util.sendResponse(res, rows);
+        } else {
+            util.sendResponse(res, []);
+        } 
+        
+    });
+
+})
+
 //post 요청
 server.post('/postList.do', function (req, res) {
     console.log('/postList.do 요청됨');

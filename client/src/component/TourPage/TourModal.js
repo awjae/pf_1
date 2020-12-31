@@ -3,7 +3,7 @@ import { Close, Star } from '@material-ui/icons';
 import './TourPage.css';
 import axios from 'axios';
 import initMap from '../../Map/core/initMap';
-import { userState } from '../userState';
+import { userState } from '../UserState';
 import { useRecoilValue } from 'recoil';
 
 function TourModal(props) {
@@ -18,17 +18,20 @@ function TourModal(props) {
         console.log(center)
         console.log(user);
         if (true) {
-            // axios.put("/insertBookmark.do", {
+            axios.put("/insertBookmark.do", {
+                id: user.id,
+                name: name,
+                x: center.lng,
+                y: center.lat
+            })
+            .then(function (res) {
+                const items = res.data
+                console.log(items)
                 
-            // })
-            // .then(function (res) {
-            //     const items = res.data
-            //     console.log(items)
-                
-            // })
-            // .catch(function (err) {
-            //     console.log(err);
-            // })
+            })
+            .catch(function (err) {
+                console.log(err);
+            })
         } else {
 
         }

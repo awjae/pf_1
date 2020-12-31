@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './BookMarkPage.css';
-import { userState } from '../userState';
+import { userState } from '../UserState';
 import { useRecoilState } from 'recoil';
 
 function BookMarkPage() {
