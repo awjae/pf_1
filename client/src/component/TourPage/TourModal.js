@@ -1,14 +1,37 @@
 import React from 'react';
 import { Close, Star } from '@material-ui/icons';
 import './TourPage.css';
+import axios from 'axios';
 import initMap from '../../Map/core/initMap';
+import { userState } from '../userState';
+import { useRecoilValue } from 'recoil';
 
 function TourModal(props) {
 
+    const user = useRecoilValue(userState);
+
     const bookmarkHandler = () => {
-        console.log(props)
         const name = props.imgInfo.galTitle;
-        console.log(initMap.map.getCenter());
+        const center = initMap.map.getCenter();
+        
+        console.log(name)
+        console.log(center)
+        console.log(user);
+        if (true) {
+            // axios.put("/insertBookmark.do", {
+                
+            // })
+            // .then(function (res) {
+            //     const items = res.data
+            //     console.log(items)
+                
+            // })
+            // .catch(function (err) {
+            //     console.log(err);
+            // })
+        } else {
+
+        }
 
     }
 

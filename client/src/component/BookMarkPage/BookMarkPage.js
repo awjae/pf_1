@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import './BookMarkPage.css';
+import { userState } from '../userState';
+import { useRecoilState } from 'recoil';
 
 function BookMarkPage() {
 
-    const [user, setUser] = useState();
+    const [user, setUser] = useRecoilState(userState);
     const [bookMarkList, setBookmarkList] = useState([]);
 
     useEffect(() => {
@@ -11,6 +13,7 @@ function BookMarkPage() {
         if (window.sessionStorage.id) {
             setUser({id : window.sessionStorage.getItem("id"), name : window.sessionStorage.getItem("name"), email : window.sessionStorage.getItem("email") });
             //selectBookMarkList(window.sessionStorage.getItem("id"));
+            
         }
 
     }, [])
