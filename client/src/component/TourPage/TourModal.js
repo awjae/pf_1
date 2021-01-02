@@ -14,9 +14,6 @@ function TourModal(props) {
         const name = props.imgInfo.galTitle;
         const center = initMap.map.getCenter();
         
-        console.log(name)
-        console.log(center)
-        console.log(user);
         if (true) {
             axios.put("/insertBookmark.do", {
                 id: user.id,
@@ -25,9 +22,9 @@ function TourModal(props) {
                 y: center.lat
             })
             .then(function (res) {
-                const items = res.data
-                console.log(items)
-                
+                const items = res.data;
+                console.log(items);
+                alert('즐겨찾기에 추가되었습니다.');
             })
             .catch(function (err) {
                 console.log(err);
