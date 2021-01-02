@@ -117,11 +117,11 @@ server.post('/loginUser.do', function (req, res) {
 
 });
 
-//
+//즐겨찾기 생성
 server.put('/insertBookmark.do', function (req, res) {
     console.dir('insertBookmark 요청');
 
-    const sql = 'INSERT INTO public.bookmark(name, x, y, id) VALUES ($1, $2, $3, $4);';
+    const sql = 'INSERT INTO public.bookmark(name, x, y, id) VALUES ($1, $2, $3, $4)';
 
     const dbParams = [req.body.name, req.body.x, req.body.y, req.body.id];
     
@@ -135,6 +135,45 @@ server.put('/insertBookmark.do', function (req, res) {
         
     });
 
+})
+
+//즐겨찾기 리스트 조회
+server.post('/selectBookMarkList.do', function (req, res) {
+    console.dir('selectBookMarkList 요청');
+
+    const sql = 'SELECT * FROM public.bookmark WHERE id = $1';
+
+    const dbParams = [req.body.id];
+    
+    database.PgQuery(res, sql, dbParams, function(err, rows) {
+        //console.log(rows)
+        if (rows.length > 0) {
+            util.sendResponse(res, rows);
+        } else {
+            util.sendResponse(res, []);
+        } 
+        
+    });
+})
+
+//즐겨찾기 삭제
+server.delete('/deleteBookMark.do', function (req, res) {
+    console.dir('deleteBookMark 요청');
+    console.dir(req.body)
+    console.log(`'DELETE FROM public.bookmark WHERE seq = ${req.body.seq} AND id = ${req.body.id}`)
+
+    const sql = 'DELETE FROM public.bookmark WHERE seq = $1 AND id = $2';
+    const dbParams = [req.body.seq, req.body.id];
+    
+    database.PgQuery(res, sql, dbParams, function(err, rows) {
+        console.log(rows)
+        if (rows.length > 0) {
+            util.sendResponse(res, rows);
+        } else {
+            util.sendResponse(res, []);
+        } 
+        
+    });
 })
 
 //post 요청

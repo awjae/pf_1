@@ -20,7 +20,7 @@
     padding-top: 10px;
 }
 .BookMarkPage__header--ul>li {
-    width: 33%;
+    width: 100%;
     height: 100%;
     text-align: center;
     vertical-align: middle;
@@ -58,3 +58,41 @@
     cursor: pointer;
 }
 
+.BookMarkPage__contents--ul {
+    margin: 20px;
+}
+.BookMarkPage__contents--ul li {
+    margin: 5px;
+    border-radius: 10px;
+    height: 40px;
+    box-shadow: 2px 3px 10px #bebebe;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    padding-left: 20px;
+}
+.BookMarkPage__contents--ul li>span:nth-child(2) {
+    right: 100px;
+    position: absolute;
+    color: #969696;
+    margin-top: 3px;
+    cursor: pointer;
+}
+
+.BookMarkPage__contents--ul li>span:last-child{
+    position: absolute;
+    right: 50px;
+    background: #00bb38;
+    border-radius: 5px;
+    width: 40px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+}
+.BookMarkPage__contents--ul li>span:last-child:hover{
+    box-shadow: 2px 2px 5px #dedede;
+    background: #008f2b;
+    cursor: pointer;
+}

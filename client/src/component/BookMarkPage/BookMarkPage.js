@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import './BookMarkPage.css';
 import { userState } from '../UserState';
-import { useRecoilState } from 'recoil';
+import { constSelector, useRecoilState } from 'recoil';
+import axios from 'axios';
+import initMap from '../../Map/core/initMap';
+import { DeleteForever } from '@material-ui/icons';
 
 function BookMarkPage() {
 
     const [user, setUser] = useRecoilState(userState);
-    const [bookMarkList, setBookmarkList] = useState([]);
+    const [bookMarkList, setBookmarkList] = useState();
 
     useEffect(() => {
 
@@ -14,6 +17,16 @@ function BookMarkPage() {
             setUser({id : window.sessionStorage.getItem("id"), name : window.sessionStorage.getItem("name"), email : window.sessionStorage.getItem("email") });
             //selectBookMarkList(window.sessionStorage.getItem("id"));
             
+            axios.post('/selectBookMarkList.do', {
+                id : window.sessionStorage.getItem("id")
+            })
+            .then(res => {
+                const result = res.data.results;
+                setBookmarkList(result);
+            })
+            .catch(err => {
+                console.log(err);
+            }) 
         }
 
     }, [])
@@ -47,13 +60,35 @@ function BookMarkPage() {
         return win;
     };
     
+    const handleBookmarkDelete = (bookmark) => {
+        console.log(bookmark)
+        
+        if (window.confirm(`즐겨찾기 '${bookmark.name}'을(를) 삭제하시겠습니까?`)) {
+            axios.delete('/deleteBookMark.do', {
+                data : {
+                    seq : bookmark.seq,
+                    id : bookmark.id
+                }
+            })
+            .then(res => {
+                console.log(res.data);
+                if (res.data.resCode === 200) {
+                    const newBookmarkList = bookMarkList.filter(item => item.seq !== bookmark.seq);
+                    setBookmarkList(newBookmarkList);
+                }
+
+            })
+            .catch(err => {
+                console.log(err);
+            }) 
+        }
+    }
+
     return (
         <section className="BookMarkPage">
             <header className="BookMarkPage__header">
                 <ul className="BookMarkPage__header--ul">
-                    <li>장소</li>
-                    <li>경로</li>
-                    <li>레이어</li>
+                    <li>즐겨찾기 목록</li>
                 </ul>
             </header>
             <article className="BookMarkPage__contents">
@@ -65,6 +100,17 @@ function BookMarkPage() {
                         </article>
                     </section>
                 }
+                <ul className="BookMarkPage__contents--ul">
+                { bookMarkList && 
+                    bookMarkList.map((bookmark, idx) => (
+                        <li key={idx}>
+                            <span>{bookmark.name}</span>
+                            <span><DeleteForever onClick={(e) => handleBookmarkDelete(bookmark)}></DeleteForever></span>
+                            <span onClick={() => initMap.setCenter(bookmark.x, bookmark.y) }>이동</span>
+                        </li>
+                    ))
+                }
+                </ul>
             </article>
         </section>
     )

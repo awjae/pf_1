@@ -52,6 +52,9 @@ server.get = function(reqPath, callback) {
 server.put = function(reqPath, callback) {
     router.route(reqPath).put(callback);
 }
+server.delete = function(reqPath, callback) {
+    router.route(reqPath).delete(callback);
+}
 
 server.router = router;
 
