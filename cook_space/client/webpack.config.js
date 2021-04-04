@@ -41,5 +41,7 @@ module.exports = {
     host: 'localhost',
     port: port,
     open: true,
+    contentBase: path.join(__dirname, "dist"),
+    publicPath: "/"
   }
 }

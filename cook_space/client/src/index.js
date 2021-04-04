@@ -5,5 +5,6 @@ import './styles/main.scss';
 import App from './app.js';
 
 const reactapp = document.createElement("div");
+reactapp.className = 'app';
 document.body.appendChild(reactapp);
 ReactDOM.render(<App />, reactapp);
