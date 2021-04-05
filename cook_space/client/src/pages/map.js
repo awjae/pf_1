@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-function map() {
+const map = () => {
     return (
         <div>
             지도시작

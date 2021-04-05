@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-function boards() {
+const boards = () => {
     return (
         <div>
             소식 시작
