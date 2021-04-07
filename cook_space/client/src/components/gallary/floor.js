@@ -2,15 +2,15 @@ import * as THREE from "three";
 
 const floor = {};
 
-floor.init = (scene) => {
+floor.init = () => {
 
-    floor.geometry = new THREE.PlaneGeometry( 10, 10 );
-    floor.material = new THREE.MeshLambertMaterial( { color: 0x4676b6 } );
-    floor.mesh = new THREE.Mesh( floor.geometry, floor.material );
-    floor.mesh.rotation.x = Math.PI * - 0.5;
-    floor.mesh.receiveShadow = true;
+    const geometry = new THREE.PlaneGeometry( 10, 10 );
+    const material = new THREE.MeshLambertMaterial( { color: 0x4676b6 } );
+    floor.curr = new THREE.Mesh( geometry, material );
+    floor.curr.rotation.x = Math.PI * - 0.5;
+    floor.curr.receiveShadow = true;
 
-    scene.add( floor.mesh );
+    return floor.curr;
 }
 
 export default floor;

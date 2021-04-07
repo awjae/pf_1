@@ -1,27 +1,64 @@
 import React, {useEffect, useRef, useState} from 'react'
 import styled from 'styled-components';
 import * as THREE from "three";
-import floor from '../components/gallary/floor';
+import renderWrapper from '../components/gallary/renderer';
+import sceneWrapper from '../components/gallary/scene';
+import cameraWrapper from '../components/gallary/camera';
+import floorWrapper from '../components/gallary/floor';
 
 const gallary = () => {
 
     const container = useRef(null);
 
     useEffect(() => {
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+        
+        const obj = {
+            width: container.current.clientWidth,
+            height: container.current.clientHeight
+        };        
 
-        const renderer = new THREE.WebGLRenderer();
-        renderer.setSize( container.current.clientWidth, container.current.clientHeight );
+        
+        const scene = sceneWrapper.init();
+        const camera = cameraWrapper.init(obj);
+        const floor = floorWrapper.init();
+        camera.position.z = 5
+        const renderer = renderWrapper.init(obj);
         container.current.appendChild( renderer.domElement );
 
+        const geometry = new THREE.BoxGeometry();
+        const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+        const cube = new THREE.Mesh( geometry, material );
+
+        const points = [];
+        points.push( new THREE.Vector3( - 10, 0, 0 ) );
+        points.push( new THREE.Vector3( 0, 10, 0 ) );
+        points.push( new THREE.Vector3( 10, 0, 0 ) );
+        const geometry2 = new THREE.BufferGeometry().setFromPoints( points );
+        const material2 = new THREE.LineBasicMaterial( { color: 0x0000ff } );
+        const line = new THREE.Line( geometry2, material2 );
+
+
+        scene.add(floor);
+        scene.add(cube);
+        scene.add(line);
+
+        //랜더링 갱신
+        const animate = () => {
+            requestAnimationFrame( animate );
+
+            cube.rotation.x += 0.01;
+            cube.rotation.y += 0.01;
+
+            renderer.render( scene, camera );
+        }
+        animate();
 
         // let width = container.current.clientWidth;
         // let height = container.current.clientHeight;
         // let frameId;
 
         // const scene = new THREE.Scene();
-        // const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+        // const camera = new THREE.PerspectiveCamera(75,  width / height, 0.1, 1000);
         // const renderer = new THREE.WebGLRenderer({
         //     antialias: true
         // });
