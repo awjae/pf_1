@@ -8,11 +8,10 @@ ground.init = () => {
     const mesh = new THREE.TextureLoader().load(grassTexture);
     mesh.wrapS = THREE.RepeatWrapping;
     mesh.wrapT = THREE.RepeatWrapping;
-    mesh.repeat.set(70, 70);
+    mesh.repeat.set(25, 25);
     const geometry = new THREE.PlaneGeometry( 10, 10 );
     const material = new THREE.MeshLambertMaterial( { map: mesh } );
     ground.curr = new THREE.Mesh( geometry, material );
-    console.log(ground.curr)
     ground.curr.rotation.x = Math.PI * - 0.5;
 
     return ground.curr;

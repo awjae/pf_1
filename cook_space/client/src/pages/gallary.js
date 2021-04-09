@@ -7,6 +7,7 @@ import cameraWrapper from '../components/gallary/camera';
 import floorWrapper from '../components/gallary/floor';
 import groundWrapper from '../components/gallary/ground';
 import lightWrapper from '../components/gallary/light';
+import controller from '../components/gallary/control';
 
 const gallary = () => {
 
@@ -25,8 +26,10 @@ const gallary = () => {
         const floor = floorWrapper.init();
         const ground = groundWrapper.init();
         const light = lightWrapper.init();
-        camera.position.z = 5
-        camera.position.y = 2
+        const dirLight = lightWrapper.directLight();
+        
+        camera.position.z = 5;
+        camera.position.y = 2;
         const renderer = renderWrapper.init(obj);
         container.current.appendChild( renderer.domElement );
 
@@ -35,20 +38,11 @@ const gallary = () => {
         const cube = new THREE.Mesh( geometry, material );
         cube.translateY(2);
 
-        // const points = [];
-        // points.push( new THREE.Vector3( - 10, 0, 0 ) );
-        // points.push( new THREE.Vector3( 0, 10, 0 ) );
-        // points.push( new THREE.Vector3( 10, 0, 0 ) );
-        // const geometry2 = new THREE.BufferGeometry().setFromPoints( points );
-        // const material2 = new THREE.LineBasicMaterial( { color: 0x0000ff } );
-        // const line = new THREE.Line( geometry2, material2 );
-
-
-        scene.add(floor);
+        //scene.add(floor);
         scene.add(cube);
         scene.add(ground);
         scene.add(light);
-        // scene.add(line);
+        scene.add(dirLight);
         scene.background = new THREE.Color(0x282c34);
 
         //랜더링 갱신
@@ -60,6 +54,7 @@ const gallary = () => {
 
             renderer.render( scene, camera );
         }
+        controller.init(camera, renderer);
         animate();
 
         // let width = container.current.clientWidth;
