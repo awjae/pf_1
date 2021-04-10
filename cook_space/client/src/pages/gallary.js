@@ -8,6 +8,7 @@ import floorWrapper from '../components/gallary/floor';
 import groundWrapper from '../components/gallary/ground';
 import lightWrapper from '../components/gallary/light';
 import controller from '../components/gallary/control';
+import fenceModel from '../components/gallary/objects/fence';
 
 const gallary = () => {
 
@@ -28,8 +29,8 @@ const gallary = () => {
         const light = lightWrapper.init();
         const dirLight = lightWrapper.directLight();
         
-        camera.position.z = 5;
-        camera.position.y = 2;
+        camera.position.z = 200;
+        camera.position.y = 200;
         const renderer = renderWrapper.init(obj);
         container.current.appendChild( renderer.domElement );
 
@@ -45,18 +46,22 @@ const gallary = () => {
         scene.add(dirLight);
 
         const controls = controller.init(camera, renderer);
+
         //랜더링 갱신
         const animate = () => {
             requestAnimationFrame( animate );
 
             cube.rotation.x += 0.01;
             cube.rotation.y += 0.01;
-
-            renderer.render( scene, camera );
+            renderer.render(scene, camera);
             controls.update();
         }
         
         animate();
+
+        //object
+        const fence = fenceModel.init(scene);       
+        window.g = scene;
 
     }, [])
 

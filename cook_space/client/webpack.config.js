@@ -1,4 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const port = process.env.PORT || 3010;
 const path = require('path');
 
@@ -34,14 +35,16 @@ module.exports = {
     ],
   },
   plugins: [
-    new HtmlWebpackPlugin()
+    new HtmlWebpackPlugin(),
+    new CopyWebpackPlugin({
+      patterns: [ { from: 'src/assets', to: 'assets' } ]
+    })
   ],
   devServer: {
     //host: '10.80.14.39',
     host: 'localhost',
     port: port,
     open: true,
-    contentBase: path.join(__dirname, "dist"),
-    publicPath: "/"
+    contentBase: path.join(__dirname, "dist")
   }
 }

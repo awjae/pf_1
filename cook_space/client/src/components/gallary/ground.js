@@ -9,7 +9,7 @@ ground.init = () => {
     mesh.wrapS = THREE.RepeatWrapping;
     mesh.wrapT = THREE.RepeatWrapping;
     mesh.repeat.set(25, 25);
-    const geometry = new THREE.PlaneGeometry( 10, 10 );
+    const geometry = new THREE.PlaneGeometry( 1000, 1000 ); //약 1m
     const material = new THREE.MeshLambertMaterial( { map: mesh } );
     ground.curr = new THREE.Mesh( geometry, material );
     ground.curr.rotation.x = Math.PI * - 0.5;
