@@ -43,7 +43,6 @@ const gallary = () => {
         scene.add(ground);
         scene.add(light);
         scene.add(dirLight);
-        scene.background = new THREE.Color(0x282c34);
 
         const controls = controller.init(camera, renderer);
         //랜더링 갱신

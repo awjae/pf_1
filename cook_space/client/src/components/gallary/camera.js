@@ -4,7 +4,7 @@ const camera = {};
 
 camera.init = (obj) => {
 
-    camera.curr = new THREE.PerspectiveCamera( 75, obj.width / obj.height, 0.1, 10000 );
+    camera.curr = new THREE.PerspectiveCamera( 60, obj.width / obj.height, 1, 20000 );
 
     return camera.curr;
 }
