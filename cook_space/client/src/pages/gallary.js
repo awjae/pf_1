@@ -9,6 +9,7 @@ import groundWrapper from '../components/gallary/ground';
 import lightWrapper from '../components/gallary/light';
 import controller from '../components/gallary/control';
 import fenceModel from '../components/gallary/objects/fence';
+import control from '../components/gallary/control';
 
 const gallary = () => {
 
@@ -29,8 +30,11 @@ const gallary = () => {
         const light = lightWrapper.init();
         const dirLight = lightWrapper.directLight();
         
-        camera.position.z = 200;
-        camera.position.y = 200;
+        // camera.position.x = 200;
+        // camera.position.z = 200;
+        // camera.position.y = 200;
+        camera.position.set(-420, 10, 20);
+
         const renderer = renderWrapper.init(obj);
         container.current.appendChild( renderer.domElement );
 
@@ -45,7 +49,11 @@ const gallary = () => {
         scene.add(light);
         scene.add(dirLight);
 
-        const controls = controller.init(camera, renderer);
+        //const controls = controller.init(camera, renderer);
+        const controls = controller.pointerLock(camera, renderer);
+        scene.add(controls.getObject);
+        //카메라 회전은 컨트롤러에 추가된 이후 가능
+        // camera.rotation.y += Math.PI * 0.2;
 
         //랜더링 갱신
         const animate = () => {
@@ -53,15 +61,23 @@ const gallary = () => {
 
             cube.rotation.x += 0.01;
             cube.rotation.y += 0.01;
+            camera.position.x += 0.05;
+            // camera.rotation.y += Math.PI * 0.01;
+
             renderer.render(scene, camera);
-            controls.update();
+            
         }
+        
         
         animate();
 
         //object
         const fence = fenceModel.init(scene);       
-        window.g = scene;
+        window.g = {
+            scene,
+            camera,
+            controls,
+        }
 
     }, [])
 
