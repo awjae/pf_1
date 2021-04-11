@@ -51,7 +51,6 @@ const gallary = () => {
 
         //const controls = controller.init(camera, renderer);
         const controls = controller.pointerLock(camera, renderer);
-        scene.add(controls.getObject);
         //카메라 회전은 컨트롤러에 추가된 이후 가능
         // camera.rotation.y += Math.PI * 0.2;
 
