@@ -62,7 +62,7 @@ const gallary = () => {
 
             cube.rotation.x += 0.01;
             cube.rotation.y += 0.01;
-            camera.position.x += 1;
+            camera.position.x += 0.1;
             if (camera.position.x > 340) {
                 camera.position.x = -340;
             }
