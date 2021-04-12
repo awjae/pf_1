@@ -1,0 +1,151 @@
+# 3ds Max Wavefront OBJ Exporter v0.94b - (c)2007 guruware
+# File Created: 28.05.2018 16:31:26
+
+newmtl _Tree_Ficus_Carica_N280518blue
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 1.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.0000 0.0000 0.0000
+	Kd 0.6627 0.8431 0.9686
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka tree\02.jpg
+	map_Kd tree\02.jpg
+	map_d tree\02-opa.jpg
+
+newmtl _Tree_Ficus_Carica_N280518besh
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 1.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.0000 0.0000 0.0000
+	Kd 0.8353 0.5882 0.7725
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka tree\03.jpg
+	map_Kd tree\03.jpg
+	map_d tree\03-opa.jpg
+
+newmtl _Tree_Ficus_Carica_N280518green
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 1.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.0000 0.0000 0.0000
+	Kd 0.5216 0.7216 0.5294
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka tree\04.jpg
+	map_Kd tree\04.jpg
+	map_d tree\07-opa.jpg
+
+newmtl _Tree_Ficus_Carica_N280518broun
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 1.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.0000 0.0000 0.0000
+	Kd 0.6784 0.5216 0.4353
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka tree\05.jpg
+	map_Kd tree\05.jpg
+	map_d tree\10-opa.jpg
+
+newmtl _Tree_Ficus_Carica_N280518red
+	Ns 70.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 1.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.0000 0.0000 0.0000
+	Kd 0.7843 0.3176 0.1765
+	Ks 0.6300 0.6300 0.6300
+	Ke 0.0000 0.0000 0.0000
+	map_Ka tree\06.jpg
+	map_Kd tree\06.jpg
+	map_d tree\06-opa.jpg
+
+newmtl _Tree_Ficus_Carica_N28051807
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 1.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.0000 0.0000 0.0000
+	Kd 0.9137 0.7843 0.5608
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka tree\07.jpg
+	map_Kd tree\07.jpg
+	map_d tree\07-opa.jpg
+
+newmtl _Tree_Ficus_Carica_N28051808
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 1.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.0000 0.0000 0.0000
+	Kd 0.4078 0.4078 0.4078
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka tree\08.jpg
+	map_Kd tree\08.jpg
+	map_d tree\08-opa.jpg
+
+newmtl _Tree_Ficus_Carica_N280518yellow
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 1.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.0000 0.0000 0.0000
+	Kd 0.9216 0.5725 0.2627
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka tree\09.jpg
+	map_Kd tree\09.jpg
+	map_d tree\09-opa.jpg
+
+newmtl _Tree_Ficus_Carica_N280518white
+	Ns 55.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 1.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.0000 0.0000 0.0000
+	Kd 0.5216 0.5216 0.5216
+	Ks 1.0260 1.0260 1.0260
+	Ke 0.0000 0.0000 0.0000
+	map_Ka tree\10.jpg
+	map_Kd tree\10.jpg
+	map_d tree\10-opa.jpg
+
+newmtl _Tree_Ficus_Carica_N280518st_tile_dark
+	Ns 70.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 1.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.0000 0.0000 0.0000
+	Kd 0.9922 0.9804 0.8941
+	Ks 0.6300 0.6300 0.6300
+	Ke 0.0000 0.0000 0.0000
+	map_Ka tree\Bark.jpg
+	map_Kd tree\Bark.jpg
