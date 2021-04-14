@@ -10,9 +10,9 @@ import lightWrapper from '../components/gallary/light';
 import controller from '../components/gallary/control';
 import control from '../components/gallary/control';
 
-// import fenceModel from '../components/gallary/objects/fence';
+import fenceModel from '../components/gallary/objects/fence';
 import treeModel from '../components/gallary/objects/tree';
-
+ 
 const gallary = () => {
 
     const container = useRef(null);
@@ -24,7 +24,6 @@ const gallary = () => {
             height: container.current.clientHeight
         };        
 
-        
         const scene = sceneWrapper.init();
         const camera = cameraWrapper.init(obj);
         const floor = floorWrapper.init();
@@ -32,10 +31,9 @@ const gallary = () => {
         const light = lightWrapper.init();
         const dirLight = lightWrapper.directLight();
         
-        // camera.position.x = 200;
-        // camera.position.z = 200;
-        // camera.position.y = 200;
-        camera.position.set(-340, 10, 20);
+        //camera.position.set(0, 20, 20);
+        camera.position.set(-335, 12, 20);
+        camera.rotation.x = Math.PI * (-0.05);
 
         const renderer = renderWrapper.init(obj);
         container.current.appendChild( renderer.domElement );
@@ -53,8 +51,6 @@ const gallary = () => {
 
         // const controls = controller.init(camera, renderer);
         const controls = controller.pointerLock(camera, renderer);
-        //카메라 회전은 컨트롤러에 추가된 이후 가능
-        // camera.rotation.y += Math.PI * 0.2;
 
         //랜더링 갱신
         const animate = () => {
@@ -66,17 +62,16 @@ const gallary = () => {
             if (camera.position.x > 340) {
                 camera.position.x = -340;
             }
-            // camera.rotation.y += Math.PI * 0.01;
 
             renderer.render(scene, camera);
             
         }
         
-        
         animate();
 
         //object
         const tree = treeModel.init(scene);       
+        const fence = fenceModel.init(scene);
         
         window.g = {
             scene,
