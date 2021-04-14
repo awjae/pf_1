@@ -12,6 +12,7 @@ import control from '../components/gallary/control';
 
 import fenceModel from '../components/gallary/objects/fence';
 import treeModel from '../components/gallary/objects/tree';
+import benchModel from '../components/gallary/objects/bench';
  
 const gallary = () => {
 
@@ -31,7 +32,7 @@ const gallary = () => {
         const light = lightWrapper.init();
         const dirLight = lightWrapper.directLight();
         
-        //camera.position.set(0, 20, 20);
+        // camera.position.set(0, 20, 20);
         camera.position.set(-335, 12, 20);
         camera.rotation.x = Math.PI * (-0.05);
 
@@ -72,6 +73,7 @@ const gallary = () => {
         //object
         const tree = treeModel.init(scene);       
         const fence = fenceModel.init(scene);
+        const bench = benchModel.init(scene);
         
         window.g = {
             scene,
