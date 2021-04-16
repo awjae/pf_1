@@ -33,7 +33,7 @@ const gallary = () => {
         const dirLight = lightWrapper.directLight();
         
         // camera.position.set(0, 20, 20);
-        camera.position.set(-335, 12, 20);
+        camera.position.set(-335, 11, 20);
         camera.rotation.x = Math.PI * (-0.05);
 
         const renderer = renderWrapper.init(obj);
@@ -45,7 +45,7 @@ const gallary = () => {
         cube.translateY(2);
 
         //scene.add(floor);
-        scene.add(cube);
+        // scene.add(cube);
         scene.add(ground);
         scene.add(light);
         scene.add(dirLight);
@@ -57,17 +57,21 @@ const gallary = () => {
         const animate = () => {
             requestAnimationFrame( animate );
 
-            cube.rotation.x += 0.01;
-            cube.rotation.y += 0.01;
-            camera.position.x += 0.1;
+            camera.position.x += 0.07;
             if (camera.position.x > 340) {
                 camera.position.x = -340;
+            }
+            if (camera.rotation.y > 0.4) {
+                camera.rotation.y = 0.4;
+                camera.rotation.z = 0.09;
+            } else if (camera.rotation.y < -0.4) {
+                camera.rotation.y = -0.4;
+                camera.rotation.z = -0.09;
             }
 
             renderer.render(scene, camera);
             
         }
-        
         animate();
 
         //object
@@ -75,6 +79,10 @@ const gallary = () => {
         const fence = fenceModel.init(scene);
         const bench = benchModel.init(scene);
         
+        renderer.domElement.addEventListener( 'click', function () {
+            controls.lock();
+        }, false );
+
         window.g = {
             scene,
             camera,

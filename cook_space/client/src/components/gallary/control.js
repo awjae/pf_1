@@ -27,7 +27,9 @@ control.init = (camera, renderer) => {
 control.pointerLock = (camera, renderer) => {
 
     const controls = new PointerLockControls( camera, renderer.domElement );
-    
+    controls.minPolarAngle = Math.PI * 0.5;
+    controls.maxPolarAngle = Math.PI * 0.6;
+
 
     control.curr = controls;
     return control.curr;
