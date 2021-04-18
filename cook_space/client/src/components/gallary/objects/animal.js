@@ -14,10 +14,12 @@ animal.init = (scene) => {
             gltf.scene.rotateY(-40 * Math.PI / 180 );
             gltf.scene.position.z = -12;
             gltf.scene.position.x = -333;
-            
+            gltf.scene.traverse( function( node ) {
+                if ( node.isMesh || node.isLight ) node.castShadow = true;
+            });
             scene.add( gltf.scene );
 
-            for (let i = gltf.scene.position.x + 180; i <= 300; i += 60) {
+            for (let i = gltf.scene.position.x + 180; i <= 300; i += 180) {
                 let clone = gltf.scene.clone();
                 clone.position.x = i;
                 scene.add( clone );
@@ -39,10 +41,12 @@ animal.init = (scene) => {
             gltf.scene.rotateY(-60 * Math.PI / 180 );
             gltf.scene.position.z = -8;
             gltf.scene.position.x = -237;
-            
+            gltf.scene.traverse( function( node ) {
+                if ( node.isMesh || node.isLight ) node.castShadow = true;
+            });
             scene.add( gltf.scene );
 
-            for (let i = gltf.scene.position.x + 180; i <= 300; i += 60) {
+            for (let i = gltf.scene.position.x + 180; i <= 300; i += 120) {
                 let clone = gltf.scene.clone();
                 clone.position.x = i;
                 scene.add( clone );
@@ -62,12 +66,14 @@ animal.init = (scene) => {
 
         gltf.scene.scale.multiplyScalar(0.3);
         gltf.scene.rotateY(130 * Math.PI / 180 );
-            gltf.scene.position.z = 0;
-            gltf.scene.position.x = -207;
-        
+        gltf.scene.position.z = 0;
+        gltf.scene.position.x = -207;
+        gltf.scene.traverse( function( node ) {
+            if ( node.isMesh || node.isLight ) node.castShadow = true;
+        });
         scene.add( gltf.scene );
 
-        for (let i = gltf.scene.position.x + 180; i <= 300; i += 60) {
+        for (let i = gltf.scene.position.x + 180; i <= 300; i += 120) {
             let clone = gltf.scene.clone();
             clone.position.x = i;
             scene.add( clone );

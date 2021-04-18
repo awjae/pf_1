@@ -13,6 +13,9 @@ bench.init = (scene) => {
             gltf.scene.rotateY(180 * Math.PI / 180 );
             gltf.scene.position.z = 4.5;
             gltf.scene.position.x = -314;
+            gltf.scene.traverse( function( node ) {
+                if ( node.isMesh || node.isLight ) node.castShadow = true;
+            });
             
             let y = 0;
             for (let i = gltf.scene.position.x; i <= 300; i += 60) {

@@ -63,7 +63,6 @@ const gallary = () => {
                 camera.position.x = -340;
             }
             
-
             renderer.render(scene, camera);
             
         }
@@ -83,6 +82,7 @@ const gallary = () => {
             scene,
             camera,
             controls,
+            tree,
         }
 
     }, [])

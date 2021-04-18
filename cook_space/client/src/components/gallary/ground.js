@@ -13,6 +13,7 @@ ground.init = () => {
     const material = new THREE.MeshLambertMaterial( { map: mesh } );
     ground.curr = new THREE.Mesh( geometry, material );
     ground.curr.rotation.x = Math.PI * - 0.5;
+    ground.curr.receiveShadow = true;
 
     return ground.curr;
 }

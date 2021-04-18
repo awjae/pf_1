@@ -28,7 +28,9 @@ fence.init = (scene) => {
             gltf.scene.scale.multiplyScalar(2.5);
             gltf.scene.position.z = -5;
             gltf.scene.position.x = -315;
-            
+            gltf.scene.traverse( function( node ) {
+                if ( node.isMesh || node.isLight ) node.castShadow = true;
+            });
             scene.add( gltf.scene );
 
             for (let i = gltf.scene.position.x + 60; i <= 300; i += 60) {

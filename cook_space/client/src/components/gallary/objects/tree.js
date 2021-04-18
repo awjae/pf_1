@@ -12,7 +12,9 @@ tree.init = (scene) => {
             gltf.scene.rotateY(90 * Math.PI / 180 );
             gltf.scene.position.z = -10;
             gltf.scene.position.x = -300;
-            
+            gltf.scene.traverse( function( node ) {
+                if ( node.isMesh ) { node.castShadow = true;}
+            });
             // gltf.animations; // Array<THREE.AnimationClip>
             // gltf.scene; // THREE.Group
             // gltf.scenes; // Array<THREE.Group>
