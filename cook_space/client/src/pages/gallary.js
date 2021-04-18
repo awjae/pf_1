@@ -13,6 +13,7 @@ import control from '../components/gallary/control';
 import fenceModel from '../components/gallary/objects/fence';
 import treeModel from '../components/gallary/objects/tree';
 import benchModel from '../components/gallary/objects/bench';
+import animalModel from '../components/gallary/objects/animal';
  
 const gallary = () => {
 
@@ -33,7 +34,7 @@ const gallary = () => {
         const dirLight = lightWrapper.directLight();
         
         // camera.position.set(0, 20, 20);
-        camera.position.set(-335, 11, 20);
+        camera.position.set(-335, 8, 16);
         camera.rotation.x = Math.PI * (-0.05);
 
         const renderer = renderWrapper.init(obj);
@@ -61,13 +62,7 @@ const gallary = () => {
             if (camera.position.x > 340) {
                 camera.position.x = -340;
             }
-            if (camera.rotation.y > 0.4) {
-                camera.rotation.y = 0.4;
-                camera.rotation.z = 0.09;
-            } else if (camera.rotation.y < -0.4) {
-                camera.rotation.y = -0.4;
-                camera.rotation.z = -0.09;
-            }
+            
 
             renderer.render(scene, camera);
             
@@ -78,6 +73,7 @@ const gallary = () => {
         const tree = treeModel.init(scene);       
         const fence = fenceModel.init(scene);
         const bench = benchModel.init(scene);
+        const animal = animalModel.init(scene);
         
         renderer.domElement.addEventListener( 'click', function () {
             controls.lock();
