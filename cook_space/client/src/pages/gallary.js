@@ -14,6 +14,8 @@ import fenceModel from '../components/gallary/objects/fence';
 import treeModel from '../components/gallary/objects/tree';
 import benchModel from '../components/gallary/objects/bench';
 import animalModel from '../components/gallary/objects/animal';
+
+import userImageModel from '../components/gallary/userImage';
  
 const gallary = () => {
 
@@ -74,6 +76,10 @@ const gallary = () => {
         const bench = benchModel.init(scene);
         const animal = animalModel.init(scene);
         
+        //userImage
+        userImageModel.init(scene);
+
+
         renderer.domElement.addEventListener( 'click', function () {
             controls.lock();
         }, false );
