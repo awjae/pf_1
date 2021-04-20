@@ -15,7 +15,7 @@ light.init = () => {
 light.directLight = () => {
     const dirLight = new THREE.DirectionalLight( 0xdfebff, 1 );
     dirLight.position.set( 50, 200, 200 );
-    dirLight.position.multiplyScalar( 0.8 );
+    dirLight.position.multiplyScalar( 0.5 );
 
     dirLight.castShadow = true;
 

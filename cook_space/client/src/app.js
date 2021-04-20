@@ -6,16 +6,16 @@ import Map from './pages/map.js';
 import Board from './pages/boards.js';
 import Gallary from './pages/gallary.js';
 
+
 const App = () => {
 
   return (
     <Router>
       <Switch>
-        <Route exact path="/" component={ Gallary } />
+        <Route exact path="/" component={ Home } />
         <Route path="/map" component={ Map } />
         <Route path="/boards" component={ Board } />
         <Route path="/gallary" component={ Gallary } /> 
-        {/* <Route path="/gallary" render={ Gallary } /> */}
       </Switch>
     </Router>
   );
