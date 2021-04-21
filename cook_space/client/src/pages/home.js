@@ -13,7 +13,11 @@ const Home = () => {
       </Title_section>
       <Example_section>
         <ul>
-          <li>example1</li>
+          <li>
+            <Link to="/gallary">
+              example1
+            </Link>  
+          </li>
         </ul>
       </Example_section>
     </Wrapper_section>
@@ -44,7 +48,7 @@ const Example_section =  styled.section`
   width: 100%;
   text-align: center;
   z-index: 3;
-  li {
+  li a {
     color: #fff; 
   }
 `;

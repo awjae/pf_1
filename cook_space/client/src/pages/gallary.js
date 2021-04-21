@@ -1,6 +1,8 @@
 import React, {useEffect, useRef, useState} from 'react'
 import styled from 'styled-components';
 import * as THREE from "three";
+import LoadingComponent from '../components/common/loading';
+
 import renderWrapper from '../components/gallary/renderer';
 import sceneWrapper from '../components/gallary/scene';
 import cameraWrapper from '../components/gallary/camera';
@@ -20,6 +22,11 @@ import userImageModel from '../components/gallary/userImage';
 const gallary = () => {
 
     const container = useRef(null);
+    const [loading, setLoading] = useState(false);
+
+    const loadingHandler = () => {
+        setLoading(true);
+    };
 
     useEffect(() => {
         
@@ -36,7 +43,7 @@ const gallary = () => {
         const dirLight = lightWrapper.directLight();
         
         // camera.position.set(0, 20, 20);
-        camera.position.set(-335, 8, 16);
+        camera.position.set(-355, 8, 16);
         camera.rotation.x = Math.PI * (-0.05);
 
         const renderer = renderWrapper.init(obj);
@@ -59,17 +66,15 @@ const gallary = () => {
         //랜더링 갱신
         const animate = () => {
             requestAnimationFrame( animate );
-
             camera.position.x += 0.07;
             if (camera.position.x > 340) {
                 camera.position.x = -340;
             }
             
             renderer.render(scene, camera);
-            
         }
         animate();
-
+        
         //object
         const tree = treeModel.init(scene);       
         const fence = fenceModel.init(scene);
@@ -84,27 +89,26 @@ const gallary = () => {
             controls.lock();
         }, false );
 
-        window.g = {
-            scene,
-            camera,
-            controls,
-            tree,
-        }
-
     }, [])
 
     return (
-        <Wrapper_main>
-            <div ref={container}></div>
-        </Wrapper_main>
+        <>
+            <Wrapper_main>
+                <div ref={container}></div>
+                { !loading &&
+                    <LoadingComponent timer={ 4000 } handler={ loadingHandler }></LoadingComponent>
+                }
+            </Wrapper_main>
+        </>
     )
 }
 
-export default gallary
+export default gallary;
 
 const Wrapper_main = styled.main`
-    div {
+    > div {
         width: 100vw;
         height: 100vh;
     }
 `;
+
