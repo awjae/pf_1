@@ -6,7 +6,7 @@ const animal = {};
 animal.init = (scene) => {
 
     const gltfLoader = new GLTFLoader();
-    gltfLoader.load('./assets/object/deer.gltf',
+    gltfLoader.load('../assets/gallary/object/deer.gltf',
         (gltf) => {
             animal.curr = gltf;
 
@@ -33,7 +33,7 @@ animal.init = (scene) => {
         }
     );
 
-    gltfLoader.load('./assets/object/cat.gltf',
+    gltfLoader.load('../assets/gallary/object/cat.gltf',
         (gltf) => {
             animal.curr = gltf;
 
@@ -60,7 +60,7 @@ animal.init = (scene) => {
         }
     );
 
-    gltfLoader.load('./assets/object/dog.gltf',
+    gltfLoader.load('../assets/gallary/object/dog.gltf',
     (gltf) => {
         animal.curr = gltf;
 

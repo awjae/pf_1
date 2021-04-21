@@ -5,7 +5,7 @@ const tree = {};
 
 tree.init = (scene) => {
     const gltfLoader = new GLTFLoader();
-    gltfLoader.load('./assets/object/tree.gltf',
+    gltfLoader.load('../assets/gallary/object/tree.gltf',
         (gltf) => {
             tree.curr = gltf;
             gltf.scene.scale.multiplyScalar(0.08);

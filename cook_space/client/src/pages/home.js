@@ -14,7 +14,7 @@ const Home = () => {
       <Example_section>
         <ul>
           <li>
-            <Link to="/gallary">
+            <Link to="/gallary/example1">
               example1
             </Link>  
           </li>

@@ -22,7 +22,7 @@ fence.init = (scene) => {
     //     }
     // );
     const gltfLoader = new GLTFLoader();
-    gltfLoader.load('./assets/object/fence.gltf',
+    gltfLoader.load('../assets/gallary/object/fence.gltf',
         (gltf) => {
             fence.curr = gltf;
             gltf.scene.scale.multiplyScalar(2.5);

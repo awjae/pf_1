@@ -6,7 +6,7 @@ const bench = {};
 bench.init = (scene) => {
 
     const gltfLoader = new GLTFLoader();
-    gltfLoader.load('./assets/object/bench_2.gltf',
+    gltfLoader.load('../assets/gallary/object/bench_2.gltf',
         (gltf) => {
             bench.curr = gltf;
             gltf.scene.scale.multiplyScalar(0.12);

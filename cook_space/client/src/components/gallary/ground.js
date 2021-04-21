@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import grassTexture from "../../assets/textures/GrassGreenTexture0002.jpg";
+import grassTexture from "../../assets/gallary/textures/GrassGreenTexture0002.jpg";
 
 const ground = {};
 
