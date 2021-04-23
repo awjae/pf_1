@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
+import example_thumb_1 from '../assets/gallary/thumbnail/example1.png';
+
 const Home = () => {
   return (
     <Wrapper_section>
@@ -13,10 +15,8 @@ const Home = () => {
       </Title_section>
       <Example_section>
         <ul>
-          <li>
-            <Link to="/gallary/example1">
-              example1
-            </Link>  
+          <li style={{ backgroundImage: `url(${example_thumb_1})` }}>
+            <Link to="/gallary/example1"></Link>  
           </li>
         </ul>
       </Example_section>
@@ -48,8 +48,23 @@ const Example_section =  styled.section`
   width: 100%;
   text-align: center;
   z-index: 3;
+  ul {
+    display: flex;
+    justify-content: center;
+  }
+  li {
+    width: 12vw;
+    height: 8vw;
+    border: 1px solid #797979;
+    border-radius: 15px;
+    background-size: cover;
+  }
   li a {
     color: #fff; 
+    width: 100%;
+    height: 100%;
+    line-height: 8vw;
+    display: inline-block;
   }
 `;
 const Wrapper_section = styled.section`
