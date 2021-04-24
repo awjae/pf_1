@@ -1,17 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 import example_thumb_1 from '../assets/gallary/thumbnail/example1.png';
 
 const Home = () => {
+
+  const [files, setFiles] = useState([]);
+
   return (
     <Wrapper_section>
       <div className="twinkling"></div>
       <div className="cloud"></div>
       <Title_section>
         <h1>Open My Exhibition</h1>
-        <a>Add Images</a>
+        <div>
+          <div className="fileForm">
+            <label htmlFor="upload">
+              <input type="file" id="upload" multiple />
+              Upload Files
+            </label>
+          </div>
+          <div>
+            <ul className="files">
+              { files &&
+                files.map(el => {
+                  <li></li>
+                })
+              }
+            </ul>
+          </div>
+        </div>
       </Title_section>
       <Example_section>
         <ul>
@@ -38,8 +57,36 @@ const Title_section =  styled.section`
     color: #fff;
     font-family: fantasy;
   }
-  a {
+
+  .fileForm {
+    border: 2px solid #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 3vw auto;
+    width: 10vw;
+    height: 5vw;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  .fileForm:hover {
+    border: 2px solid #ffeb00;
+  }
+
+  label {
     color: #fff;
+    display: inline-block;
+    line-height: 5vw;
+    cursor: pointer;
+  }
+  label:hover {
+    color: #ffeb00;
+  }
+  input[type="file"] {
+    position: absolute;
+    right: -9999px;
+    visibility: hidden;
+    opacity: 0;
   }
 `;
 const Example_section =  styled.section`
