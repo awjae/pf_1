@@ -8,6 +8,15 @@ const Home = () => {
 
   const [files, setFiles] = useState([]);
 
+  const fileSelcted = (evt) => {
+    const target = evt.target.files;
+    const newResult = [];
+    for (let file of target) {
+      newResult.push(file.name);
+    }
+    setFiles([...files, ...newResult]);
+  }
+
   return (
     <Wrapper_section>
       <div className="twinkling"></div>
@@ -17,16 +26,16 @@ const Home = () => {
         <div>
           <div className="fileForm">
             <label htmlFor="upload">
-              <input type="file" id="upload" multiple />
+              <input type="file" id="upload" multiple onChange={ fileSelcted } />
               Upload Files
             </label>
           </div>
-          <div>
+          <div className="fileList">
             <ul className="files">
               { files &&
-                files.map(el => {
-                  <li></li>
-                })
+                files.map((el, idx) => (
+                  <li key={idx}>{el}</li>
+                ))
               }
             </ul>
           </div>
@@ -63,7 +72,7 @@ const Title_section =  styled.section`
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 3vw auto;
+    margin: 3vw auto 1vw;
     width: 10vw;
     height: 5vw;
     border-radius: 10px;
@@ -84,9 +93,13 @@ const Title_section =  styled.section`
   }
   input[type="file"] {
     position: absolute;
-    right: -9999px;
     visibility: hidden;
     opacity: 0;
+  }
+
+  .fileList li {
+    color: #fff;
+    margin-bottom: 3px;
   }
 `;
 const Example_section =  styled.section`
