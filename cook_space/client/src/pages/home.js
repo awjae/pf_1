@@ -22,7 +22,26 @@ const Home = () => {
       <div className="twinkling"></div>
       <div className="cloud"></div>
       <Title_section>
-        <h1>Open My Exhibition</h1>
+        <div className="waviy">
+          <span style={{"--i":1}}>O</span>
+          <span style={{"--i":2}}>p</span>
+          <span style={{"--i":3}}>e</span>
+          <span style={{"--i":4}}>n</span>
+          <span style={{"--i":5}} className="waviy-space"></span>
+          <span style={{"--i":6}}>M</span>
+          <span style={{"--i":7}}>y</span>
+          <span style={{"--i":8}} className="waviy-space"> </span>
+          <span style={{"--i":9}}>E</span>
+          <span style={{"--i":10}}>x</span>
+          <span style={{"--i":11}}>h</span>
+          <span style={{"--i":12}}>i</span>
+          <span style={{"--i":13}}>b</span>
+          <span style={{"--i":14}}>i</span>
+          <span style={{"--i":15}}>t</span>
+          <span style={{"--i":16}}>i</span>
+          <span style={{"--i":17}}>o</span>
+          <span style={{"--i":18}}>n</span>
+        </div>
         <div>
           <div className="fileForm">
             <label htmlFor="upload">
@@ -61,10 +80,26 @@ const Title_section =  styled.section`
   text-align: center;
   z-index: 3;
 
-  h1 {
+  .waviy {
     font-size: 5rem;
     color: #fff;
     font-family: fantasy;
+    position: relative;
+    span {
+      position: relative;
+      display: inline-block;
+      color: #fff;
+      animation: flip 5s infinite;
+      animation-delay: calc(.1s * var(--i))
+    }
+  }
+  .waviy-space {
+    width: 30px;
+  }
+  @keyframes flip {
+    0%,80% {
+      transform: rotateY(360deg) 
+    }
   }
 
   .fileForm {
