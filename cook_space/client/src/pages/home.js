@@ -17,6 +17,11 @@ const Home = () => {
     setFiles([...files, ...newResult]);
   }
 
+  const fileDelete = (idx) => {
+    const newResult = files.filter((el, jdx) => idx !== jdx);
+    setFiles(newResult);
+  }
+
   return (
     <Wrapper_section>
       <div className="twinkling"></div>
@@ -53,7 +58,7 @@ const Home = () => {
             <ul className="files">
               { files &&
                 files.map((el, idx) => (
-                  <li key={idx}>{el}</li>
+                  <li key={idx}>{el}<span onClick={() => fileDelete(idx) }>x</span></li>
                 ))
               }
             </ul>
@@ -135,6 +140,12 @@ const Title_section =  styled.section`
   .fileList li {
     color: #fff;
     margin-bottom: 3px;
+  }
+  .fileList li span {
+    color: #ffeb00;
+    margin-left: 7px;
+    cursor: pointer;
+    font-size: 1.2em;
   }
 `;
 const Example_section =  styled.section`
