@@ -47,13 +47,21 @@ const Home = () => {
           <span style={{"--i":17}}>o</span>
           <span style={{"--i":18}}>n</span>
         </div>
-        <div>
-          <div className="fileForm">
+        <div className="fileForm-wrapper">
+          <div>
             <label htmlFor="upload">
               <input type="file" id="upload" multiple onChange={ fileSelcted } />
               Upload Files
             </label>
           </div>
+          <div>
+            <label htmlFor="send">
+              <input type="submit" id="send"/>
+              Send Files
+            </label>
+          </div>    
+        </div>
+        <div>
           <div className="fileList">
             <ul className="files">
               { files &&
@@ -106,19 +114,22 @@ const Title_section =  styled.section`
       transform: rotateY(360deg) 
     }
   }
-
-  .fileForm {
+  .fileForm-wrapper {
+    display: flex;
+    justify-content: center;
+  }
+  .fileForm-wrapper> div {
     border: 2px solid #fff;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 3vw auto 1vw;
     width: 10vw;
     height: 5vw;
     border-radius: 10px;
     cursor: pointer;
+    margin:15px 30px 10px;
   }
-  .fileForm:hover {
+  .fileForm-wrapper> div:hover {
     border: 2px solid #ffeb00;
   }
 
@@ -131,7 +142,7 @@ const Title_section =  styled.section`
   label:hover {
     color: #ffeb00;
   }
-  input[type="file"] {
+  input[type="file"], input[type="submit"] {
     position: absolute;
     visibility: hidden;
     opacity: 0;
