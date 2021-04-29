@@ -22,6 +22,10 @@ const Home = () => {
     setFiles(newResult);
   }
 
+  const sendhandler = (evt) => {
+    console.log(evt)
+  }
+
   return (
     <Wrapper_section>
       <div className="twinkling"></div>
@@ -55,10 +59,7 @@ const Home = () => {
             </label>
           </div>
           <div>
-            <label htmlFor="send">
-              <input type="submit" id="send"/>
-              Send Files
-            </label>
+            <a className="sendBtn" href="#" id="send" onClick={ sendhandler }>Send Files</a>
           </div>    
         </div>
         <div>
@@ -133,13 +134,14 @@ const Title_section =  styled.section`
     border: 2px solid #ffeb00;
   }
 
-  label {
+  .sendBtn, label {
     color: #fff;
     display: inline-block;
     line-height: 5vw;
     cursor: pointer;
+    text-decoration: none;
   }
-  label:hover {
+  .sendBtn:hover, label:hover {
     color: #ffeb00;
   }
   input[type="file"], input[type="submit"] {
