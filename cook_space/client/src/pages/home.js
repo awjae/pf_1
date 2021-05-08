@@ -28,6 +28,7 @@ const Home = () => {
       .then(response => response.json())
       .then(json => console.log(json))
 
+    const fileForm = new FormData();
   }
 
   return (
