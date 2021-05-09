@@ -23,12 +23,25 @@ const Home = () => {
   }
 
   const sendhandler = (evt) => {
-
+    evt.preventDefault();
+    
     fetch('https://jsonplaceholder.typicode.com/todos/1')
       .then(response => response.json())
       .then(json => console.log(json))
 
-    const fileForm = new FormData();
+    // fetch('http://www.example.net', { 
+    //   method: 'POST',
+    //   headers: {
+    //     "Content-Type": "multipart/form-data"
+    //   },
+    //   body: files 
+    // }).then(
+    //   response => response.json() 
+    // ).then(
+    //   success => console.log(success) 
+    // ).catch(
+    //   error => console.log(error) 
+    // );
   }
 
   return (
