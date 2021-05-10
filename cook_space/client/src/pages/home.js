@@ -25,7 +25,9 @@ const Home = () => {
   const sendhandler = (evt) => {
     evt.preventDefault();
     
-    fetch('https://jsonplaceholder.typicode.com/todos/1')
+    fetch('http://39.115.4.11:3000/api/insertFileList', {
+        method: 'post'
+      })
       .then(response => response.json())
       .then(json => console.log(json))
 
