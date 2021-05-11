@@ -7,6 +7,7 @@ import example_thumb_1 from '../assets/gallary/thumbnail/example1.png';
 const Home = () => {
 
   const [files, setFiles] = useState([]);
+  const fileInput = useRef();
 
   const fileSelcted = (evt) => {
     const target = evt.target.files;
@@ -25,8 +26,12 @@ const Home = () => {
   const sendhandler = (evt) => {
     evt.preventDefault();
     
+    const fileList = new FormData();
+    fileList.append("files", fileInput.file)
+
     fetch('http://39.115.4.11:3000/api/insertFileList', {
-        method: 'post'
+        method: 'post',
+        body: fileList
       })
       .then(response => response.json())
       .then(json => console.log(json))
@@ -74,7 +79,7 @@ const Home = () => {
         <div className="fileForm-wrapper">
           <div>
             <label htmlFor="upload">
-              <input type="file" id="upload" multiple onChange={ fileSelcted } />
+              <input ref={ fileInput } type="file" id="upload" multiple onChange={ fileSelcted } />
               Upload Files
             </label>
           </div>
