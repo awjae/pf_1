@@ -41,7 +41,6 @@ module.exports = {
     })
   ],
   devServer: {
-    //host: '10.80.14.39',
     host: 'localhost',
     port: port,
     open: true,

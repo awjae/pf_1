@@ -6,6 +6,7 @@ exports.apiTestFunc = async (req, res, next) => {
     }
 };
 
+/* fileinput api */
 exports.apiInsertFiles = async (req, res, next) => {
     console.log(req);
 

@@ -27,7 +27,7 @@ const Home = () => {
     evt.preventDefault();
     
     const fileList = new FormData();
-    fileList.append("files", fileInput.file)
+    fileList.append("files", fileInput.file);
 
     fetch('http://39.115.4.11:3000/api/insertFileList', {
         method: 'post',
@@ -36,19 +36,6 @@ const Home = () => {
       .then(response => response.json())
       .then(json => console.log(json))
 
-    // fetch('http://www.example.net', { 
-    //   method: 'POST',
-    //   headers: {
-    //     "Content-Type": "multipart/form-data"
-    //   },
-    //   body: files 
-    // }).then(
-    //   response => response.json() 
-    // ).then(
-    //   success => console.log(success) 
-    // ).catch(
-    //   error => console.log(error) 
-    // );
   }
 
   return (
