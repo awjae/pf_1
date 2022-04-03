@@ -1,37 +1,49 @@
 import React, { useEffect, useRef } from 'react'
 import styled from '@emotion/styled'
 
-import * as posenet from '@tensorflow-models/posenet';
+import * as poseDetection from '@tensorflow-models/pose-detection';
+import * as tf from '@tensorflow/tfjs-core';
+// Register one of the TF.js backends.
 import '@tensorflow/tfjs-backend-webgl';
-
 
 function Player() {
   const videoEl = useRef<HTMLVideoElement>(null);
   const output = useRef<HTMLCanvasElement>(null);
   let ctx = null;
 
-  function drawKeypoint(keypoint: any) {
-    
-    console.log(keypoint)
-    const circle = new Path2D();
-    circle.arc(keypoint.x, keypoint.y, 4, 0, 2 * Math.PI);
-    ctx.fill(circle);
-    ctx.stroke(circle);
-    
-    raf();
-  }
-  function raf() {
+  async function raf() {
+
+    if (videoEl.current.readyState < 2) {
+      await new Promise((resolve) => {
+        videoEl.current.onloadeddata = () => {
+          resolve(videoEl.current);
+        };
+      });
+    }
+
+    const model = poseDetection.SupportedModels.MoveNet;
+    const detector = await poseDetection.createDetector(model);
+    const poses = await detector.estimatePoses(videoEl.current);
     ctx.drawImage(videoEl.current, 0, 0, videoEl.current.videoWidth, videoEl.current.videoHeight);
+    poses[0]?.keypoints.forEach(el => {
+      if (el.score >= 0.3) {
+        const circle = new Path2D();
+        circle.arc(el.x, el.y, 4, 0, 2 * Math.PI);
+        ctx.fill(circle);
+        ctx.stroke(circle);
+      }
+    })
     requestAnimationFrame(() => raf());
   }
 
   useEffect(function () {
     if (output.current !== null) {
       ctx = output.current.getContext('2d');
+      ctx.fillStyle = "#00ff2a";
     }
 
     if (navigator.mediaDevices.getUserMedia) {
-      navigator.mediaDevices.getUserMedia({ video: true })
+      navigator.mediaDevices.getUserMedia({ video: {width: 500, height: 500, frameRate: 60}})
       .then(function (stream) {
             if (videoEl.current !== null) {
                 videoEl.current.srcObject = stream;
@@ -40,14 +52,7 @@ function Player() {
           })
           .then(async function () {
             if (videoEl.current !== null) {
-              const scaleFactor = 0.50; // 이미지 크기 보정
-              const flipHorizontal = false; //영상 이미지 반전 여부
-              const outputStride = 16;
-              // load the posenet model
-              const net = await posenet.load();
-              // const pose = await net.estimateSinglePose(videoEl.current, scaleFactor, flipHorizontal, outputStride);
-              const pose = await net.estimateSinglePose(videoEl.current, {flipHorizontal: flipHorizontal});
-              drawKeypoint(pose.keypoints);
+              raf();
             }
           })
           .catch(function (err0r) {
