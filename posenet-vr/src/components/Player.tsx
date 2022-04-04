@@ -10,6 +10,8 @@ function Player() {
   const videoEl = useRef<HTMLVideoElement>(null);
   const output = useRef<HTMLCanvasElement>(null);
   let ctx = null;
+  let detector = null;
+  let model = null
 
   async function raf() {
 
@@ -20,9 +22,8 @@ function Player() {
         };
       });
     }
-
-    const model = poseDetection.SupportedModels.MoveNet;
-    const detector = await poseDetection.createDetector(model);
+    
+    
     const poses = await detector.estimatePoses(videoEl.current);
     ctx.drawImage(videoEl.current, 0, 0, videoEl.current.videoWidth, videoEl.current.videoHeight);
     poses[0]?.keypoints.forEach(el => {
@@ -36,6 +37,13 @@ function Player() {
     requestAnimationFrame(() => raf());
   }
 
+  async function checkCamera() {
+    model = poseDetection.SupportedModels.MoveNet;
+    detector = await poseDetection.createDetector(model);
+    
+    raf();
+  }
+
   useEffect(function () {
     if (output.current !== null) {
       ctx = output.current.getContext('2d');
@@ -45,20 +53,20 @@ function Player() {
     if (navigator.mediaDevices.getUserMedia) {
       navigator.mediaDevices.getUserMedia({ video: {width: 500, height: 500, frameRate: 60}})
       .then(function (stream) {
-            if (videoEl.current !== null) {
-                videoEl.current.srcObject = stream;
-                return
-            }
-          })
-          .then(async function () {
-            if (videoEl.current !== null) {
-              raf();
-            }
-          })
-          .catch(function (err0r) {
-            console.log("Something went wrong!", err0r);
-          });
-      }
+        if (videoEl.current !== null) {
+            videoEl.current.srcObject = stream;
+            return
+        }
+      })
+      .then(function () {
+        if (videoEl.current !== null) {
+          checkCamera();
+        }
+      })
+      .catch(function (err0r) {
+        console.log("Something went wrong!", err0r);
+      });
+    }
   })
 
   return (
