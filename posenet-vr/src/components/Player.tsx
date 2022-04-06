@@ -1,5 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import styled from '@emotion/styled'
+import Posenet from '../utils/posenet';
+import Canvas from '../utils/canvas';
 
 import * as poseDetection from '@tensorflow-models/pose-detection';
 import * as tf from '@tensorflow/tfjs-core';
@@ -9,9 +11,10 @@ import '@tensorflow/tfjs-backend-webgl';
 function Player() {
   const videoEl = useRef<HTMLVideoElement>(null);
   const output = useRef<HTMLCanvasElement>(null);
-  let ctx = null;
-  let detector = null;
-  let model = null
+
+  const posenet = new Posenet();
+  let canvas;
+
   const modelTree = {
     "0": "1",
     "1": "3",
@@ -41,38 +44,24 @@ function Player() {
       });
     }
 
-    const poses = await detector.estimatePoses(videoEl.current);
-    ctx.drawImage(videoEl.current, 0, 0, videoEl.current.videoWidth, videoEl.current.videoHeight);
+    const poses = await posenet.getPoses(videoEl.current);
+
+    canvas.ctx.drawImage(videoEl.current, 0, 0, videoEl.current.videoWidth, videoEl.current.videoHeight);
+    
     poses[0]?.keypoints.forEach((el, idx) => {
       if (el.score >= 0.3) {
-        const circle = new Path2D();
-        circle.arc(el.x, el.y, 4, 0, 2 * Math.PI);
-        ctx.fill(circle);
-        ctx.fillStyle = "#00ff2a";
-        ctx.strokeStyle = "#00ff2a";
-        ctx.stroke(circle);
+        canvas.drawPoint(el.x, el.y);
         if (modelTree.hasOwnProperty(String(idx)) && poses[0].keypoints[parseInt(modelTree[String(idx)])].score >= 0.3) {
-          ctx.beginPath();
-          ctx.strokeStyle = '#fff';
-          ctx.moveTo(poses[0].keypoints[idx].x, poses[0].keypoints[idx].y);
-          ctx.lineTo(poses[0].keypoints[modelTree[String(idx)]].x, poses[0].keypoints[modelTree[String(idx)]].y);
-          ctx.stroke();
+          canvas.drawSkeleton(poses[0].keypoints[idx].x, poses[0].keypoints[idx].y, poses[0].keypoints[modelTree[String(idx)]].x, poses[0].keypoints[modelTree[String(idx)]].y);
         }
       }
     })
 
     requestAnimationFrame(() => raf());
   }
-
-  async function checkCamera() {
-    model = poseDetection.SupportedModels.MoveNet;
-    detector = await poseDetection.createDetector(model);
-    raf();
-  }
-
   useEffect(function () {
     if (output.current !== null) {
-      ctx = output.current.getContext('2d');
+      canvas = new Canvas(output.current.getContext('2d'));
     }
 
     if (navigator.mediaDevices.getUserMedia) {
@@ -80,12 +69,8 @@ function Player() {
       .then(function (stream) {
         if (videoEl.current !== null) {
             videoEl.current.srcObject = stream;
+            raf();
             return
-        }
-      })
-      .then(function () {
-        if (videoEl.current !== null) {
-          checkCamera();
         }
       })
       .catch(function (err0r) {
