@@ -43,6 +43,7 @@ const Board = styled.main`
   display: flex;
   flex-direction: column;
   background-color: #222222;
+  overflow: hidden;
   header {
     height: 45px;
     padding: 40px 0px;
