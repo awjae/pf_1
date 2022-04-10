@@ -16,6 +16,7 @@ function Character() {
     function animate() {
       requestAnimationFrame(animate);
       controls.update();
+      webGl.debuggingBone();
       renderer.render( scene, camera );
     }
   })

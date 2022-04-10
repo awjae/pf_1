@@ -8,6 +8,7 @@ export default class WebGl {
     private camera;
     private renderer;
     private controls;
+    private skeleton;
 
     constructor(el) {
         this.setScene();
@@ -56,9 +57,10 @@ export default class WebGl {
           model.traverse( function ( object ) {
             if ( object.isMesh ) object.castShadow = true;
           });
-          const skeleton = new THREE.SkeletonHelper( model );
-          skeleton.visible = true;
-          this.scene.add( skeleton );
+          this.skeleton = new THREE.SkeletonHelper( model );
+          this.skeleton.visible = true;
+          this.scene.add( this.skeleton );
+          this.debuggingBone();
         }.bind(this));
     }
     setControls() {
@@ -86,5 +88,15 @@ export default class WebGl {
     }
     getScene() {
         return this.scene
+    }
+    getSkeleton() {
+        return this.skeleton
+    }
+    debuggingBone() {
+        if (this.skeleton) {
+            this.skeleton.bones[5].rotation.x += 0.05
+            // this.skeleton.bones[5].rotation.y += 0.05
+            // this.skeleton.bones[5].rotation.z += 0.05
+        }
     }
 }
