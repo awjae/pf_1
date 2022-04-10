@@ -3,8 +3,9 @@ import styled from '@emotion/styled';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+
 function Character() {
-  const wrapper = useRef(null); 
+  const wrapper = useRef(null);
 
   useEffect(() => {
     const scene = new THREE.Scene();
@@ -29,12 +30,12 @@ function Character() {
     grid.material.transparent = true;
     scene.add( grid );
 
-    const camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 0.25, 100 );
-    camera.position.set( - 5, 3, 10 );
-    camera.lookAt( new THREE.Vector3( 0, 2, 0 ) );
+    const camera = new THREE.PerspectiveCamera( 12, window.innerWidth / window.innerHeight, 0.25, 100 );
+    camera.position.set( 0, 2, 10 );
+    // camera.lookAt( new THREE.Vector3( 0, 2, 0 ) );
 
     const loader = new GLTFLoader();
-    loader.load( 'src/models/Xbot.glb', function ( gltf ) {
+    loader.load( 'models/Xbot.glb', function ( gltf ) {
       const model = gltf.scene;
       scene.add( model );
       model.traverse( function ( object ) {
@@ -43,7 +44,7 @@ function Character() {
       const skeleton = new THREE.SkeletonHelper( model );
       skeleton.visible = false;
       scene.add( skeleton );
-    } );
+    });
 
 
     const renderer = new THREE.WebGLRenderer();
