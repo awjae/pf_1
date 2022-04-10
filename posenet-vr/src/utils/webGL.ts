@@ -1,0 +1,90 @@
+import * as THREE from 'three';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+
+
+export default class WebGl {
+    private scene;
+    private camera;
+    private renderer;
+    private controls;
+
+    constructor(el) {
+        this.setScene();
+        this.setLight();
+        this.setGround();
+        this.setCamera();
+        this.setModel('models/Xbot.glb');
+        this.setRenderer();
+        this.setControls();
+        this.setCanvas(el);
+    }
+
+    setScene() {
+        this.scene = new THREE.Scene();
+        this.scene.background = new THREE.Color( 0xa0a0a0 );
+        this.scene.fog = new THREE.Fog( 0xe0e0e0, 20, 100 );
+    }
+    setLight() {
+        const hemiLight = new THREE.HemisphereLight( 0xffffff, 0x444444 );
+        hemiLight.position.set( 0, 20, 0 );
+        this.scene.add( hemiLight );
+
+        const dirLight = new THREE.DirectionalLight( 0xffffff );
+        dirLight.position.set( 0, 20, 10 );
+        this.scene.add( dirLight );
+    }
+    setGround() {
+        const mesh = new THREE.Mesh( new THREE.PlaneGeometry( 2000, 2000 ), new THREE.MeshPhongMaterial( { color: 0x999999, depthWrite: false } ) );
+        mesh.rotation.x = - Math.PI / 2;
+        this.scene.add( mesh );
+        const grid = new THREE.GridHelper( 200, 40, 0x000000, 0x000000 );
+        grid.material.opacity = 0.2;
+        grid.material.transparent = true;
+        this.scene.add( grid );
+    }
+    setCamera() {
+        this.camera = new THREE.PerspectiveCamera( 12, 1, 0.25, 100 );
+        this.camera.position.set( 0, 2, 10 );
+        // camera.lookAt( new THREE.Vector3( 0, 2, 0 ) );
+    }
+    setModel(path) {
+        const loader = new GLTFLoader();
+        loader.load( path, function ( gltf ) {
+          const model = gltf.scene;
+          this.scene.add( model );
+          model.traverse( function ( object ) {
+            if ( object.isMesh ) object.castShadow = true;
+          });
+          const skeleton = new THREE.SkeletonHelper( model );
+          skeleton.visible = true;
+          this.scene.add( skeleton );
+        }.bind(this));
+    }
+    setControls() {
+        this.controls = new OrbitControls( this.camera, this.renderer.domElement );
+        this.controls.enablePan = false;
+        this.controls.enableZoom = false;
+        this.controls.target.set( 0, 1, 0 );
+    }
+    setRenderer() {
+        this.renderer = new THREE.WebGLRenderer();
+        this.renderer.setSize( 500, 500 );
+        this.renderer.render( this.scene, this.camera );
+    }
+    setCanvas(el) {
+        el.appendChild(this.renderer.domElement);
+    }
+    getControls() {
+        return this.controls
+    }
+    getRenderer() {
+        return this.renderer
+    }
+    getCamera() {
+        return this.camera
+    }
+    getScene() {
+        return this.scene
+    }
+}
