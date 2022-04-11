@@ -1,16 +1,12 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styled from '@emotion/styled'
 import Posenet from '../utils/posenet';
 import Canvas from '../utils/canvas';
 
-import * as poseDetection from '@tensorflow-models/pose-detection';
-import * as tf from '@tensorflow/tfjs-core';
-// Register one of the TF.js backends.
-import '@tensorflow/tfjs-backend-webgl';
-
 function Player() {
   const videoEl = useRef<HTMLVideoElement>(null);
   const output = useRef<HTMLCanvasElement>(null);
+  const [initPoses, setInitPoses] = useState(null);
 
   const posenet = new Posenet();
   let canvas;
@@ -44,18 +40,34 @@ function Player() {
       });
     }
 
-    const poses = await posenet.getPoses(videoEl.current);
+    const eyes = {
+      "left_eye": {},
+      "right_eye": {},
+    };
+    try {
+      const poses = await posenet.getPoses(videoEl.current);
 
-    canvas.ctx.drawImage(videoEl.current, 0, 0, videoEl.current.videoWidth, videoEl.current.videoHeight);
-    
-    poses[0]?.keypoints.forEach((el, idx) => {
-      if (el.score >= 0.3) {
-        canvas.drawPoint(el.x, el.y);
-        if (modelTree.hasOwnProperty(String(idx)) && poses[0].keypoints[parseInt(modelTree[String(idx)])].score >= 0.3) {
-          canvas.drawSkeleton(poses[0].keypoints[idx].x, poses[0].keypoints[idx].y, poses[0].keypoints[modelTree[String(idx)]].x, poses[0].keypoints[modelTree[String(idx)]].y);
-        }
+      if (initPoses === null && poses[0]) {
+        setInitPoses(poses[0].keypoints);
       }
-    })
+      
+      canvas.ctx.drawImage(videoEl.current, 0, 0, videoEl.current.videoWidth, videoEl.current.videoHeight);
+      
+      poses[0]?.keypoints.forEach((el, idx) => {
+        if (el.score >= 0.3) {
+          canvas.drawPoint(el.x, el.y);
+          if (modelTree.hasOwnProperty(String(idx)) && poses[0].keypoints[parseInt(modelTree[String(idx)])].score >= 0.3) {
+            canvas.drawSkeleton(poses[0].keypoints[idx].x, poses[0].keypoints[idx].y, poses[0].keypoints[modelTree[String(idx)]].x, poses[0].keypoints[modelTree[String(idx)]].y);
+          }
+          if (el.name === "left_eye" || el.name === "right_eye") {
+            eyes[el.name] = el;
+          }
+        }
+      })
+      
+    } catch (error) {
+      
+    }
 
     requestAnimationFrame(() => raf());
   }
