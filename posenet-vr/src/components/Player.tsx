@@ -2,11 +2,12 @@ import React, { useEffect, useRef, useState } from 'react'
 import styled from '@emotion/styled'
 import Posenet from '../utils/posenet';
 import Canvas from '../utils/canvas';
+import {GetState} from 'zustand';
 
 function Player() {
   const videoEl = useRef<HTMLVideoElement>(null);
   const output = useRef<HTMLCanvasElement>(null);
-  const [initPoses, setInitPoses] = useState(null);
+  let initPoses = null;
 
   const posenet = new Posenet();
   let canvas;
@@ -29,7 +30,6 @@ function Player() {
     "15": "13",
     "16": "14",
   }
-
   async function raf() {
 
     if (videoEl.current.readyState < 2) {
@@ -40,17 +40,15 @@ function Player() {
       });
     }
 
-    const eyes = {
-      "left_eye": {},
-      "right_eye": {},
-    };
+    const faces = {};
     try {
       const poses = await posenet.getPoses(videoEl.current);
 
       if (initPoses === null && poses[0]) {
-        setInitPoses(poses[0].keypoints);
+        initPoses = poses[0].keypoints;
+        console.log(initPoses)
+        // console.log(initPoses[0], initPoses[1], initPoses[2])
       }
-      
       canvas.ctx.drawImage(videoEl.current, 0, 0, videoEl.current.videoWidth, videoEl.current.videoHeight);
       
       poses[0]?.keypoints.forEach((el, idx) => {
@@ -59,9 +57,7 @@ function Player() {
           if (modelTree.hasOwnProperty(String(idx)) && poses[0].keypoints[parseInt(modelTree[String(idx)])].score >= 0.3) {
             canvas.drawSkeleton(poses[0].keypoints[idx].x, poses[0].keypoints[idx].y, poses[0].keypoints[modelTree[String(idx)]].x, poses[0].keypoints[modelTree[String(idx)]].y);
           }
-          if (el.name === "left_eye" || el.name === "right_eye") {
-            eyes[el.name] = el;
-          }
+          faces[el.name] = el;
         }
       })
       
@@ -69,7 +65,7 @@ function Player() {
       
     }
 
-    requestAnimationFrame(() => raf());
+    // requestAnimationFrame(() => raf());
   }
   useEffect(function () {
     if (output.current !== null) {
