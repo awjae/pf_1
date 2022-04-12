@@ -2,12 +2,14 @@ import React, { useEffect, useRef, useState } from 'react'
 import styled from '@emotion/styled'
 import Posenet from '../utils/posenet';
 import Canvas from '../utils/canvas';
-import {GetState} from 'zustand';
+
+import useStore from "../utils/store";
 
 function Player() {
   const videoEl = useRef<HTMLVideoElement>(null);
   const output = useRef<HTMLCanvasElement>(null);
   let initPoses = null;
+  const name = useStore((state) => state.text);
 
   const posenet = new Posenet();
   let canvas;
@@ -68,6 +70,7 @@ function Player() {
     // requestAnimationFrame(() => raf());
   }
   useEffect(function () {
+    console.log(name)
     if (output.current !== null) {
       canvas = new Canvas(output.current.getContext('2d'));
     }
