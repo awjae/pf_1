@@ -4,6 +4,7 @@ import Posenet from '../utils/posenet';
 import Canvas from '../utils/canvas';
 
 import useStore from "../utils/store";
+import { modelTree } from "../utils/movenetTree";
 
 function Player() {
   const videoEl = useRef<HTMLVideoElement>(null);
@@ -14,24 +15,6 @@ function Player() {
   const posenet = new Posenet();
   let canvas;
 
-  const modelTree = {
-    "0": "1",
-    "1": "3",
-    "2": "0",
-    "4": "2",
-    "5": "11",
-    "6": "5",
-    "7": "5",
-    "8": "6",
-    "9": "7",
-    "10": "8",
-    "11": "12",
-    "12": "6",
-    "13": "11",
-    "14": "12",
-    "15": "13",
-    "16": "14",
-  }
   async function raf() {
 
     if (videoEl.current.readyState < 2) {
@@ -49,7 +32,6 @@ function Player() {
       if (initPoses === null && poses[0]) {
         initPoses = poses[0].keypoints;
         console.log(initPoses)
-        // console.log(initPoses[0], initPoses[1], initPoses[2])
       }
       canvas.ctx.drawImage(videoEl.current, 0, 0, videoEl.current.videoWidth, videoEl.current.videoHeight);
       
@@ -67,7 +49,7 @@ function Player() {
       
     }
 
-    // requestAnimationFrame(() => raf());
+    requestAnimationFrame(() => raf());
   }
   useEffect(function () {
     console.log(name)
