@@ -51,3 +51,5 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 
 1. 캠코더 영상을 통한 모션캡쳐
+2. 2D 동영상으로 부터 모델의 bone을 연산해서 3d model을 움직여야함
+ * 2D매체와  3D 모델은 랜더링 방식이 차이가 나서 모션캡쳐 방식이 다르다 
