@@ -92,11 +92,12 @@ export default class WebGl {
     getSkeleton() {
         return this.skeleton
     }
-    debuggingBone() {
+    debuggingBone(x: Number, y: Number, z: Number) {
         if (this.skeleton) {
-            this.skeleton.bones[5].rotation.x += 0.05
-            // this.skeleton.bones[5].rotation.y += 0.05
-            // this.skeleton.bones[5].rotation.z += 0.05
+            // console.log(x);
+            this.skeleton.bones[5].rotation.x = ( +x / 60);
+            this.skeleton.bones[5].rotation.y = ( +y / 60);
+            this.skeleton.bones[5].rotation.z = ( +z / 60);
         }
     }
 }

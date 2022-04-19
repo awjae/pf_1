@@ -11,7 +11,9 @@ function Player() {
   const output = useRef<HTMLCanvasElement>(null);
   const imageEl = useRef<HTMLImageElement>(null);
   let initPoses = null;
-  const name = useStore((state) => state.text);
+  let init_Y = 0;
+  // const setInitX = useStore((state) => state.rotateX);
+  const setRotateX = useStore((state) => state.setRotateX);
 
   const posenet = new Posenet();
   let canvas;
@@ -30,10 +32,12 @@ function Player() {
     try {
       let poses;
       mediaType === 'video' ? poses = await posenet.getPoses(videoEl.current) : poses = await posenet.getPoses(imageEl.current);
+
       if (initPoses === null && poses[0]) {
         initPoses = poses[0].keypoints;
-        console.log(initPoses)
+        init_Y = ((initPoses[3].y + initPoses[4].y) / 2) - initPoses[0].y;
       }
+
       canvas.ctx.drawImage(videoEl.current, 0, 0, videoEl.current.videoWidth, videoEl.current.videoHeight);
       poses[0]?.keypoints.forEach((el, idx) => {
         if (el.score >= 0.3) {
@@ -44,7 +48,12 @@ function Player() {
           faces[el.name] = el;
         }
       })
-      
+
+      if (poses[0].keypoints[3].score >= 0.3 && poses[0].keypoints[4].score >= 0.3 && poses[0].keypoints[0].score >= 0.3) {
+        const ear_Y = ((poses[0].keypoints[3].y + poses[0].keypoints[4].y) / 2) - poses[0].keypoints[0].y;
+        setRotateX(init_Y - ear_Y);
+      }
+
     } catch (error) {
       
     }
@@ -70,14 +79,15 @@ function Player() {
         raf('img');
       }, 2000);
     });
-  })
+  },[])
 
   return (
     <CameraDiv>
         <canvas ref={output} width="500px" height="500px"></canvas>
         <video ref={videoEl} autoPlay={ true } id="videoElement">
         </video>
-        <ImgEl ref={imageEl} src='/images/top.webp' alt='대체이미지'></ImgEl>
+
+        {/* <ImgEl ref={imageEl} src='/images/top.webp' alt='대체이미지'></ImgEl> */}
     </CameraDiv>
   )
 }
@@ -94,6 +104,7 @@ const CameraDiv = styled.div`
     video {
         width: 100%;
         height: 100%;
+        display: none;
     }
 `
 const ImgEl = styled.img`

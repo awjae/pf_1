@@ -4,10 +4,18 @@ import WebGl from '../utils/webGL';
 
 import useStore from "../utils/store";
 
+declare global {
+  interface Window {
+    rotateX: Number;
+  }
+}
+
 function Character() {
   const wrapper = useRef(null);
-  const name = useStore((state) => state.text);
-  const setName = useStore((state) => state.setText);
+  // const name = useStore((state) => state.text);
+  // const setName = useStore((state) => state.setText);
+  const rotateX = useStore((state) => state.rotateX);
+  let rotate_model_x = 0;
 
   useEffect(() => {
     const webGl = new WebGl(wrapper.current);
@@ -16,17 +24,18 @@ function Character() {
     const scene = webGl.getScene();
     const camera = webGl.getCamera();
 
-    console.log(name)
-    setName({text: "heelo"});
-
     animate();
     function animate() {
       requestAnimationFrame(animate);
       controls.update();
-      // webGl.debuggingBone();
+      webGl.debuggingBone(window.rotateX, 0, 0);
       renderer.render( scene, camera );
     }
   },[])
+
+  useEffect(() => {
+    window.rotateX = rotateX;
+  },[rotateX])
 
   return (
     <CharacterDiv ref={wrapper}>
