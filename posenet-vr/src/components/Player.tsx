@@ -12,8 +12,10 @@ function Player() {
   const imageEl = useRef<HTMLImageElement>(null);
   let initPoses = null;
   let init_Y = 0;
+  let init_X = 0;
   // const setInitX = useStore((state) => state.rotateX);
   const setRotateX = useStore((state) => state.setRotateX);
+  const setRotateY = useStore((state) => state.setRotateY);
 
   const posenet = new Posenet();
   let canvas;
@@ -36,6 +38,8 @@ function Player() {
       if (initPoses === null && poses[0]) {
         initPoses = poses[0].keypoints;
         init_Y = ((initPoses[3].y + initPoses[4].y) / 2) - initPoses[0].y;
+        init_X = ((initPoses[2].x - initPoses[4].x) + (initPoses[3].x - initPoses[1].x)) / 2;
+        // console.log(initPoses)
       }
 
       canvas.ctx.drawImage(videoEl.current, 0, 0, videoEl.current.videoWidth, videoEl.current.videoHeight);
@@ -52,6 +56,17 @@ function Player() {
       if (poses[0].keypoints[3].score >= 0.3 && poses[0].keypoints[4].score >= 0.3 && poses[0].keypoints[0].score >= 0.3) {
         const ear_Y = ((poses[0].keypoints[3].y + poses[0].keypoints[4].y) / 2) - poses[0].keypoints[0].y;
         setRotateX(init_Y - ear_Y);
+      }
+
+      if ((poses[0].keypoints[2].score >= 0.3 && poses[0].keypoints[4].score >= 0.3) || (poses[0].keypoints[3].score >= 0.3 && poses[0].keypoints[1].score >= 0.3)) {
+        if (!(poses[0].keypoints[2].score >= 0.3 && poses[0].keypoints[4].score >= 0.3)) {
+          setRotateY(-(poses[0].keypoints[3].x - poses[0].keypoints[1].x - init_X));
+        } else if (!(poses[0].keypoints[3].score >= 0.3 && poses[0].keypoints[1].score >= 0.3)) {
+          setRotateY(poses[0].keypoints[2].x - poses[0].keypoints[4].x - init_X);
+        } else {
+          (poses[0].keypoints[2].x - poses[0].keypoints[4].x) > (poses[0].keypoints[3].x - poses[0].keypoints[1].x) ? 
+            setRotateY(poses[0].keypoints[2].x - poses[0].keypoints[4].x - init_X) : setRotateY(-(poses[0].keypoints[3].x - poses[0].keypoints[1].x - init_X));
+        }
       }
 
     } catch (error) {
@@ -79,6 +94,7 @@ function Player() {
         raf('img');
       }, 2000);
     });
+
   },[])
 
   return (

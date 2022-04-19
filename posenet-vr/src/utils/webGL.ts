@@ -45,9 +45,8 @@ export default class WebGl {
         this.scene.add( grid );
     }
     setCamera() {
-        this.camera = new THREE.PerspectiveCamera( 12, 1, 0.25, 100 );
+        this.camera = new THREE.PerspectiveCamera( 12, 1, 0.1, 50 );
         this.camera.position.set( 0, 2, 10 );
-        // camera.lookAt( new THREE.Vector3( 0, 2, 0 ) );
     }
     setModel(path) {
         const loader = new GLTFLoader();
@@ -58,7 +57,7 @@ export default class WebGl {
             if ( object.isMesh ) object.castShadow = true;
           });
           this.skeleton = new THREE.SkeletonHelper( model );
-          this.skeleton.visible = true;
+          this.skeleton.visible = false;
           this.scene.add( this.skeleton );
           this.debuggingBone();
         }.bind(this));
@@ -96,7 +95,7 @@ export default class WebGl {
         if (this.skeleton) {
             // console.log(x);
             this.skeleton.bones[5].rotation.x = ( +x / 60);
-            this.skeleton.bones[5].rotation.y = ( +y / 60);
+            this.skeleton.bones[5].rotation.y = ( +y / 80);
             this.skeleton.bones[5].rotation.z = ( +z / 60);
         }
     }

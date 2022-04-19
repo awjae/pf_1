@@ -7,6 +7,7 @@ import useStore from "../utils/store";
 declare global {
   interface Window {
     rotateX: Number;
+    rotateY: Number;
   }
 }
 
@@ -15,7 +16,7 @@ function Character() {
   // const name = useStore((state) => state.text);
   // const setName = useStore((state) => state.setText);
   const rotateX = useStore((state) => state.rotateX);
-  let rotate_model_x = 0;
+  const rotateY = useStore((state) => state.rotateY);
 
   useEffect(() => {
     const webGl = new WebGl(wrapper.current);
@@ -28,7 +29,7 @@ function Character() {
     function animate() {
       requestAnimationFrame(animate);
       controls.update();
-      webGl.debuggingBone(window.rotateX, 0, 0);
+      webGl.debuggingBone(window.rotateX, window.rotateY, 0);
       renderer.render( scene, camera );
     }
   },[])
@@ -36,6 +37,10 @@ function Character() {
   useEffect(() => {
     window.rotateX = rotateX;
   },[rotateX])
+
+  useEffect(() => {
+    window.rotateY = rotateY;
+  },[rotateY])
 
   return (
     <CharacterDiv ref={wrapper}>
