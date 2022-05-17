@@ -57,7 +57,7 @@ export default class WebGl {
             if ( object.isMesh ) object.castShadow = true;
           });
           this.skeleton = new THREE.SkeletonHelper( model );
-          this.skeleton.visible = false;
+          this.skeleton.visible = true;
           this.scene.add( this.skeleton );
           this.debuggingBone();
         }.bind(this));
@@ -91,12 +91,17 @@ export default class WebGl {
     getSkeleton() {
         return this.skeleton
     }
-    debuggingBone(x: Number, y: Number, z: Number) {
+    debuggingBone(face :any, rightArm :any) {
         if (this.skeleton) {
-            // console.log(x);
-            this.skeleton.bones[5].rotation.x = ( +x / 60);
-            this.skeleton.bones[5].rotation.y = ( +y / 80);
-            this.skeleton.bones[5].rotation.z = ( +z / 60);
+            // 180도 = 3.14
+            // console.dir(rightArm.z / 80)
+            // console.log("arm, forearm, hand : ", this.skeleton.bones[10], this.skeleton.bones[11], this.skeleton.bones[12]);
+            // console.log("arm, forearm, hand : ", this.skeleton.bones[34], this.skeleton.bones[35], this.skeleton.bones[36]);
+            this.skeleton.bones[5].rotation.x = ( +face.x / 60);
+            this.skeleton.bones[5].rotation.y = ( +face.y / 80);
+            this.skeleton.bones[5].rotation.z = ( +face.z / 60);
+            this.skeleton.bones[34].rotation.z = ( +rightArm.z / 80);
+            this.skeleton.bones[34].rotation.y = rightArm.y / 45;
         }
     }
 }

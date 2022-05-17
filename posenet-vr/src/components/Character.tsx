@@ -8,6 +8,8 @@ declare global {
   interface Window {
     rotateX: Number;
     rotateY: Number;
+    rightArmRotateZ: Number;
+    rightArmRotateY: Number;
   }
 }
 
@@ -17,6 +19,8 @@ function Character() {
   // const setName = useStore((state) => state.setText);
   const rotateX = useStore((state) => state.rotateX);
   const rotateY = useStore((state) => state.rotateY);
+  const rightArmRotateZ = useStore((state) => state.rightArmRotateZ);
+  const rightArmRotateY = useStore((state) => state.rightArmRotateY);
 
   useEffect(() => {
     const webGl = new WebGl(wrapper.current);
@@ -29,7 +33,10 @@ function Character() {
     function animate() {
       requestAnimationFrame(animate);
       controls.update();
-      webGl.debuggingBone(window.rotateX, window.rotateY, 0);
+      webGl.debuggingBone(
+        {x:window.rotateX, y:window.rotateY, z:0},
+        {y:window.rightArmRotateY, z:window.rightArmRotateZ}
+      );
       renderer.render( scene, camera );
     }
   },[])
@@ -41,6 +48,14 @@ function Character() {
   useEffect(() => {
     window.rotateY = rotateY;
   },[rotateY])
+
+  useEffect(() => {
+    window.rightArmRotateZ = rightArmRotateZ;
+  },[rightArmRotateZ])
+  
+  useEffect(() => {
+    window.rightArmRotateY = rightArmRotateY;
+  },[rightArmRotateY])
 
   return (
     <CharacterDiv ref={wrapper}>

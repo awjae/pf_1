@@ -13,9 +13,12 @@ function Player() {
   let initPoses = null;
   let init_Y = 0;
   let init_X = 0;
+  let init_right_arm_distance = 0;
   // const setInitX = useStore((state) => state.rotateX);
   const setRotateX = useStore((state) => state.setRotateX);
   const setRotateY = useStore((state) => state.setRotateY);
+  const setRightArmRotateY = useStore((state) => state.setRightArmRotateY);
+  const setRightArmRotateZ = useStore((state) => state.setRightArmRotateZ);
 
   const posenet = new Posenet();
   let canvas;
@@ -30,16 +33,20 @@ function Player() {
       });
     }
 
-    const faces = {};
     try {
       let poses;
       mediaType === 'video' ? poses = await posenet.getPoses(videoEl.current) : poses = await posenet.getPoses(imageEl.current);
 
       if (initPoses === null && poses[0]) {
         initPoses = poses[0].keypoints;
+        //얼굴 
         init_Y = ((initPoses[3].y + initPoses[4].y) / 2) - initPoses[0].y;
         init_X = ((initPoses[2].x - initPoses[4].x) + (initPoses[3].x - initPoses[1].x)) / 2;
-        // console.log(initPoses)
+        
+        //오른팔
+        init_right_arm_distance = Math.sqrt(Math.pow((initPoses[6].x - initPoses[8].x),2) + Math.pow((initPoses[6].y - initPoses[8].y),2));
+
+        console.log(initPoses)
       }
 
       canvas.ctx.drawImage(videoEl.current, 0, 0, videoEl.current.videoWidth, videoEl.current.videoHeight);
@@ -49,15 +56,14 @@ function Player() {
           if (modelTree.hasOwnProperty(String(idx)) && poses[0].keypoints[parseInt(modelTree[String(idx)])].score >= 0.3) {
             canvas.drawSkeleton(poses[0].keypoints[idx].x, poses[0].keypoints[idx].y, poses[0].keypoints[modelTree[String(idx)]].x, poses[0].keypoints[modelTree[String(idx)]].y);
           }
-          faces[el.name] = el;
         }
       })
 
+      // 얼굴 //
       if (poses[0].keypoints[3].score >= 0.3 && poses[0].keypoints[4].score >= 0.3 && poses[0].keypoints[0].score >= 0.3) {
         const ear_Y = ((poses[0].keypoints[3].y + poses[0].keypoints[4].y) / 2) - poses[0].keypoints[0].y;
         setRotateX(init_Y - ear_Y);
       }
-
       if ((poses[0].keypoints[2].score >= 0.3 && poses[0].keypoints[4].score >= 0.3) || (poses[0].keypoints[3].score >= 0.3 && poses[0].keypoints[1].score >= 0.3)) {
         if (!(poses[0].keypoints[2].score >= 0.3 && poses[0].keypoints[4].score >= 0.3)) {
           setRotateY(-(poses[0].keypoints[3].x - poses[0].keypoints[1].x - init_X));
@@ -69,12 +75,25 @@ function Player() {
         }
       }
 
+      // 오른팔 : poses[0].keypoints[6], poses[0].keypoints[8], poses[0].keypoints[10]
+      if (poses[0].keypoints[6].score >= 0.3 && poses[0].keypoints[8].score >= 0.3) {
+        poses[0].keypoints[6].x - poses[0].keypoints[8].x >= 0 ?
+          setRightArmRotateZ(poses[0].keypoints[8].y - poses[0].keypoints[6].y) : setRightArmRotateZ(251 + (poses[0].keypoints[6].y - poses[0].keypoints[8].y));
+
+        let currentArmDistance = Math.sqrt(Math.pow((poses[0].keypoints[8].x - poses[0].keypoints[6].x), 2) + Math.pow((poses[0].keypoints[8].y - poses[0].keypoints[6].y), 2));
+        poses[0].keypoints[6].x - poses[0].keypoints[8].x >= 0 ?
+        setRightArmRotateY((((init_right_arm_distance - currentArmDistance) * 100) / init_right_arm_distance) - 1) : setRightArmRotateY(((((currentArmDistance - init_right_arm_distance) * 100) / init_right_arm_distance) - 1));
+      }
+
+
+
     } catch (error) {
       
     }
 
     if (mediaType === 'video') { requestAnimationFrame(() => raf(mediaType)) };
   }
+
   useEffect(function () {
     if (output.current !== null) {
       canvas = new Canvas(output.current.getContext('2d'));
